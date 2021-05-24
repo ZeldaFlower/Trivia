@@ -3238,18 +3238,6 @@ TESTing:
 
 
 
-    TODO:
-3. Figure out how to have video play on Alexa
-4. ensure < and > don't make it into the verses
-5. record videos and save to db
-1. Do I need this? : Implement a double opt-in strategy. When users sign up to receive email from you, send them a message with a confirmation link, and do not start sending them email until they confirm their address by clicking that link. A double opt-in strategy helps reduce the number of hard bounces resulting from typographical errors.
-
-set up something for bounces and complaints
-https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
-view bounce rates and complaint rates here: https://console.aws.amazon.com/ses/home?region=us-east-1#reputation-dashboard:
-2. make echo show/firestick tv text scrollable?!? I thought it was on the list side for sure.
-
-
 Steps for updating:
 1. add to dynamo db by copying from https://www.biblegateway.com/passage/?search=Acts+15%3A1-35%3B+Galatians+2&version=NIV;KJV KJV.
 2. date is key and is in format 2019-10-03
@@ -3259,5 +3247,23 @@ Steps for updating:
 5. videoUrl is the video url in mp4 format, but could be a youtube video actually and would be cheaper, and could make podcast
 5a. have dad record his voice, send it to me via text, I'll text it to my email (or send via airdrop to a mac if over 25mb)-- and copy-paste the text, reuse a couple clips, and create it here: https://www.kapwing.com/studio/editor
 6. url is the bible gateway link that has NIV and KJV so users can read in another format (language or publication)
+---------------------------------------------------------------
+
+    TODO:
+	1. App doesn't want to be called using test tab
+	2. Add dynamo db table named 'triviaQuestions'
+	3. Add a question or two to the db table manually
+	4. Change method 'getTriviaQuestion' to get a trivia question from the db
+	5. Have triviaUsers be added to; verify incrementing numberOfQuestionsAsked
+	
+	DONE:
+	Week 1 (5/16/2021): Made a method called GetTriviaQuestion which calls getTriviaForUser
+	Offline: fixed authorization from Alexa to trivia function
+	Week 2 (5/23/2021): Implemented method getTriviaForUser
+	Added dynamo db table named 'triviaUsers'
+	Issues: App doesn't want to be called using test tab
+	Offline: fixed bug: had an extra ')' in emit line
+	
+	Week 3 (5/31/2021): 
 
 **/
