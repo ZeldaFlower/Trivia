@@ -1,0 +1,15 @@
+{
+  "name": "alexa-with-dyamo-sample",
+  "version": "1.0.0",
+  "description": "An example of hooking alexa with aws dynamodb",
+  "main": "index.js",
+  "repository": "git@github.com:tamouse/alexa-with-dyamo-sample.git",
+  "author": "Tamara Temple <tamouse@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "alexa-sdk": "^1.0.24",
+    "aws-sdk": "^2.177.0",
+    "es6-promisify": "^5.0.0",
+    "request": "^2.88.0"
+  }
+}
