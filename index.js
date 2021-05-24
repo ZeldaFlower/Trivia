@@ -2638,7 +2638,7 @@ function getTriviaForUser(filledSlots, userId) {
 				toShow = triviaInfo.question
 				//this.emit(':tellWithCard', toShow, this.t('TRIVIA_INFO_TITLE'), toShow);// !!TODO maybe just tell
 			} else {
-				this.emit(':ask', "I cannot find the category "+name+". Please ask for a different category.")+this.t('HELP_REPROMPT'));
+				this.emit(':ask', "I cannot find the category "+name+". Please ask for a different category."+this.t('HELP_REPROMPT'));
 			}
 			// save dynamo params to our dynamo db table
 			var numberOfQuestionsAsked = dynamoParams.Item.numberOfQuestionsAsked
