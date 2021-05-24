@@ -3250,9 +3250,10 @@ Steps for updating:
 ---------------------------------------------------------------
 
     TODO:
-	1. App doesn't want to be called using test tab
+	1. Change text when you open app; Welcome to Christine Trivia. You can say start. What can I help you with?
+	1a. add start to alexa side
 	2. Add dynamo db table named 'triviaQuestions'
-	3. Add a question or two to the db table manually
+	3. Add a question or two to the db table manually- question: Who parted the red sea with God's help? 1) Adam 2) Moses 3) Ruth 4) Joseph category: Bible answer: Moses
 	4. Change method 'getTriviaQuestion' to get a trivia question from the db
 	5. Have triviaUsers be added to; verify incrementing numberOfQuestionsAsked
 	
@@ -3263,6 +3264,7 @@ Steps for updating:
 	Added dynamo db table named 'triviaUsers'
 	Issues: App doesn't want to be called using test tab
 	Offline: fixed bug: had an extra ')' in emit line
+	App doesn't want to be called using test tab -- I think I needed to build the project again, works now.
 	
 	Week 3 (5/31/2021): 
 
