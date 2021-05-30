@@ -807,34 +807,35 @@ console.log(this)
 				}
 			})
 		}
-    },
+    },//!!
 	'GetTriviaQuestion': function () {
 		var filledSlots = delegateSlotCollection.call(this);
 
 		var { userId, accessToken } = this.event.session.user;
-		if (!accessToken) {
-			console.log("no token")
+//		if (!accessToken) {
+//			console.log("no token")
 			//this.emit(':ask', 'Please link your Account so I can email you the web link.');
 			getTriviaForUser.call(this, filledSlots, userId);
-		} else {
-			console.log("token")
-			const options = {
-				url: 'https://api.amazon.com/user/profile?access_token=' + accessToken,
-				method: 'GET',
-				headers: {
-					'Accept': 'application/json',
-					Authorization: "Bearer " + this.event.context.System.apiAccessToken
-				}
-			};
-			request(options, (error, response, body) => {//TODO: request error
-				if (!error && response.statusCode === 200){
-					let data = JSON.parse(body); // Store the data we got from the API request
-					//console.log(data)
-					userId = data.user_id
-					getTriviaForUser.call(this, filledSlots, userId);
-				}
-			})
-		}
+//		} else {
+//			console.log("token")
+//			const options = {
+//				url: 'https://api.amazon.com/user/profile?access_token=' + accessToken,
+//				method: 'GET',
+//				headers: {
+//					'Accept': 'application/json',
+//					Authorization: "Bearer " + this.event.context.System.apiAccessToken
+//				}
+//			};
+//			request(options, (error, response, body) => {//TODO: request error
+//				if (!error && response.statusCode === 200){
+//					let data = JSON.parse(body); // Store the data we got from the API request
+//					console.log(data)
+//					console.log(filledSlots)
+//					userId = data.user_id
+//					getTriviaForUser.call(this, filledSlots, userId);
+//				}
+//			})
+//		}
     },
 
 	'GetRecipe': function () {
@@ -1581,132 +1582,18 @@ function putParamsAndMessage(dynamoParams, toTell, emitName, cardName) {
   	});
 }
 //getTriviaQuestion.call(this, existingItem, null, location ? location.value : null, null, null, null, null, true)
-function getTriviaQuestion(existingItem, nameOrList, location, granularLocation, remove, findAny, findAll, findOld, findRecent) {
+function getTriviaQuestion(existingItem, category) {
 	console.log("getTriviaQuestion")
-	var matchingFood = [];
-    var foods = existingItem ? existingItem.food ? existingItem.food : [] : [];
-    var name = null;//nameOrList;
-    var map = {};
-    if (findAll) {
-    	if (location) {
-		    for (var index in foods) {
-		    	var food = foods[index];
-		    	if (food.location === location) {
-		    		matchingFood.push(food);
-		    	}
-		    }
-    	} else {
-    		matchingFood = foods;
-    	}
-		//matchingFood = matchingFood.slice(0,matchingFood.length > 9? 10:matchingFood.length);
+	var params = {
+    TableName: "trivia",
+    Key: {
+      triviaID: "2021-05-30"//Date.now()// "2019-11-11"
     }
-    if (findOld) {
-    	if (location) {
-		    for (var index in foods) {
-		    	var food = foods[index];
-		    	if (food.location === location && !food.condiment) {
-		    		matchingFood.push(food);
-		    	}
-		    }
-    	} else {
-    		//matchingFood = foods;
-			for (var index in foods) {
-		    	var food = foods[index];
-				if (!food.condiment) {
-		    		matchingFood.push(food);
-		    	}
-		    }
-
-    	}
-    	matchingFood.sort(function(a, b){return a.dateAdded - b.dateAdded});
-		//console.log(matchingFood);
-    	matchingFood = matchingFood.slice(0,matchingFood.length > 9? 10:matchingFood.length);
-		//console.log(matchingFood);
-    }
-    if (findRecent) {
-    	matchingFood = foods;
-    	// what if no food?
-    	matchingFood.sort(function(a, b){return b.dateAdded - a.dateAdded});
-		console.log("food")
-		//console.log(matchingFood)
-    	matchingFood = matchingFood.slice(0);
-    	if (remove) {
-   			name = matchingFood[0].name
-   			console.log("will remove "+name)
-   		}
-    }
-    if (findAny) {
-    	name = true;
-	  		const newIndex = Math.floor(Math.random() * foods.length);
-
-	  		for (var i = newIndex; i < foods.length; i++) {
-	  			var food = foods[i];
-	  			if (!food.condiment) {
-	  				matchingFood.push(food);
-	  			}
-	  		}
-	  		if (matchingFood.length === 0) {
-	  			for (var i = 0; i < newIndex; i++) {
-	  				var food = foods[i];
-		  			if (!food.condiment) {
-		  				matchingFood.push(food);
-		  			}
-	  			}
-	  		}
-	  	} else {
-	  		if(!name){
-	if (nameOrList instanceof Array) {
-		for (let name of nameOrList) {
-			map[name] = true;
-		}
-	} else {
-		name = nameOrList;
-	}
-	  		}
-	console.log("foods: ")
-	console.log(foods)
-    for (var index in foods) {
-    	var food = foods[index];
-    	// console.log(food)
-						if ((name === food.name || map[food.name])&& (!location || location === food.location)
-							&& (!granularLocation || granularLocation === food.granularLocation)) {
-								matchingFood.push(food);
-								if (remove) {
-									console.log("removing "+food.name)
-									foods.splice(index, 1);
-								}
-								if (name) {
-									break;
-								}
-						}
-    	}
-    }
-	if (existingItem && existingItem.food){
-		existingItem.food.sort((a,b) => {
-			if (('' + a.location).localeCompare(b.location)>0){
-				return 1;
-			}
-			if (('' + a.location).localeCompare(b.location)==0){
-				if(('' + a.granularLocation).localeCompare(b.granularLocation)>0){
-					return 1;
-				}
-				if (('' + a.granularLocation).localeCompare(b.granularLocation) == 0) {
-					if(('' + a.food).localeCompare(b.food)>0){
-						return 1;
-					} else {
-						return 0;
-					}
-				}
-				return -1
-			}
-			return -1
-		});
-	}
-    if (name){
-    	return matchingFood[0];
-    } else {
-    	return matchingFood;
-    }
+  };
+  return dbGet(params).then(function(item) {
+	  console.log("item: "+item)
+	return item.Item
+  });
 }
 
 function emailVerses(email, date) {
@@ -2613,18 +2500,20 @@ this.emit(':ask', this.t('SORRY'));
 // 	// }
 // }
 
-//getTriviaForUser
+//getTriviaForUser!!
 function getTriviaForUser(filledSlots, userId) {
 	if (filledSlots != undefined){
 		var name = filledSlots.slots.categoryTitle.value;
-
+console.log("category: " +name)
 		//const { userId } = this.event.session.user;
 		checkIfUserExists.call(this, userId)
 		  .then(data => {
+			  console.log("data: " +data)
 			const existingItem = data.Item;
 			var dynamoParams = {
 				TableName: table,
 				Item: {
+					userID: userId,
 					numberOfQuestionsAsked: 0,
 					updated: Date.now()
 				}
@@ -2632,7 +2521,9 @@ function getTriviaForUser(filledSlots, userId) {
 			if (existingItem) {
 				dynamoParams.Item = existingItem
 			}
-			var triviaInfo = getTriviaQuestion.call(this, existingItem, name);
+			getTriviaQuestion.call(this, existingItem, name).then(function(triviaInfo){
+			console.log("triviaInfo: "+triviaInfo)
+			console.log(triviaInfo)
 			var toShow = ""
 			if (triviaInfo) {
 				toShow = triviaInfo.question
@@ -2640,11 +2531,15 @@ function getTriviaForUser(filledSlots, userId) {
 			} else {
 				this.emit(':ask', "I cannot find the category "+name+". Please ask for a different category."+this.t('HELP_REPROMPT'));
 			}
+			console.log("to show: " +toShow)
 			// save dynamo params to our dynamo db table
 			var numberOfQuestionsAsked = dynamoParams.Item.numberOfQuestionsAsked
 			numberOfQuestionsAsked = numberOfQuestionsAsked + 1;
 			dynamoParams.Item.numberOfQuestionsAsked = numberOfQuestionsAsked
+			console.log("numberOfQuestionsAsked: " +numberOfQuestionsAsked)
 			putParamsAndMessage.call(this, dynamoParams, toShow, ":tellWithCard", this.t('TRIVIA_INFO_TITLE'));
+	
+			}.bind(this));
 
 		}).catch(err => {
 			console.error(err);
@@ -3252,14 +3147,13 @@ Steps for updating:
     TODO:
 	1. Change text when you open app; Welcome to Christine Trivia. You can say start. What can I help you with?
 	1a. add start to alexa side
-	2. Add dynamo db table named 'triviaQuestions'
-	3. Add a question or two to the db table manually- question: Who parted the red sea with God's help? 1) Adam 2) Moses 3) Ruth 4) Joseph category: Bible answer: Moses
-	4. Change method 'getTriviaQuestion' to get a trivia question from the db
-	5. Have triviaUsers be added to; verify incrementing numberOfQuestionsAsked
+	3. Add a question or two more to db
+	
 	
 	DONE:
 	Week 1 (5/16/2021): Made a method called GetTriviaQuestion which calls getTriviaForUser
 	Offline: fixed authorization from Alexa to trivia function
+	
 	Week 2 (5/23/2021): Implemented method getTriviaForUser
 	Added dynamo db table named 'triviaUsers'
 	Issues: App doesn't want to be called using test tab
@@ -3267,5 +3161,10 @@ Steps for updating:
 	App doesn't want to be called using test tab -- I think I needed to build the project again, works now.
 	
 	Week 3 (5/31/2021): 
-
+	1. Add dynamo db table named 'trivia
+	2. add to the db table manually- question: Who parted the red sea with God's help? 1) Adam 2) Moses 3) Ruth 4) Joseph category: Bible answer: Moses
+	3. Change method 'getTriviaQuestion' to get a trivia question from the db
+	4. Have triviaUsers be added to; verify incrementing numberOfQuestionsAsked
+	
+	Week 4 (6/6/2021):
 **/
