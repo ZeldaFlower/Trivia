@@ -3145,9 +3145,12 @@ Steps for updating:
 ---------------------------------------------------------------
 
     TODO:
-	1. Change text when you open app; Welcome to Christine Trivia. You can say start. What can I help you with?
-	1a. add start to alexa side
-	3. Add a question or two more to db
+	8. Make the conversation stay 'open' 
+	9. Accept responses to the question and check against the answer
+	10. Increment correctAnswers for user
+	5. Change text when you open app; Welcome to Christine Trivia. You can say question. What can I help you with?
+	6. Add a question or two more to db
+	7. Retrieve random questions per category
 	
 	
 	DONE:
