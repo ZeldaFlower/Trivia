@@ -3154,7 +3154,9 @@ Steps for updating:
     TODO:
 	9. Accept responses to the question and check against the answer
 	10. Increment correctAnswers for user
-	
+	11. Add another category question
+	12. Retrieve the new category question
+	13. Add your own questions to the app
 	
 	DONE:
 	Week 1 (5/16/2021): Made a method called GetTriviaQuestion which calls getTriviaForUser
