@@ -1228,6 +1228,8 @@ console.log(this)
 	},
 	'AMAZON.YesIntent': function() {
 		console.log("subIntent")
+		console.log(this.event.session.attributes.triviaID)
+		
 		if (this.event.session.attributes.recipeSub) {
 			console.log(this.event.session.attributes.recipeSub)
 			console.log(this.event.session.attributes.filledSlots)//need to save the slots
@@ -1425,7 +1427,7 @@ const languageStrings = {
     'en': {
         translation: {
             SKILL_NAME: 'Daily Bread',
-      			WELCOME: 'Welcome to Daily Bread. You can say play. ',// or comment.',//list, modify
+      			WELCOME: 'Welcome to Christine Trivia. You can say play. ',// or comment.',//list, modify
       			TRIVIA_INFO_TITLE: 'Christine Trivia',
       			REMOVED_CARD_TITLE: "Removed Comment",
       			NOT_REMOVED: "I have not removed your comment.",
@@ -1560,6 +1562,8 @@ function getRecipes() {
 function putParamsAndMessage(dynamoParams, toTell, emitName, cardName) {
 	dbPut(dynamoParams).then(function(){
 		if (emitName == ":tellWithCard" && supportsAPL.call(this, null)) {
+			console.log("triviaID")
+			console.log(this.event.session.attributes.triviaID)
 			this.response.cardRenderer(this.t('TRIVIA_INFO_TITLE'), toTell);
 			  this.response.speak(toTell);
 			  //main['mainTemplate']['items'][0]['text'] = toTell
@@ -1584,10 +1588,12 @@ function putParamsAndMessage(dynamoParams, toTell, emitName, cardName) {
 //getTriviaQuestion.call(this, existingItem, null, location ? location.value : null, null, null, null, null, true)
 function getTriviaQuestion(existingItem, category) {
 	console.log("getTriviaQuestion")
+	var triviaIDs = ["1", "2"]
+	var randomIndex = Math.round(Math.random() * 1)
 	var params = {
     TableName: "trivia",
     Key: {
-      triviaID: "2021-05-30"//Date.now()// "2019-11-11"
+      triviaID: triviaIDs[randomIndex]//"2021-05-30"//Date.now()// "2019-11-11"
     }
   };
   return dbGet(params).then(function(item) {
@@ -2527,6 +2533,7 @@ console.log("category: " +name)
 			var toShow = ""
 			if (triviaInfo) {
 				toShow = triviaInfo.question
+				this.event.session.attributes.triviaID = triviaInfo.triviaID
 				//this.emit(':tellWithCard', toShow, this.t('TRIVIA_INFO_TITLE'), toShow);// !!TODO maybe just tell
 			} else {
 				this.emit(':ask', "I cannot find the category "+name+". Please ask for a different category."+this.t('HELP_REPROMPT'));
@@ -2537,7 +2544,7 @@ console.log("category: " +name)
 			numberOfQuestionsAsked = numberOfQuestionsAsked + 1;
 			dynamoParams.Item.numberOfQuestionsAsked = numberOfQuestionsAsked
 			console.log("numberOfQuestionsAsked: " +numberOfQuestionsAsked)
-			putParamsAndMessage.call(this, dynamoParams, toShow, ":tellWithCard", this.t('TRIVIA_INFO_TITLE'));
+			putParamsAndMessage.call(this, dynamoParams, toShow, ":ask", this.t('TRIVIA_INFO_TITLE'));
 	
 			}.bind(this));
 
@@ -3145,12 +3152,8 @@ Steps for updating:
 ---------------------------------------------------------------
 
     TODO:
-	8. Make the conversation stay 'open' 
 	9. Accept responses to the question and check against the answer
 	10. Increment correctAnswers for user
-	5. Change text when you open app; Welcome to Christine Trivia. You can say question. What can I help you with?
-	6. Add a question or two more to db
-	7. Retrieve random questions per category
 	
 	
 	DONE:
@@ -3170,4 +3173,8 @@ Steps for updating:
 	4. Have triviaUsers be added to; verify incrementing numberOfQuestionsAsked
 	
 	Week 4 (6/6/2021):
+		5. Change text when you open app; Welcome to Christine Trivia. You can say question. What can I help you with?
+		8. Make the conversation stay 'open' 
+	6. Add a question or two more to db
+	7. Retrieve random questions per category
 **/
