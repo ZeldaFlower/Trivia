@@ -1589,7 +1589,14 @@ function putParamsAndMessage(dynamoParams, toTell, emitName, cardName) {
 function getTriviaQuestion(existingItem, category) {
 	console.log("getTriviaQuestion")
 	var triviaIDs = ["1", "2"]
-	var randomIndex = Math.round(Math.random() * 1)
+	if (category == "ANIMAL" || category == "Animal") {
+		triviaIDs = ["3"]
+	}
+	console.log(triviaIDs)
+
+	var randomIndex = Math.round(Math.random() * triviaIDs.length - 1)
+	console.log(randomIndex)
+	console.log(triviaIDs[randomIndex])
 	var params = {
     TableName: "trivia",
     Key: {
@@ -3152,10 +3159,8 @@ Steps for updating:
 ---------------------------------------------------------------
 
     TODO:
-	9. Accept responses to the question and check against the answer
+	9. Accept responses to the question and check against the answer - SessionEndedRequest seems to sometimes be called, open not working as expected
 	10. Increment correctAnswers for user
-	11. Add another category question
-	12. Retrieve the new category question
 	13. Add your own questions to the app
 	
 	DONE:
@@ -3175,8 +3180,14 @@ Steps for updating:
 	4. Have triviaUsers be added to; verify incrementing numberOfQuestionsAsked
 	
 	Week 4 (6/6/2021):
-		5. Change text when you open app; Welcome to Christine Trivia. You can say question. What can I help you with?
-		8. Make the conversation stay 'open' 
+	5. Change text when you open app; Welcome to Christine Trivia. You can say play. What can I help you with?
+	8. Make the conversation stay 'open' 
 	6. Add a question or two more to db
 	7. Retrieve random questions per category
+	
+	Week 5 (6/13/2021):
+	11. Add another category question (animal)
+	12. Retrieve the new category question (ask christine trivia for an animal question)
+	
+	Week 6 (6/27/2021):
 **/
