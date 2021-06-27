@@ -1226,6 +1226,52 @@ console.log(this)
 			this.emit(':ask', this.t('HELP_REPROMPT'));
 		}
 	},
+	'NumberIntent': function() {
+		console.log("subIntent")
+		console.log(this.event.session.attributes.triviaID)
+		console.log(this.event.session)
+		console.log(this.event.session.attributes)
+		if (this.event.session.attributes.triviaID) {
+			var filledSlots = delegateSlotCollection.call(this);
+			const number = filledSlots.slots.number.value;
+			var params = {
+				TableName: "trivia",
+				Key: {
+					triviaID: this.event.session.attributes.triviaID//"2021-05-30"//Date.now()// "2019-11-11"
+				}
+			};
+			dbGet(params).then(function(item) {
+				console.log("item: "+item)
+				if (item.Item.answerNumber == number) {
+					// save to db correct answer
+					
+					var { userId, accessToken } = this.event.session.user;
+					checkIfUserExists.call(this, userId).then(data => {
+						
+						console.log("data: " +data)
+						const existingItem = data.Item;
+						var dynamoParams = {
+							TableName: table
+						}
+						if (existingItem) {
+							dynamoParams.Item = existingItem
+						}
+						if (!dynamoParams.Item.correctAnswers){
+							dynamoParams.Item.correctAnswers = 0;
+						}
+						dynamoParams.Item.correctAnswers = dynamoParams.Item.correctAnswers + 1;
+					// save and respond to user with "Correct!" possibly "Would you like another question?"
+						putParamsAndMessage.call(this, dynamoParams, "Correct!", ":tell", this.t('TRIVIA_INFO_TITLE'));
+					})
+				} else {
+					// respond to user "Sorry, that is incorrect. The correct answer is 'answer'"
+					this.emit(':tell',  "Sorry, that is incorrect. The correct answer is '"+item.Item.answer+"'");
+				}
+			}.bind(this));
+		} else {
+			this.emit(':ask', this.t('HELP_REPROMPT'));
+		}
+	},
 	'AMAZON.YesIntent': function() {
 		console.log("subIntent")
 		console.log(this.event.session.attributes.triviaID)
@@ -1562,6 +1608,7 @@ function getRecipes() {
 function putParamsAndMessage(dynamoParams, toTell, emitName, cardName) {
 	dbPut(dynamoParams).then(function(){
 		if (emitName == ":tellWithCard" && supportsAPL.call(this, null)) {
+			console.log('tellingWithCard')
 			console.log("triviaID")
 			console.log(this.event.session.attributes.triviaID)
 			this.response.cardRenderer(this.t('TRIVIA_INFO_TITLE'), toTell);
@@ -1576,8 +1623,14 @@ function putParamsAndMessage(dynamoParams, toTell, emitName, cardName) {
 				})
 			  this.emit(':responseReady');
 		} else if (emitName) {
+			console.log('expectingAsk')
+			console.log(this.event.session.attributes.triviaID)
+			console.log(emitName)
+			console.log(cardName)
+			console.log(toTell)
 			this.emit(emitName, toTell, cardName, toTell);
 		} else {
+			console.log('telling')
   			this.emit(':tell', toTell);
 		}
   	}.bind(this)).catch(err => {
@@ -3159,9 +3212,8 @@ Steps for updating:
 ---------------------------------------------------------------
 
     TODO:
-	9. Accept responses to the question and check against the answer - SessionEndedRequest seems to sometimes be called, open not working as expected
-	10. Increment correctAnswers for user
 	13. Add your own questions to the app
+	14. User able to ask trivia how many correct answer they have, and how many questions asked, %?
 	
 	DONE:
 	Week 1 (5/16/2021): Made a method called GetTriviaQuestion which calls getTriviaForUser
@@ -3190,4 +3242,7 @@ Steps for updating:
 	12. Retrieve the new category question (ask christine trivia for an animal question)
 	
 	Week 6 (6/27/2021):
+	9. Accept responses to the question and check against the answer - SessionEndedRequest seems to sometimes be called, open not working as expected
+	10. Increment correctAnswers for user
+	
 **/
