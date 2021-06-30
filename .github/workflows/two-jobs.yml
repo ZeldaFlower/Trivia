@@ -1,4 +1,4 @@
-name: GitHub Actions Demo
+name: Two Jobs
 on: [push, pull_request]
 jobs:
   Explore-GitHub-Actions:
