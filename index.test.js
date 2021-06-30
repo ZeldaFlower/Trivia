@@ -1,4 +1,4 @@
-const index = require("./index");
+const index = require("./index"); 
 test("Returns about-us for english language", () => {
     expect(index({
 	"version": "1.0",
