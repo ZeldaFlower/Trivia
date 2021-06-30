@@ -20,8 +20,7 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: npm i jest --save-dev
-      - run: npm init
-      - run: npm i jest-cli -g
+      - run: npm install jest
       - run: jest
       - run: echo "🍏 This job's status is ${{ job.status }}."
   Checkmarx:
