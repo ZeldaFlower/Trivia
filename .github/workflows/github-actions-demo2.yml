@@ -1,5 +1,9 @@
 name: Second Action
-on: [push]
+on:
+  workflow_run:
+    workflows: ["GitHub Actions Demo"]
+    types:
+      - completed
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
