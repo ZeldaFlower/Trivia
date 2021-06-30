@@ -1,13 +1,13 @@
 name: CI Workflow
-on: [push, pull_request]
+on: [push]
 jobs:
-  Release prepare:
+  Release-prepare:
     runs-on: ubuntu-latest
     steps:
     - run: echo "Prepare for release!"
-  Test and Upload:
+  Test-and-Upload:
     runs-on: ubuntu-latest
-    needs: Release prepare
+    needs: Release-prepare
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
@@ -20,28 +20,28 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-  Checkmarx	:
+  Checkmarx:
     runs-on: ubuntu-latest
-    needs: Test and Upload
+    needs: Test-and-Upload
     steps:
     - run: echo "!"
-  Deploy to Snapshot and run FTA:
+  Deploy-to-Snapshot-and-run-FTA:
     runs-on: ubuntu-latest
     needs: Checkmarx
     steps:
     - run: echo "!"
-  Deploy to Test and run FTA:
+  Deploy-to-Test-and-run-FTA:
     runs-on: ubuntu-latest
-    needs: Deploy to Snapshot and run FTA
+    needs: Deploy-to-Snapshot-and-run-FTA
     steps:
     - run: echo "!"
-  Update Support Branch:
+  Update-Support-Branch:
     runs-on: ubuntu-latest
-    needs: Deploy to Test and run FTA
+    needs: Deploy-to-Test-and-run-FTA
     steps:
     - run: echo "!"
-  Tag Current Release Version:
+  Tag-Current-Release-Version:
     runs-on: ubuntu-latest
-    needs: Update Support Branch
+    needs: Update-Support-Branch
     steps:
     - run: echo "!"
