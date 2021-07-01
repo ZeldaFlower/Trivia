@@ -20,6 +20,7 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: npm i jest --save-dev
+      - run: git branch
       - run: git checkout ${{github.ref}}
       - run: npm test --
       - run: echo "🍏 This job's status is ${{ job.status }}."
