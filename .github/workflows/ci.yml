@@ -19,7 +19,7 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
-      - run cat package.json
+      - run: cat package.json
       - run: npm i jest --save-dev
       - run: git branch
       - run: npm install
