@@ -21,6 +21,7 @@ jobs:
           ls ${{ github.workspace }}
       - run: cat package.json
       - run: npm install --save-dev jest-cli
+      - run: npm install aws-sdk
       - run: git branch
       - run: npm test --
       - run: echo "🍏 This job's status is ${{ job.status }}."
