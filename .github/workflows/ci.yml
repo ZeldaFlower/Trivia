@@ -20,7 +20,7 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: cat package.json
-      - run: npm i jest --save-dev
+      - run: npm install –-save-dev jest-cli
       - run: git branch
       - run: npm install
       - run: npm test --
