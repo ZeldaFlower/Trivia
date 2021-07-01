@@ -6,6 +6,9 @@
   "repository": "git@github.com:tamouse/alexa-with-dyamo-sample.git",
   "author": "Tamara Temple <tamouse@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
   "dependencies": {
     "alexa-sdk": "^1.0.24",
     "aws-sdk": "^2.177.0",
