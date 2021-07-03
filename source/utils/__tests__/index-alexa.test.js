@@ -6,6 +6,7 @@ Run with 'mocha examples/skill-sample-nodejs-hello-world/helloworld-tests.js'.
 
 // include the testing framework
 const alexaTest = require('alexa-skill-test-framework');
+const aws = require('aws-sdk');
 //const alexaTest = require('../../index');
 
 // initialize the testing framework
