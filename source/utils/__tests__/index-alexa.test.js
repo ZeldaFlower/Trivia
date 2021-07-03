@@ -14,6 +14,22 @@ alexaTest.initialize(require("../../../index.js"),
 	"amzn1.ask.account.VOID");
 
 describe("Hello World Skill", function () {
+	
+describe("HelloWorldIntent", function () {
+
+alexaTest.test([
+
+{
+request: alexaTest.getIntentRequest("LaunchIntent"),
+says: "Welcome to Christine Trivia! You can say play. What can I help you with?", repromptsNothing: true, shouldEndSession: true,
+hasAttributes: {
+activity: ‘eating'
+
+}
+}
+]);
+});
+};
 	// tests the behavior of the skill's LaunchRequest
 	describe("LaunchRequest", function () {
 		alexaTest.test([
