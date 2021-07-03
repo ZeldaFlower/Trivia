@@ -25,14 +25,7 @@ jobs:
       - run: npm install mocha
       - run: npm install alexa-skill-test-framework --save-dev
 #       - run: git branch
-      - run: cd node_modules
-      - run: ls
-      - run: cd dynamodb
-      - run: ls
-      - run: cd src
-      - run: ls
-      - run: libs
-      - run: ls
+      - run: cd node_modules;ls; cd dynamodb; ls; cd src; ls; libs; ls
       - run: npm test --
       - run: echo "🍏 This job's status is ${{ job.status }}."
 #   Checkmarx:
