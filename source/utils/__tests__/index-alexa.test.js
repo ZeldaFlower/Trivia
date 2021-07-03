@@ -19,8 +19,8 @@ describe("HelloWorldIntent", function () {
 aws.config.update({
     region: "eu-west-1",
     endpoint: "http://localhost:8080",
-    accessKeyId: “bogusaccesskey”,
-    secretAccessKey: “bogussecretkey”
+    accessKeyId: "bogusaccesskey",
+    secretAccessKey: "bogussecretkey"
 });
 alexaTest.test([
 
