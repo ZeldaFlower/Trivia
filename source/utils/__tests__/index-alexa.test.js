@@ -19,7 +19,7 @@ describe("Hello World Skill", function () {
 describe("HelloWorldIntent", function () {
 aws.config.update({
     region: "us-east-1"
-// 	,
+	,
 //     endpoint: "http://us-east-1.amazonaws.com",
     accessKeyId: "bogusaccesskey",
     secretAccessKey: "bogussecretkey"
