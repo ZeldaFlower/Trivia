@@ -29,7 +29,7 @@ activity: 'eating'
 }
 ]);
 });
-};
+},
 	// tests the behavior of the skill's LaunchRequest
 	describe("LaunchRequest", function () {
 		alexaTest.test([
