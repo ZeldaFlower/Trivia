@@ -9,7 +9,7 @@ const alexaTest = require('alexa-skill-test-framework');
 //const alexaTest = require('../../index');
 
 // initialize the testing framework
-alexaTest.initialize(require(("../../../index.js"),
+alexaTest.initialize(require("../../../index.js"),
 	"amzn1.ask.skill.00000000-0000-0000-0000-000000000000",
 	"amzn1.ask.account.VOID");
 
