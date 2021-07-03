@@ -9,7 +9,7 @@ const alexaTest = require('alexa-skill-test-framework');
 const aws = require('aws-sdk');
 //const alexaTest = require('../../index');
 
-jest.mock("../../dynamodb/src/libs/ddbClient.js");
+jest.mock("../../../node_modules/dynamodb/src/libs/ddbClient.js");
 
 // initialize the testing framework
 alexaTest.initialize(require("../../../index.js"),
