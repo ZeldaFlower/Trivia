@@ -22,6 +22,8 @@ jobs:
       - run: cat package.json
       - run: npm install --save-dev jest-cli
       - run: npm install aws-sdk
+      - run: npm install mocha
+      - run: npm install alexa-skill-test-framework --save-dev
       - run: git branch
       - run: npm test --
       - run: echo "🍏 This job's status is ${{ job.status }}."
