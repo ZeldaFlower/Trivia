@@ -9,6 +9,8 @@ const alexaTest = require('alexa-skill-test-framework');
 const aws = require('aws-sdk');
 //const alexaTest = require('../../index');
 
+jest.mock("../../dynamodb/src/libs/ddbClient.js");
+
 // initialize the testing framework
 alexaTest.initialize(require("../../../index.js"),
 	"amzn1.ask.skill.00000000-0000-0000-0000-000000000000",
