@@ -495,7 +495,7 @@ console.log(this)
 
                             this.event.session.attributes.recipeSub = product
                             this.event.session.attributes.filledSlots = filledSlots
-                /** !!! */
+                /** TODO: ? */
                             this.emit(':ask', "Although signing up for daily emails is free. To send emails for any date, you need to subscribe. With "+product.name+". "+product.summary+". Would you like to hear more?");
                 }
                 } // else error
@@ -934,7 +934,7 @@ console.log(this)
 										if (recipeSub.purchasable == "PURCHASABLE") {
 											this.event.session.attributes.recipeSub = recipeSub
 											this.event.session.attributes.filledSlots = filledSlots
-					/** !!! */
+					/** TODO: ? */
 											this.emit(':ask', "It looks like you have 20 recipes. You cannot add another until you subscribe. With "+recipeSub.name+". "+recipeSub.summary+". Would you like to hear more?")
 
 										} else {
@@ -1000,7 +1000,7 @@ console.log(this)
 		}
 	},
 
-	'ListRecipes': function () {//!!
+	'ListRecipes': function () {//TODO: ?
 		var filledSlots = delegateSlotCollection.call(this);
 
 		var { userId, accessToken } = this.event.session.user;
@@ -2568,7 +2568,7 @@ this.emit(':ask', this.t('SORRY'));
 
 //getTriviaForUser!!
 function getTriviaForUser(filledSlots, userId) {
-	if (filledSlots != undefined){
+	if (filledSlots != undefined) {
 		var name = filledSlots.slots.categoryTitle.value;
 console.log("category: " +name)
 		//const { userId } = this.event.session.user;
@@ -2587,25 +2587,24 @@ console.log("category: " +name)
 			if (existingItem) {
 				dynamoParams.Item = existingItem
 			}
-			getTriviaQuestion.call(this, existingItem, name).then(function(triviaInfo){
-			console.log("triviaInfo: "+triviaInfo)
-			console.log(triviaInfo)
-			var toShow = ""
-			if (triviaInfo) {
-				toShow = triviaInfo.question
-				this.event.session.attributes.triviaID = triviaInfo.triviaID
-				//this.emit(':tellWithCard', toShow, this.t('TRIVIA_INFO_TITLE'), toShow);// !!TODO maybe just tell
-			} else {
-				this.emit(':ask', "I cannot find the category "+name+". Please ask for a different category."+this.t('HELP_REPROMPT'));
-			}
-			console.log("to show: " +toShow)
-			// save dynamo params to our dynamo db table
-			var numberOfQuestionsAsked = dynamoParams.Item.numberOfQuestionsAsked
-			numberOfQuestionsAsked = numberOfQuestionsAsked + 1;
-			dynamoParams.Item.numberOfQuestionsAsked = numberOfQuestionsAsked
-			console.log("numberOfQuestionsAsked: " +numberOfQuestionsAsked)
-			putParamsAndMessage.call(this, dynamoParams, toShow, ":ask", this.t('TRIVIA_INFO_TITLE'));
-	
+			getTriviaQuestion.call(this, existingItem, name).then(function(triviaInfo) {
+				console.log("triviaInfo: "+triviaInfo)
+				console.log(triviaInfo)
+				var toShow = ""
+				if (triviaInfo) {
+					toShow = triviaInfo.question
+					this.event.session.attributes.triviaID = triviaInfo.triviaID
+					//this.emit(':tellWithCard', toShow, this.t('TRIVIA_INFO_TITLE'), toShow);// TODO: maybe just tell
+				} else {
+					this.emit(':ask', "I cannot find the category "+name+". Please ask for a different category."+this.t('HELP_REPROMPT'));
+				}
+				console.log("to show: " +toShow)
+				// save dynamo params to our dynamo db table
+				var numberOfQuestionsAsked = dynamoParams.Item.numberOfQuestionsAsked
+				numberOfQuestionsAsked = numberOfQuestionsAsked + 1;
+				dynamoParams.Item.numberOfQuestionsAsked = numberOfQuestionsAsked
+				console.log("numberOfQuestionsAsked: " +numberOfQuestionsAsked)
+				putParamsAndMessage.call(this, dynamoParams, toShow, ":ask", this.t('TRIVIA_INFO_TITLE'));
 			}.bind(this));
 
 		}).catch(err => {
@@ -2975,7 +2974,7 @@ function showVideoOrAudio(item, toShow, toTell, date) {
 
 }
 
-function getRecipeForUser(filledSlots, userId) {//!!
+function getRecipeForUser(filledSlots, userId) {//TODO: ?
 
 		console.log("List Verses")
     var date = filledSlots.slots.recipeTitle.value;
@@ -3139,7 +3138,7 @@ function logDebug(debug) {
 
 exports.handler = function (event, context) {
     const alexa = Alexa.handler(event, context);
-console.log("Alexa contents!!")
+console.log("Alexa contents!")
 console.log(alexa);
 
 var lambda = new awsSDK.Lambda({

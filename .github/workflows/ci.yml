@@ -1,0 +1,78 @@
+name: CI Workflow
+on: [push]
+jobs:
+#   Release-prepare:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - run: echo "Prepare for release!"
+  Test-and-Upload:
+    runs-on: ubuntu-latest
+#     needs: Release-prepare
+    steps:
+#       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+#       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+#       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v2
+#       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+#       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+#       - name: List files in the repository
+#         run: |
+#           ls ${{ github.workspace }}
+#       - run: cat package.json
+      - run: zip -r index.zip *
+      - run: ls
+      - run: npm install --save-dev jest-cli
+      - run: npm install aws-sdk
+      - run: npm install mocha
+      - run: npm install alexa-skill-test-framework --save-dev
+#       - run: git branch
+#       - run: cd node_modules;ls; cd aws-sdk; ls; cd dynamodb; cd src; ls; libs; ls
+# TODO: make test run shorter by merging with brach that already has this installed:
+#       - name: merge current branch with jest aws mocha and alexa skill test framework to test
+#         run: |
+#           git pull origin test-node-modules --allow-unrelated-histories; git push origin --delete ${{ github.ref }}-testing-branch; git checkout test-node-modules; git checkout -b ${{ github.ref }}-testing-branch; git merge ${{ github.ref }}; git push origin;
+      - run: npm test --
+      - run: echo "🍏 This job's status is ${{ job.status }}. Uploading to lambda."
+      - run: cd .. 
+      - run: ls
+#       - run: mkfile ~/.aws/config
+#       AKIASMKRZKZGUIDRMOV3
+#       AXwoDFrzGljlUYdGCyAd6eQnb9PRFqIacuJZiCgC
+      - run: export AWS_ACCESS_KEY_ID=AKIASMKRZKZGUIDRMOV3
+      - run: export AWS_SECRET_ACCESS_KEY=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
+      - run: export AWS_DEFAULT_REGION=us-east-1
+#       TODO: make following work...
+#       - run: aws lambda update-function-code --function-name trivia --zip-file fileb://index.zip
+      - run: git remote
+      - run: git config --global user.email "zelda_flower@yahoo.com"
+      - run: git config --global user.name "Christine Koen through workflow"
+      - name: create branch that has our zip
+        run: git push origin --delete ${{ github.ref }}-with-zip; git checkout -b ${{ github.ref }}-with-zip; git add .; git commit -am"With Zip"; git push  --set-upstream origin ${{ github.ref }}-with-zip;
+
+
+#   Checkmarx:
+#     runs-on: ubuntu-latest
+#     needs: Test-and-Upload
+#     steps:
+#     - run: echo "!"
+#   Deploy-to-Snapshot-and-run-FTA:
+#     runs-on: ubuntu-latest
+#     needs: Checkmarx
+#     steps:
+#     - run: echo "!"
+#   Deploy-to-Test-and-run-FTA:
+#     runs-on: ubuntu-latest
+#     needs: Deploy-to-Snapshot-and-run-FTA
+#     steps:
+#     - run: echo "!"
+#   Update-Support-Branch:
+#     runs-on: ubuntu-latest
+#     needs: Deploy-to-Test-and-run-FTA
+#     steps:
+#     - run: echo "!"
+#   Tag-Current-Release-Version:
+#     runs-on: ubuntu-latest
+#     needs: Update-Support-Branch
+#     steps:
+#     - run: echo "!"
