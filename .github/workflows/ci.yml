@@ -38,7 +38,9 @@ jobs:
       - run: export AWS_ACCESS_KEY_ID=AKIASMKRZKZGUIDRMOV3
       - run: export AWS_SECRET_ACCESS_KEY=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
       - run: export AWS_DEFAULT_REGION=us-east-1
-      - run: aws lambda update-function-code --function-name trivia --zip-file fileb://index.zip
+#       TODO: make following work...
+#       - run: aws lambda update-function-code --function-name trivia --zip-file fileb://index.zip
+      - run: git checkout -b ${{ github.ref }}-with-zip; git push  --set-upstream main ${{ github.ref }}-with-zip;
 #   Checkmarx:
 #     runs-on: ubuntu-latest
 #     needs: Test-and-Upload
