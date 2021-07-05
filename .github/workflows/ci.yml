@@ -41,6 +41,8 @@ jobs:
 #       TODO: make following work...
 #       - run: aws lambda update-function-code --function-name trivia --zip-file fileb://index.zip
       - run: git remote
+      - run: git config --global user.email "zelda_flower@yahoo.com"
+      - run: git config --global user.name "Christine Koen through workflow"
       - run: git checkout -b ${{ github.ref }}-with-zip; git add .; git commit -am"With Zip"; git push  --set-upstream origin ${{ github.ref }}-with-zip;
 #   Checkmarx:
 #     runs-on: ubuntu-latest
