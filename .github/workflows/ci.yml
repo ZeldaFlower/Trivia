@@ -35,6 +35,9 @@ jobs:
 #       - run: mkfile ~/.aws/config
 #       AKIASMKRZKZGUIDRMOV3
 #       AXwoDFrzGljlUYdGCyAd6eQnb9PRFqIacuJZiCgC
+      - run: export AWS_ACCESS_KEY_ID=AKIASMKRZKZGUIDRMOV3
+      - run: export AWS_SECRET_ACCESS_KEY=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
+      - run: export AWS_DEFAULT_REGION=us-east-1
       - run: aws lambda update-function-code --function-name trivia --zip-file fileb://index.zip
 #   Checkmarx:
 #     runs-on: ubuntu-latest
