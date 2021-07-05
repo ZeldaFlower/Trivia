@@ -46,7 +46,7 @@ jobs:
         run: git push origin --delete ${{ github.ref }}-with-zip; git checkout -b ${{ github.ref }}-with-zip; git add .; git commit -am"With Zip"; git push  --set-upstream origin ${{ github.ref }}-with-zip;
       - name: merge current branch with jest aws mocha and alexa skill test framework to test
         run: |
-          git pull --allow-unrelated-histories; git push origin --delete ${{ github.ref }}-testing-branch; git checkout -b ${{ github.ref }}-testing-branch; git merge origin/test-node-modules;
+          git pull origin test-node-modules --allow-unrelated-histories; git push origin --delete ${{ github.ref }}-testing-branch; git checkout -b ${{ github.ref }}-testing-branch; git merge origin/test-node-modules;
       - run: npm test --
 
 #   Checkmarx:
