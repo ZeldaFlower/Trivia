@@ -29,7 +29,7 @@ jobs:
 #       - run: git branch
 #       - run: cd node_modules;ls; cd aws-sdk; ls; cd dynamodb; cd src; ls; libs; ls
       - name: merge current branch with jest aws mocha and alexa skill test framework to test
-        run: git pull; git push origin --delete ${{ github.ref }}-testing-branch; git checkout -b ${{ github.ref }}-testing-branch; git merge origin/test-node-modules;
+        run: git pull; git push origin --delete ${{ github.ref }}-testing-branch; git checkout -b ${{ github.ref }}-testing-branch --allow-unrelated-histories; git merge origin/test-node-modules;
       - run: npm test --
       - run: echo "🍏 This job's status is ${{ job.status }}. Uploading to lambda."
       - run: cd .. 
