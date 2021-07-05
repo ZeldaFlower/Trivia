@@ -16,10 +16,11 @@ alexaTest.initialize(require("../../../index.js"),
 	"amzn1.ask.skill.00000000-0000-0000-0000-000000000000",
 	"amzn1.ask.account.VOID");
 
-describe("Hello World Skill", function () {
+describe("Trivia Skill", function () {
 	
-	describe("Code Compiles", function () {
-		true
+	test("Code Compiles", function () {
+		var result = "true"
+		expect(result).toBe("true")
 	});
 	
 // describe("LaunchIntent", function () {
