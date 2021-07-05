@@ -20,6 +20,7 @@ jobs:
 #         run: |
 #           ls ${{ github.workspace }}
 #       - run: cat package.json
+      - run: zip –X –r ../index.zip *
       - run: npm install --save-dev jest-cli
       - run: npm install aws-sdk
       - run: npm install mocha
@@ -27,7 +28,12 @@ jobs:
 #       - run: git branch
 #       - run: cd node_modules;ls; cd aws-sdk; ls; cd dynamodb; cd src; ls; libs; ls
       - run: npm test --
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - run: echo "🍏 This job's status is ${{ job.status }}. Uploading to lambda."
+      - run: cd .. 
+#       - run: mkfile ~/.aws/config
+#       AKIASMKRZKZGUIDRMOV3
+#       AXwoDFrzGljlUYdGCyAd6eQnb9PRFqIacuJZiCgC
+      - run: aws lambda update-function-code --function-name trivia --zip-file fileb://index.zip
 #   Checkmarx:
 #     runs-on: ubuntu-latest
 #     needs: Test-and-Upload
