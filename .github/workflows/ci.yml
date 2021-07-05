@@ -20,7 +20,7 @@ jobs:
 #         run: |
 #           ls ${{ github.workspace }}
 #       - run: cat package.json
-      - run: zip index.zip *
+      - run: zip -r index.zip *
       - run: ls
 #       - run: npm install --save-dev jest-cli
 #       - run: npm install aws-sdk
