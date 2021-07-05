@@ -3212,8 +3212,11 @@ Steps for updating:
 ---------------------------------------------------------------
 
     TODO:
-	13. Add your own questions to the app
-	14. User able to ask trivia how many correct answer they have, and how many questions asked, %?
+	13. Add your own questions to the app for $
+	14. User able to ask trivia how many correct answers they have, and how many questions asked, %?
+	15. Make tests in github working
+	16. Auto upload to lambda
+	17. stage/prod tags
 	
 	DONE:
 	Week 1 (5/16/2021): Made a method called GetTriviaQuestion which calls getTriviaForUser
@@ -3244,5 +3247,7 @@ Steps for updating:
 	Week 6 (6/27/2021):
 	9. Accept responses to the question and check against the answer - SessionEndedRequest seems to sometimes be called, open not working as expected
 	10. Increment correctAnswers for user
+	
+	Week 7 (7/11/2021):
 	
 **/

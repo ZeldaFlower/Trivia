@@ -8,8 +8,9 @@
   "license": "MIT",
   "dependencies": {
     "alexa-sdk": "^1.0.24",
-    "aws-sdk": "^2.177.0",
+    "aws-sdk": "^2.939.0",
     "es6-promisify": "^5.0.0",
+    "mocha": "^9.0.2",
     "request": "^2.88.0"
   }
 }
