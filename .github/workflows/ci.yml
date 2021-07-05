@@ -1,5 +1,5 @@
 name: CI Workflow
-on: [push, pull_request]
+on: [push]
 jobs:
 #   Release-prepare:
 #     runs-on: ubuntu-latest
