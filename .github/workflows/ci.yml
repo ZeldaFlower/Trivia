@@ -21,6 +21,7 @@ jobs:
 #           ls ${{ github.workspace }}
 #       - run: cat package.json
       - run: zip –X –r ../index.zip *
+      - run: ls
       - run: npm install --save-dev jest-cli
       - run: npm install aws-sdk
       - run: npm install mocha
@@ -30,6 +31,7 @@ jobs:
       - run: npm test --
       - run: echo "🍏 This job's status is ${{ job.status }}. Uploading to lambda."
       - run: cd .. 
+      - run: ls
 #       - run: mkfile ~/.aws/config
 #       AKIASMKRZKZGUIDRMOV3
 #       AXwoDFrzGljlUYdGCyAd6eQnb9PRFqIacuJZiCgC
