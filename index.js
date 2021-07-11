@@ -808,6 +808,10 @@ console.log(this)
 			})
 		}
     },//!!
+	'GetStats': function () {
+		var { userId, accessToken } = this.event.session.user;
+		getStats.call(this, userId);
+	},
 	'GetTriviaQuestion': function () {
 		var filledSlots = delegateSlotCollection.call(this);
 
@@ -2505,6 +2509,14 @@ this.emit(':ask', this.t('SORRY'));
 // 		// });
 // 	// }
 // }
+
+function getStats(userId) {
+	checkIfUserExists.call(this, userId).then(data => {
+		console.log("data: " +data)
+		const existingItem = data.Item;
+		this.emit(':tell', "You have answered "+existingItem.correctAnswers?existingItem.correctAnswers:0+" out of "+existingItem.numberOfQuestionsAsked+" questions correctly!");
+	})
+}
 
 //getTriviaForUser!!
 function getTriviaForUser(filledSlots, userId) {
