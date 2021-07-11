@@ -3215,8 +3215,7 @@ Steps for updating:
 	13. Add your own questions to the app for $
 	14. User able to ask trivia how many correct answers they have, and how many questions asked, %?
 	15. Make tests in github work
-	16. Auto upload to lambda (https://developer.amazon.com/blogs/post/Tx1UE9W1NQ0GYII/publishing-your-skill-code-to-lambda-via-the-command-line-interface, https://docs.aws.amazon.com/polly/latest/dg/setup-aws-cli.html, https://intellipaat.com/community/2320/passing-access-and-secret-key-aws-cli) 	AKIASMKRZKZGUIDRMOV3
-	AXwoDFrzGljlUYdGCyAd6eQnb9PRFqIacuJZiCgC
+		
 	
 	DONE:
 	Week 1 (5/16/2021): Made a method called GetTriviaQuestion which calls getTriviaForUser
@@ -3249,6 +3248,8 @@ Steps for updating:
 	10. Increment correctAnswers for user
 	
 	Week 7 (7/11/2021):
+	Before stream:
 	15. a. Test for ensuring parsing is done right in GitHub
 	17. stage/prod tags: Click publish new version, save, then go back to main function and choose Aliases, make 'Prod' from the newly created version, then add Alexa Skills Kit with the skill ID; then go to Alexa endpoint configuration and add :Prod to the end of the ARN.
+	16. Auto upload to lambda (https://developer.amazon.com/blogs/post/Tx1UE9W1NQ0GYII/publishing-your-skill-code-to-lambda-via-the-command-line-interface, https://docs.aws.amazon.com/polly/latest/dg/setup-aws-cli.html, https://intellipaat.com/community/2320/passing-access-and-secret-key-aws-cli) 
 **/
