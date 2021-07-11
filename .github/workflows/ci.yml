@@ -2,7 +2,7 @@ name: CI Workflow
 on: [push]
 jobs:
 #   Release-prepare:
-#     runs-on: ubuntu-latest
+#     runs-on: ubuntu-latest 
 #     steps:
 #     - run: echo "Prepare for release!"
   Test-and-Upload:
@@ -19,13 +19,13 @@ jobs:
 #       - name: List files in the repository
 #         run: |
 #           ls ${{ github.workspace }}
-#       - run: cat package.json
-      - run: zip -r index.zip *
+#       - run: cat package.json 
+#       - run: zip -r index.zip *
       - run: ls
-      - run: npm install --save-dev jest-cli
-      - run: npm install aws-sdk
-      - run: npm install mocha
-      - run: npm install alexa-skill-test-framework --save-dev
+#       - run: npm install --save-dev jest-cli
+#       - run: npm install aws-sdk
+#       - run: npm install mocha
+#       - run: npm install alexa-skill-test-framework --save-dev
 #       - run: git branch
 #       - run: cd node_modules;ls; cd aws-sdk; ls; cd dynamodb; cd src; ls; libs; ls
 # TODO: make test run shorter by merging with brach that already has this installed:
@@ -33,17 +33,25 @@ jobs:
 #         run: |
 #           git pull origin test-node-modules --allow-unrelated-histories; git push origin --delete ${{ github.ref }}-testing-branch; git checkout test-node-modules; git checkout -b ${{ github.ref }}-testing-branch; git merge ${{ github.ref }}; git push origin;
       - run: npm test --
+      - run: cp node_modules.zip nodes.zip
+      - run: rm -rf node_modules
+      - run: unzip nodes.zip
+      - run: rm nodes.zip
+      - run: rm node_modules.zip
+      - run: zip -r index.zip *
       - run: echo "🍏 This job's status is ${{ job.status }}. Uploading to lambda."
       - run: cd .. 
       - run: ls
-#       - run: mkfile ~/.aws/config
-#       AKIASMKRZKZGUIDRMOV3
-#       AXwoDFrzGljlUYdGCyAd6eQnb9PRFqIacuJZiCgC
-      - run: export AWS_ACCESS_KEY_ID=AKIASMKRZKZGUIDRMOV3
-      - run: export AWS_SECRET_ACCESS_KEY=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
-      - run: export AWS_DEFAULT_REGION=us-east-1
-#       TODO: make following work...
-#       - run: aws lambda update-function-code --function-name trivia --zip-file fileb://index.zip
+#       - run: mkfile ~/.aws/confige
+      - name: Configure AWS Region
+        run: echo "AWS_DEFAULT_REGION=us-east-1" >> $GITHUB_ENV
+      - run: AWS_EC2_METADATA_DISABLED=true >> $GITHUB_ENV
+      - shell: bash
+        env:
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: "AKIASMKRZKZGUIDRMOV3"
+        run: |
+         aws lambda update-function-code --function-name trivia --zip-file fileb://index.zip
       - run: git remote
       - run: git config --global user.email "zelda_flower@yahoo.com"
       - run: git config --global user.name "Christine Koen through workflow"
