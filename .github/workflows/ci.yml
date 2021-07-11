@@ -37,18 +37,16 @@ jobs:
       - run: cd .. 
       - run: ls
 #       - run: mkfile ~/.aws/confige
-      - run: AWS_ACCESS_KEY_ID=AKIASMKRZKZGUIDRMOV3 >> $GITHUB_ENV
-      - shell: bash
-        env:
-          SUPER_SECRET: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-         AWS_SECRET_ACCESS_KEY="$SUPER_SECRET" >> $GITHUB_ENV
-      - run: export AWS_DEFAULT_REGION=us-east-1
       - name: Configure AWS Region
         run: echo "AWS_DEFAULT_REGION=us-east-1" >> $GITHUB_ENV
-      - run: export AWS_EC2_METADATA_DISABLED=true
+      - run: AWS_EC2_METADATA_DISABLED=true >> $GITHUB_ENV
 #       TODO: make following work...
-      - run: aws lambda update-function-code --function-name trivia --zip-file fileb://index.zip
+      - shell: bash
+        env:
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: "AKIASMKRZKZGUIDRMOV3"
+        run: |
+         aws lambda update-function-code --function-name trivia --zip-file fileb://index.zip
       - run: git remote
       - run: git config --global user.email "zelda_flower@yahoo.com"
       - run: git config --global user.name "Christine Koen through workflow"
