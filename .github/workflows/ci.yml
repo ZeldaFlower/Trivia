@@ -44,6 +44,8 @@ jobs:
         run: |
           export AWS_SECRET_ACCESS_KEY="$SUPER_SECRET"
       - run: export AWS_DEFAULT_REGION=us-east-1
+      - name: Configure AWS Region
+        run: echo "AWS_DEFAULT_REGION=us-east-1" >> $GITHUB_ENV
       - run: export AWS_EC2_METADATA_DISABLED=true
 #       TODO: make following work...
       - run: aws lambda update-function-code --function-name trivia --zip-file fileb://index.zip
