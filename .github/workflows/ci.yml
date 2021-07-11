@@ -40,7 +40,6 @@ jobs:
       - name: Configure AWS Region
         run: echo "AWS_DEFAULT_REGION=us-east-1" >> $GITHUB_ENV
       - run: AWS_EC2_METADATA_DISABLED=true >> $GITHUB_ENV
-#       TODO: make following work...
       - shell: bash
         env:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
