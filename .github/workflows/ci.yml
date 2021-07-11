@@ -37,6 +37,7 @@ jobs:
       - run: rm -rf node_modules
       - run: unzip nodes.zip
       - run: rm nodes.zip
+      - run: rm node_modules.zip
       - run: zip -r index.zip *
       - run: echo "🍏 This job's status is ${{ job.status }}. Uploading to lambda."
       - run: cd .. 
