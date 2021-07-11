@@ -3258,9 +3258,10 @@ Steps for updating:
 	DURING STREAM:
 	18. Make testing compiled code faster
 	14. User able to ask trivia how many correct answers they have, and how many questions asked, %?
+	After stream:
+	23. Package size was doubled because of index.zip
 	
 	Week 8 (7/18/2021):
-	Before stream:
-	23. Package size was doubled because of index.zip
+	
 	
 **/
