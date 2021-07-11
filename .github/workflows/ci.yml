@@ -33,9 +33,10 @@ jobs:
 #         run: |
 #           git pull origin test-node-modules --allow-unrelated-histories; git push origin --delete ${{ github.ref }}-testing-branch; git checkout test-node-modules; git checkout -b ${{ github.ref }}-testing-branch; git merge ${{ github.ref }}; git push origin;
       - run: npm test --
+      - run: cp node_modules.zip nodes.zip
       - run: rm -rf node_modules
-      - run: unzip node-modules.zip
-      - run: rm node-modules.zip
+      - run: unzip nodes.zip
+      - run: rm nodes.zip
       - run: zip -r index.zip *
       - run: echo "🍏 This job's status is ${{ job.status }}. Uploading to lambda."
       - run: cd .. 
