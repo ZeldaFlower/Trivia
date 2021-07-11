@@ -36,9 +36,7 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}. Uploading to lambda."
       - run: cd .. 
       - run: ls
-#       - run: mkfile ~/.aws/config
-#       AKIASMKRZKZGUIDRMOV3
-#       AXwoDFrzGljlUYdGCyAd6eQnb9PRFqIacuJZiCgC
+#       - run: mkfile ~/.aws/confige
       - run: export AWS_ACCESS_KEY_ID=AKIASMKRZKZGUIDRMOV3
       - shell: bash
         env:
@@ -47,7 +45,7 @@ jobs:
           export AWS_SECRET_ACCESS_KEY="$SUPER_SECRET"
       - run: export AWS_DEFAULT_REGION=us-east-1
 #       TODO: make following work...
-#       - run: aws lambda update-function-code --function-name trivia --zip-file fileb://index.zip
+      - run: aws lambda update-function-code --function-name trivia --zip-file fileb://index.zip
       - run: git remote
       - run: git config --global user.email "zelda_flower@yahoo.com"
       - run: git config --global user.name "Christine Koen through workflow"
