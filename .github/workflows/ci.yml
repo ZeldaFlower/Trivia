@@ -20,12 +20,12 @@ jobs:
 #         run: |
 #           ls ${{ github.workspace }}
 #       - run: cat package.json 
-      - run: zip -r index.zip *
+#       - run: zip -r index.zip *
       - run: ls
-      - run: npm install --save-dev jest-cli
-      - run: npm install aws-sdk
-      - run: npm install mocha
-      - run: npm install alexa-skill-test-framework --save-dev
+#       - run: npm install --save-dev jest-cli
+#       - run: npm install aws-sdk
+#       - run: npm install mocha
+#       - run: npm install alexa-skill-test-framework --save-dev
 #       - run: git branch
 #       - run: cd node_modules;ls; cd aws-sdk; ls; cd dynamodb; cd src; ls; libs; ls
 # TODO: make test run shorter by merging with brach that already has this installed:
@@ -33,6 +33,10 @@ jobs:
 #         run: |
 #           git pull origin test-node-modules --allow-unrelated-histories; git push origin --delete ${{ github.ref }}-testing-branch; git checkout test-node-modules; git checkout -b ${{ github.ref }}-testing-branch; git merge ${{ github.ref }}; git push origin;
       - run: npm test --
+      - run: rm -rf node_modules
+      - run: unzip node-modules.zip
+      - run: rm node-modules.zip
+      - run: zip -r index.zip *
       - run: echo "🍏 This job's status is ${{ job.status }}. Uploading to lambda."
       - run: cd .. 
       - run: ls
