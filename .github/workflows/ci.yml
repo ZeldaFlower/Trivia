@@ -37,12 +37,12 @@ jobs:
       - run: cd .. 
       - run: ls
 #       - run: mkfile ~/.aws/confige
-      - run: export AWS_ACCESS_KEY_ID=AKIASMKRZKZGUIDRMOV3
+      - run: AWS_ACCESS_KEY_ID=AKIASMKRZKZGUIDRMOV3 >> $GITHUB_ENV
       - shell: bash
         env:
           SUPER_SECRET: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          export AWS_SECRET_ACCESS_KEY="$SUPER_SECRET"
+         AWS_SECRET_ACCESS_KEY="$SUPER_SECRET" >> $GITHUB_ENV
       - run: export AWS_DEFAULT_REGION=us-east-1
       - name: Configure AWS Region
         run: echo "AWS_DEFAULT_REGION=us-east-1" >> $GITHUB_ENV
