@@ -3223,8 +3223,12 @@ Steps for updating:
 ---------------------------------------------------------------
 
     TODO:
-	13. Add your own questions to the app
-	14. User able to ask trivia how many correct answer they have, and how many questions asked, %?
+	13. Add your own questions to the app for $
+	15. Make tests in github work
+	19. look into wasm which replaces javascript
+	20. update updated field
+	21. add prod tag for endpoint before submitting app for review
+	22. fix bug with index sometimes gives -1
 	
 	DONE:
 	Week 1 (5/16/2021): Made a method called GetTriviaQuestion which calls getTriviaForUser
@@ -3256,4 +3260,17 @@ Steps for updating:
 	9. Accept responses to the question and check against the answer - SessionEndedRequest seems to sometimes be called, open not working as expected
 	10. Increment correctAnswers for user
 	
+	Week 7 (7/11/2021):
+	Before stream:
+	15. a. Test for ensuring parsing is done right in GitHub
+	17. stage/prod tags: Click publish new version, save, then go back to main function and choose Aliases, make 'Prod' from the newly created version, then add Alexa Skills Kit with the skill ID; then go to Alexa endpoint configuration and add :Prod to the end of the ARN.
+	16. Auto upload to lambda (https://developer.amazon.com/blogs/post/Tx1UE9W1NQ0GYII/publishing-your-skill-code-to-lambda-via-the-command-line-interface, https://docs.aws.amazon.com/polly/latest/dg/setup-aws-cli.html, 
+	DURING STREAM:
+	18. Make testing compiled code faster
+	14. User able to ask trivia how many correct answers they have, and how many questions asked, %?
+	
+	After stream:
+	23. Package size was doubled because of index.zip
+	
+	Week 8 (7/18/2021):
 **/
