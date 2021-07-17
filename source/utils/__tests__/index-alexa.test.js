@@ -11,6 +11,8 @@ const aws = require('aws-sdk');
 
 // jest.mock("../../../node_modules/dynamodb/src/libs/ddbClient.js");
 
+// jest.mock("../../../node_modules/aws-sdk/lib/request.js");
+
 // initialize the testing framework
 alexaTest.initialize(require("../../../index.js"),
 	"amzn1.ask.skill.00000000-0000-0000-0000-000000000000",
