@@ -13,7 +13,7 @@ const AWSMock = require('aws-sdk-mock');
 // jest.mock("../../../node_modules/dynamodb/src/libs/ddbClient.js");
 
 // jest.mock("../../../node_modules/aws-sdk/clients/dynamodb.js");
-// jest.mock("../../../node_modules/aws-sdk/clients/dynamodb.js");
+jest.mock("../../../node_modules/aws-sdk/lib/request.jss");
 
 // initialize the testing framework
 alexaTest.initialize(require("../../../index.js"),
