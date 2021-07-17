@@ -83,7 +83,7 @@ describe("Trivia Skill", function () {
 describe('Test index', function () {
 
   it('works', function () {
-    expect(index.handler({
+	  var promise = index.handler({
 	"version": "1.0",
 	"session": {
 		"new": true,
@@ -229,7 +229,9 @@ describe('Test index', function () {
 		},
 		"dialogState": "COMPLETED"
 	}
-}, "")).toEqual({
+}, "")
+	var response = await promise
+    expect(response).toEqual({
 	"body": {
 		"version": "1.0",
 		"response": {
@@ -251,6 +253,6 @@ describe('Test index', function () {
 		},
 		"userAgent": "ask-nodejs/1.0.24 Node/v14.17.0"
 	}
-});
+	});
   });
-// });
+});
