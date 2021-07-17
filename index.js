@@ -2580,6 +2580,9 @@ function getStats(userId) {
 
 //getTriviaForUser!!
 function getTriviaForUser(filledSlots, userId) {
+console.log("get trivia for user method");
+console.log(filledSlots);
+console.log(userId);
 	if (filledSlots != undefined) {
 		var name = filledSlots.slots.categoryTitle.value;
 console.log("category: " +name)
