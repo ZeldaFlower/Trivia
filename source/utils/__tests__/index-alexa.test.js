@@ -9,10 +9,11 @@ const alexaTest = require('alexa-skill-test-framework');
 const aws = require('aws-sdk');
 const AWSMock = require('aws-sdk-mock');
 //const alexaTest = require('../../index');
+const flushPromises = require('flush-promises');
 
 // jest.mock("../../../node_modules/dynamodb/src/libs/ddbClient.js");
 
-// jest.mock("../../../node_modules/aws-sdk/clients/dynamodb.js");
+jest.mock("../../../node_modules/aws-sdk/clients/dynamodb.js");
 // jest.mock("../../../node_modules/aws-sdk/lib/request.js");
 
 // initialize the testing framework
@@ -32,8 +33,8 @@ aws.config.update({
     region: "us-east-1"
 	,
 //     endpoint: "http://us-east-1.amazonaws.com",
-    accessKeyId: "bogusaccesskey",
-    secretAccessKey: "bogussecretkey"
+//     accessKeyId: "bogusaccesskey",
+//     secretAccessKey: "bogussecretkey"
 });
 // aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((_, cb) => {
 //   cb(null, user);
