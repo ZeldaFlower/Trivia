@@ -7,6 +7,7 @@ Run with 'mocha examples/skill-sample-nodejs-hello-world/helloworld-tests.js'.
 // include the testing framework
 const alexaTest = require('alexa-skill-test-framework');
 const aws = require('aws-sdk');
+const AWSMock = require('aws-sdk-mock');
 //const alexaTest = require('../../index');
 
 // jest.mock("../../../node_modules/dynamodb/src/libs/ddbClient.js");
@@ -36,6 +37,9 @@ aws.config.update({
 });
 aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((_, cb) => {
   cb(null, user);
+});
+AWSMock.mock('DynamoDB.DocumentClient', 'query', function(params, callback) {
+  callback(null, {Items: [1, 2, 3]});
 });
 alexaTest.test([
 	{
