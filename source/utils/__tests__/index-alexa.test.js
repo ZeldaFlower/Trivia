@@ -72,7 +72,7 @@ alexaTest.test([
 				request: alexaTest.getIntentRequest("GetTriviaQuestion", {
 				"categoryTitle": {
 					"name": "categoryTitle",
-					"value": "Bible Trivia Made Easy"}}),
+					"value": "Animals"}}),
 				says: "What is Christine's Favorite animal? 1) blah 2) Bunnies 3) cats 4) dogs", repromptsNothing: true, shouldEndSession: false,
 				hasAttributes: {
 					category: 'animals'
