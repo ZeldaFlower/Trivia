@@ -9,7 +9,7 @@ const alexaTest = require('alexa-skill-test-framework');
 const aws = require('aws-sdk');
 const AWSMock = require('aws-sdk-mock');
 //const alexaTest = require('../../index');
-const flushPromises = require('flush-promises');
+// const flushPromises = require('flush-promises');
 
 // jest.mock("../../../node_modules/dynamodb/src/libs/ddbClient.js");
 
