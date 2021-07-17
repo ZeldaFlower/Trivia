@@ -3148,36 +3148,36 @@ function logDebug(debug) {
   }
 }
 
-exports.handler = function (event, context) {
-    const alexa = Alexa.handler(event, context);
+exports.handler = function (event, context, callback) {
+    const alexa = Alexa.handler(event, context, callback);
 console.log("Alexa contents!")
 console.log(alexa);
 
-var lambda = new awsSDK.Lambda({
-  region: 'us-east-1' //change to your region
-});
+// var lambda = new awsSDK.Lambda({
+//   region: 'us-east-1' //change to your region
+// });
 
-lambda.invoke({
-  FunctionName: 'alexa',
-  Payload: JSON.stringify(event,context) // pass params
-}, function(error, data) {
-  if (error) {
-console.log("error here:")
-console.log(error)
-    //context.done('error', error);
-  }
-  if(data && data.Payload){
-console.log("payload!")
-console.log(data.Payload)
-console.log(data)
-   //context.succeed(data.Payload)
-    alexa.APP_ID = APP_ID;
-    // To enable string internationalization (i18n) features, set a resources object.
-    alexa.resources = languageStrings;
+// lambda.invoke({
+//   FunctionName: 'alexa',
+//   Payload: JSON.stringify(event,context) // pass params
+// }, function(error, data) {
+//   if (error) {
+// console.log("error here:")
+// console.log(error)
+//     //context.done('error', error);
+//   }
+//   if(data && data.Payload){
+// console.log("payload!")
+// console.log(data.Payload)
+// console.log(data)
+//    //context.succeed(data.Payload)
+//     alexa.APP_ID = APP_ID;
+//     // To enable string internationalization (i18n) features, set a resources object.
+//     alexa.resources = languageStrings;
     alexa.registerHandlers(handlers);
     alexa.execute();
-  }
-});
+//   }
+// });
 };
 // utterances:
 
