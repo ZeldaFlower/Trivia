@@ -15,6 +15,7 @@ const AWSMock = require('aws-sdk-mock');
 
 // jest.mock("../../../node_modules/aws-sdk/clients/dynamodb.js");
 // jest.mock("../../../node_modules/aws-sdk/lib/request.js");
+jest.mock("../../../node_modules/aws-sdk");
 
 // initialize the testing framework
 alexaTest.initialize(require("../../../index.js"),
@@ -41,6 +42,9 @@ aws.config.update({
 // });
 AWSMock.mock('DynamoDB.DocumentClient', 'query', function(params, callback) {
   callback(null, {Items: [1, 2, 3]});
+});
+AWSMock.mock('Lambda', 'invoke', function(params, callback) {
+  callback(null, {Payload: [1, 2, 3]});
 });
 alexaTest.test([
 	{
