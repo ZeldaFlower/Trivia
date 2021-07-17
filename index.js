@@ -3173,7 +3173,7 @@ console.log(alexa);
 //    //context.succeed(data.Payload)
 //     alexa.APP_ID = APP_ID;
 //     // To enable string internationalization (i18n) features, set a resources object.
-//     alexa.resources = languageStrings;
+    alexa.resources = languageStrings;
     alexa.registerHandlers(handlers);
     alexa.execute();
 //   }
