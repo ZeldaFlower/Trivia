@@ -1651,7 +1651,7 @@ function getTriviaQuestion(existingItem, category) {
 	}
 	console.log(triviaIDs)
 
-	var randomIndex = Math.round(Math.random() * triviaIDs.length - 1)
+	var randomIndex = Math.round(Math.random() * (triviaIDs.length - 1))
 	console.log(randomIndex)
 	console.log(triviaIDs[randomIndex])
 	var params = {
