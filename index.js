@@ -2600,6 +2600,7 @@ console.log("category: " +name)
 				}
 			}
 			if (existingItem) {
+				existingItem.updated = Date.now()
 				dynamoParams.Item = existingItem
 			}
 			getTriviaQuestion.call(this, existingItem, name).then(function(triviaInfo) {
@@ -3231,7 +3232,7 @@ Steps for updating:
 	19. look into wasm which replaces javascript
 	20. update updated field
 	21. add prod tag for endpoint before submitting app for review
-	22. fix bug with index sometimes gives -1
+
 	
 	DONE:
 	Week 1 (5/16/2021): Made a method called GetTriviaQuestion which calls getTriviaForUser
@@ -3276,4 +3277,5 @@ Steps for updating:
 	23. Package size was doubled because of index.zip
 	
 	Week 8 (7/18/2021):
+		22. fix bug with index sometimes gives -1
 **/
