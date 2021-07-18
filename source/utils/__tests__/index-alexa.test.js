@@ -43,9 +43,9 @@ aws.config.update({
 AWSMock.mock('DynamoDB.DocumentClient', 'query', function(params, callback) {
   callback(null, {Items: [1, 2, 3]});
 });
-AWSMock.mock('Lambda', 'invoke', function(params, callback) {
-  callback(null, {Payload: [1, 2, 3]});
-});
+// AWSMock.mock('Lambda', 'invoke', function(params, callback) {
+//   callback(null, {Payload: [1, 2, 3]});
+// });
 alexaTest.test([
 	{
 		request: alexaTest.getIntentRequest("LaunchRequest"),
