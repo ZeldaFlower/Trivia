@@ -49,13 +49,29 @@ AWSMock.mock('Lambda', 'invoke', function(params, callback) {
 alexaTest.test([
 	{
 		request: alexaTest.getIntentRequest("LaunchRequest"),
-		says: "Welcome to Christine Trivia! You can say play. What can I help you with?", repromptsNothing: true, shouldEndSession: true,
+		says: "Welcome to Christine Trivia. You can say play.  What can I help you with?", repromptsNothing: true, shouldEndSession: true,
 		hasAttributes: {
 			activity: 'eating'
 		}
 	}
 ]);
 });
+
+// 	describe("GetTriviaQuestion", function () {
+// 		alexaTest.test([
+// 			{
+// 				request: alexaTest.getIntentRequest("GetTriviaQuestion", {
+// 				"categoryTitle": {
+// 					"name": "categoryTitle",
+// 					"value": "Animals"}}),
+// 				says: "What is Christine's Favorite animal? 1) blah 2) Bunnies 3) cats 4) dogs", repromptsNothing: true, shouldEndSession: false,
+// 				hasAttributes: {
+// 					category: 'animals'
+// 				}
+// 			}
+// 		]);
+// 	});
+
 // 	// tests the behavior of the skill's LaunchRequest
 // 	describe("LaunchRequest", function () {
 // 		alexaTest.test([
@@ -65,22 +81,7 @@ alexaTest.test([
 // 			}
 // 		]);
 // 	});
-
-	describe("GetTriviaQuestion", function () {
-		alexaTest.test([
-			{
-				request: alexaTest.getIntentRequest("GetTriviaQuestion", {
-				"categoryTitle": {
-					"name": "categoryTitle",
-					"value": "Animals"}}),
-				says: "What is Christine's Favorite animal? 1) blah 2) Bunnies 3) cats 4) dogs", repromptsNothing: true, shouldEndSession: false,
-				hasAttributes: {
-					category: 'animals'
-				}
-			}
-		]);
-	});
-
+	
 // 	// tests the behavior of the skill's HelloWorldIntent with like operator
 // 	describe("HelloWorldIntent like", function () {
 // 		alexaTest.test([
