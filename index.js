@@ -816,30 +816,30 @@ console.log(this)
 		var filledSlots = delegateSlotCollection.call(this);
 
 		var { userId, accessToken } = this.event.session.user;
-//		if (!accessToken) {
-//			console.log("no token")
+		if (!accessToken) {
+			console.log("no token")
 			//this.emit(':ask', 'Please link your Account so I can email you the web link.');
 			getTriviaForUser.call(this, filledSlots, userId);
-//		} else {
-//			console.log("token")
-//			const options = {
-//				url: 'https://api.amazon.com/user/profile?access_token=' + accessToken,
-//				method: 'GET',
-//				headers: {
-//					'Accept': 'application/json',
-//					Authorization: "Bearer " + this.event.context.System.apiAccessToken
-//				}
-//			};
-//			request(options, (error, response, body) => {//TODO: request error
-//				if (!error && response.statusCode === 200){
-//					let data = JSON.parse(body); // Store the data we got from the API request
-//					console.log(data)
-//					console.log(filledSlots)
-//					userId = data.user_id
-//					getTriviaForUser.call(this, filledSlots, userId);
-//				}
-//			})
-//		}
+		} else {
+			console.log("token")
+			const options = {
+				url: 'https://api.amazon.com/user/profile?access_token=' + accessToken,
+				method: 'GET',
+				headers: {
+					'Accept': 'application/json',
+					Authorization: "Bearer " + this.event.context.System.apiAccessToken
+				}
+			};
+			request(options, (error, response, body) => {//TODO: request error
+				if (!error && response.statusCode === 200){
+					let data = JSON.parse(body); // Store the data we got from the API request
+					console.log(data)
+					console.log(filledSlots)
+					userId = data.user_id
+					getTriviaForUser.call(this, filledSlots, userId);
+				}
+			})
+		}
     },
 
 	'GetRecipe': function () {
