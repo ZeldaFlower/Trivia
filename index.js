@@ -7,7 +7,7 @@ Do you ever wonder how long those leftovers have been in the fridge?
 
 Track your food with this skill, and I will let you know from the comfort of your couch!
 
-Here are some examples of what you can say:
+Here are some examples of what you can say: 
 - Add {milk} to {fridge} {top shelf/bottom drawer/top drawer/second drawer/side door/other}
 - Do I have {milk}?
 - Move {milk} to {fridge} {top shelf}
