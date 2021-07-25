@@ -1097,8 +1097,7 @@ const handlers = {
 		this.emit(':ask', this.t('HELP_REPROMPT'));
 	},
 	'Connections.Response': function () {
-		console.log('connections.response')
-		console.log(this.event)
+		console.log('connections.response', this.event)
 		var purchaseResult = this.event.request.payload.purchaseResult
 		console.log(purchaseResult)
 		if (this.event.request.name != "Cancel") {
@@ -1244,7 +1243,6 @@ const handlers = {
 	},
 	'NumberIntent': function () {
 		console.log("subIntent")
-		console.log(this.event.session.attributes.triviaID)
 		console.log(this.event.session)
 		console.log(this.event.session.attributes)
 		if (this.event.session.attributes.triviaID) {
@@ -2802,8 +2800,7 @@ function listRecipesForUser(filledSlots, userId) {//
 				}
 			}
 			titleArray.sort();
-			console.log("array:")
-			console.log(itemArray)
+			console.log("array:", itemArray)
 
 			itemArray = itemArray.sort(function (a, b) {
 				if (a.title < b.title) { return -1; }
