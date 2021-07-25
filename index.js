@@ -2620,7 +2620,7 @@ console.log("category: " +name)
 				numberOfQuestionsAsked = numberOfQuestionsAsked + 1;
 				dynamoParams.Item.numberOfQuestionsAsked = numberOfQuestionsAsked
 				console.log("numberOfQuestionsAsked: " +numberOfQuestionsAsked)
-				putParamsAndMessage.call(this, dynamoParams, toShow, ":ask", this.t('TRIVIA_INFO_TITLE'));
+				putParamsAndMessage.call(this, dynamoParams, toShow, ":ask", toShow+" Please say one, two, three or four");
 			}.bind(this));
 
 		}).catch(err => {
