@@ -21,7 +21,7 @@ Here are some examples of what you can say:
 - Mark {mustard} as condiment
 
 If you say "Alexa, open food tracker", I will also remind you of what I can do.
-If you say, "Alexa, ask food tracker for help"
+If you say, "Alexa, ask food tracker for help" 
 **/
 
 'use strict';
