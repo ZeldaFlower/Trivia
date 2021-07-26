@@ -66,6 +66,7 @@ alexaTest.test([
 		says: "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses.", 
 		reprompts: "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses. Please say one, two, three, or four.", 
 		shouldEndSession: false
+	}
 ]);
 });
 
