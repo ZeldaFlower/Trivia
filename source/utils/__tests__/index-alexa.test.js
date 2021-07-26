@@ -7,7 +7,7 @@ Run with 'mocha examples/skill-sample-nodejs-hello-world/helloworld-tests.js'.
 // include the testing framework
 const alexaTest = require('alexa-skill-test-framework');
 const aws = require('aws-sdk');
-// const AWSMock = require('aws-sdk-mock');
+const AWSMock = require('aws-sdk-mock');
 //const alexaTest = require('../../index');
 // const flushPromises = require('flush-promises');
 
@@ -15,7 +15,7 @@ const aws = require('aws-sdk');
 
 // jest.mock("../../../node_modules/aws-sdk/clients/dynamodb.js");
 // jest.mock("../../../node_modules/aws-sdk/lib/request.js");
-// jest.mock("../../../node_modules/aws-sdk");
+jest.mock("../../../node_modules/aws-sdk");
 
 // initialize the testing framework
 alexaTest.initialize(require("../../../index.js"),
@@ -29,33 +29,33 @@ describe("Trivia Skill", function () {
 		expect(result).toBe("true")
 	});
 	
-// describe("LaunchIntent", function () {
-// aws.config.update({
-//     region: "us-east-1"
-// 	,
-// //     endpoint: "http://us-east-1.amazonaws.com",
-//     accessKeyId: "bogusaccesskey",
-//     secretAccessKey: "bogussecretkey"
+describe("LaunchIntent", function () {
+aws.config.update({
+    region: "us-east-1"
+	,
+//     endpoint: "http://us-east-1.amazonaws.com",
+    accessKeyId: "bogusaccesskey",
+    secretAccessKey: "bogussecretkey"
+});
+// aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((_, cb) => {
+//   cb(null, user);
 // });
-// // aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((_, cb) => {
-// //   cb(null, user);
-// // });
-// AWSMock.mock('DynamoDB.DocumentClient', 'query', function(params, callback) {
-//   callback(null, {Items: [1, 2, 3]});
+AWSMock.mock('DynamoDB.DocumentClient', 'query', function(params, callback) {
+  callback(null, {Items: [1, 2, 3]});
+});
+// AWSMock.mock('Lambda', 'invoke', function(params, callback) {
+//   callback(null, {Payload: [1, 2, 3]});
 // });
-// // AWSMock.mock('Lambda', 'invoke', function(params, callback) {
-// //   callback(null, {Payload: [1, 2, 3]});
-// // });
-// alexaTest.test([
-// 	{
-// 		request: alexaTest.getIntentRequest("LaunchRequest"),
-// 		says: "Welcome to Christine Trivia. You can say play.  What can I help you with?", repromptsNothing: true, shouldEndSession: true,
-// 		hasAttributes: {
-// 			activity: 'eating'
-// 		}
-// 	}
-// ]);
-// });
+alexaTest.test([
+	{
+		request: alexaTest.getIntentRequest("LaunchRequest"),
+		says: "Welcome to Christine Trivia. You can say play.  What can I help you with?", repromptsNothing: true, shouldEndSession: true,
+		hasAttributes: {
+			activity: 'eating'
+		}
+	}
+]);
+});
 
 // 	describe("GetTriviaQuestion", function () {
 // 		alexaTest.test([
