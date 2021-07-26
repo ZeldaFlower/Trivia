@@ -49,7 +49,7 @@ AWSMock.mock('DynamoDB.DocumentClient', 'query', function(params, callback) {
 alexaTest.test([
 	{
 		request: alexaTest.getIntentRequest("LaunchRequest"),
-		says: "Welcome to Christine Trivia. You can say play.  What can I help you with?", repromptsNothing: true, shouldEndSession: true,
+		says: "Welcome to Christine Trivia! You can say play.  What can I help you with?", repromptsNothing: true, shouldEndSession: true,
 		hasAttributes: {
 			activity: 'eating'
 		}
