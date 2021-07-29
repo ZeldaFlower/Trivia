@@ -57,7 +57,7 @@ alexaTest.test([
 	// TODO: seems the slots do not get propogated to the method get trivia for user method
 	// https://github.com/ZeldaFlower/Trivia/runs/3157251358
 var triviaQuestionIntent=	alexaTest.getIntentRequest("GetTriviaQuestion", {"categoryTitle": "Animal"});
-	triviaQuestionIntent.dialogState = "COMPLETE";
+	triviaQuestionIntent.request.dialogState = "COMPLETE";
 alexaTest.test([
 	{
 		request: triviaQuestionIntent,
