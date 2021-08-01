@@ -1250,23 +1250,63 @@ console.log(this)
 					// save to db correct answer
 					
 					var { userId, accessToken } = this.event.session.user;
-					checkIfUserExists.call(this, userId).then(data => {
-						
-						console.log("data: " +data)
-						const existingItem = data.Item;
-						var dynamoParams = {
-							TableName: table
-						}
-						if (existingItem) {
-							dynamoParams.Item = existingItem
-						}
-						if (!dynamoParams.Item.correctAnswers){
-							dynamoParams.Item.correctAnswers = 0;
-						}
-						dynamoParams.Item.correctAnswers = dynamoParams.Item.correctAnswers + 1;
-					// save and respond to user with "Correct!" possibly "Would you like another question?"
-						putParamsAndMessage.call(this, dynamoParams, "Correct!", ":tell", this.t('TRIVIA_INFO_TITLE'));
-					})
+					if (!accessToken) {
+						console.log("no token")
+						checkIfUserExists.call(this, userId).then(data => {
+
+							console.log("data: " +data)
+							const existingItem = data.Item;
+							var dynamoParams = {
+								TableName: table
+							}
+							if (existingItem) {
+								dynamoParams.Item = existingItem
+							}
+							if (!dynamoParams.Item.correctAnswers){
+								dynamoParams.Item.correctAnswers = 0;
+							}
+							dynamoParams.Item.correctAnswers = dynamoParams.Item.correctAnswers + 1;
+							// save and respond to user with "Correct!" possibly "Would you like another question?"
+							putParamsAndMessage.call(this, dynamoParams, "Correct!", ":tell", this.t('TRIVIA_INFO_TITLE'));
+						})
+					} else {
+						console.log("token")
+						const options = {
+							url: 'https://api.amazon.com/user/profile?access_token=' + accessToken,
+							method: 'GET',
+							headers: {
+								'Accept': 'application/json',
+								Authorization: "Bearer " + this.event.context.System.apiAccessToken
+							}
+						};
+						request(options, (error, response, body) => {//TODO: request error
+							if (!error && response.statusCode === 200){
+								let data = JSON.parse(body); // Store the data we got from the API request
+								console.log(data)
+								console.log(filledSlots)
+								userId = data.user_id
+// 								getTriviaForUser.call(this, filledSlots, userId);
+								
+								checkIfUserExists.call(this, userId).then(data => {
+
+									console.log("data: " +data)
+									const existingItem = data.Item;
+									var dynamoParams = {
+										TableName: table
+									}
+									if (existingItem) {
+										dynamoParams.Item = existingItem
+									}
+									if (!dynamoParams.Item.correctAnswers){
+										dynamoParams.Item.correctAnswers = 0;
+									}
+									dynamoParams.Item.correctAnswers = dynamoParams.Item.correctAnswers + 1;
+									// save and respond to user with "Correct!" possibly "Would you like another question?"
+									putParamsAndMessage.call(this, dynamoParams, "Correct!", ":tell", this.t('TRIVIA_INFO_TITLE'));
+								})
+							}
+						})
+					}
 				} else {
 					// respond to user "Sorry, that is incorrect. The correct answer is 'answer'"
 					this.emit(':tell',  "Sorry, that is incorrect. The correct answer is '"+item.Item.answer+"'");
@@ -1276,6 +1316,36 @@ console.log(this)
 			this.emit(':ask', this.t('HELP_REPROMPT'));
 		}
 	},
+	
+	'xxxxx': function () {
+		var filledSlots = delegateSlotCollection.call(this);
+
+		var { userId, accessToken } = this.event.session.user;
+		if (!accessToken) {
+			console.log("no token")
+			//this.emit(':ask', 'Please link your Account so I can email you the web link.');
+			getTriviaForUser.call(this, filledSlots, userId);
+		} else {
+			console.log("token")
+			const options = {
+				url: 'https://api.amazon.com/user/profile?access_token=' + accessToken,
+				method: 'GET',
+				headers: {
+					'Accept': 'application/json',
+					Authorization: "Bearer " + this.event.context.System.apiAccessToken
+				}
+			};
+			request(options, (error, response, body) => {//TODO: request error
+				if (!error && response.statusCode === 200){
+					let data = JSON.parse(body); // Store the data we got from the API request
+					console.log(data)
+					console.log(filledSlots)
+					userId = data.user_id
+					getTriviaForUser.call(this, filledSlots, userId);
+				}
+			})
+		}
+    },
 	'AMAZON.YesIntent': function() {
 		console.log("subIntent")
 		console.log(this.event.session.attributes.triviaID)
