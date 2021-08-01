@@ -830,7 +830,6 @@ console.log(this)
 				if (!error && response.statusCode === 200){
 					let data = JSON.parse(body); // Store the data we got from the API request
 					console.log(data)
-					console.log(filledSlots)
 					userId = data.user_id
 					getStats.call(this, userId);
 				}
