@@ -1731,7 +1731,8 @@ function getTriviaQuestion(existingItem, category) {
     }
   };
   return dbGet(params).then(function(item) {
-	  console.log("item: "+item)
+	  console.log("item: ")
+	  console.log(item)
 	return item.Item
   });
 }
