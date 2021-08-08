@@ -41,6 +41,9 @@ aws.config.update({
 //   cb(null, user);
 // });
 AWSMock.mock('DynamoDB.DocumentClient', 'get', function(params, callback) {
+	console.log("dynamodb get");
+	console.log(params);
+	console.log(callback);
 	if (params.TableName == "trivia") {
   		callback(null, {Item: {question: "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses."}});
 	} else {
