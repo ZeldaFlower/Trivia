@@ -51,12 +51,6 @@ AWSMock.mock('DynamoDB.DocumentClient', 'get', function(params, callback) {
 	}
 });
 	
-	.get({TableName: 'TasksTable', Key: 'someTask'})
-    .promise()
-    .then(result => {
-        console.log(result.Item)
-    });
-	
 // AWSMock.mock('Lambda', 'invoke', function(params, callback) {
 //   callback(null, {Payload: [1, 2, 3]});
 // });
