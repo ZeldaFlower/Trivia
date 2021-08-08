@@ -77,7 +77,7 @@ aws.DynamoDB.DocumentClient.prototype.put.mockImplementation((_, cb) => {
 		{
 			request: triviaQuestionIntent,
 			says: "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses.", 
-			reprompts: "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses. Please say one, two, three, or four", 
+			reprompts: "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses. Please say one, two, three or four", 
 			shouldEndSession: false
 		}
 	]);
