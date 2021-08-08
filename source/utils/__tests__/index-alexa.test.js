@@ -40,6 +40,9 @@ aws.config.update({
 // aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((_, cb) => {
 //   cb(null, user);
 // });
+aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((_, cb) => {
+  cb(null, { response: {"Item": {"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses."}}});
+});
 // AWSMock.mock('DynamoDB', 'getItem', function(params, callback) {
 // 	console.log("dynamodb get");
 // 	console.log(params);
