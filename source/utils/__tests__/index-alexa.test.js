@@ -40,8 +40,12 @@ aws.config.update({
 // aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((_, cb) => {
 //   cb(null, user);
 // });
-AWSMock.mock('DynamoDB.DocumentClient', 'query', function(params, callback) {
-  callback(null, {Items: [1, 2, 3]});
+AWSMock.mock('DynamoDB.DocumentClient', 'get', function(params, callback) {
+	if (params.TableName == "trivia") {
+  		callback(null, {Item: {question: "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses."}});
+	} else {
+  		callback(null, {Item: {userId: "amzn1.ask.account.VOID", "numberOfQuestionsAsked": 0}});
+	}
 });
 // AWSMock.mock('Lambda', 'invoke', function(params, callback) {
 //   callback(null, {Payload: [1, 2, 3]});
