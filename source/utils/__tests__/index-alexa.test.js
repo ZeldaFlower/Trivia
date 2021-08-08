@@ -40,7 +40,7 @@ aws.config.update({
 // aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((_, cb) => {
 //   cb(null, user);
 // });
-AWSMock.mock('DynamoDB.DocumentClient', 'get', function(params, callback) {
+AWSMock.mock('DynamoDB', 'getItem', function(params, callback) {
 	console.log("dynamodb get");
 	console.log(params);
 	console.log(callback);
