@@ -57,16 +57,16 @@ AWSMock.mock('DynamoDB.DocumentClient', 'query', function(params, callback) {
 	// TODO: seems the slots do not get propogated to the method get trivia for user method
 	// https://github.com/ZeldaFlower/Trivia/runs/3157251358
 	
-// 	var triviaQuestionIntent= alexaTest.getIntentRequest("GetTriviaQuestion", {"categoryTitle": "Animal"});
-// 	triviaQuestionIntent.request.dialogState = "COMPLETED";
-// 	alexaTest.test([
-// 		{
-// 			request: triviaQuestionIntent,
-// 			says: "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses.", 
-// 			reprompts: "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses. Please say one, two, three, or four.", 
-// 			shouldEndSession: false
-// 		}
-// 	]);
+	var triviaQuestionIntent= alexaTest.getIntentRequest("GetTriviaQuestion", {"categoryTitle": "Animal"});
+	triviaQuestionIntent.request.dialogState = "COMPLETED";
+	alexaTest.test([
+		{
+			request: triviaQuestionIntent,
+			says: "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses.", 
+			reprompts: "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses. Please say one, two, three, or four.", 
+			shouldEndSession: false
+		}
+	]);
 });
 
 // 	describe("GetTriviaQuestion", function () {
