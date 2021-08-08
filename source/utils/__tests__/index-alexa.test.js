@@ -45,11 +45,18 @@ AWSMock.mock('DynamoDB.DocumentClient', 'get', function(params, callback) {
 	console.log(params);
 	console.log(callback);
 	if (params.TableName == "trivia") {
-  		callback(null, {Item: {question: "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses."}});
+  		callback(null, { response: {"Item": {"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses."}}});
 	} else {
-  		callback(null, {Item: {userId: "amzn1.ask.account.VOID", "numberOfQuestionsAsked": 0}});
+  		callback(null, { response: {"Item": {"userId": "amzn1.ask.account.VOID", "numberOfQuestionsAsked": 0}}});
 	}
 });
+	
+	.get({TableName: 'TasksTable', Key: 'someTask'})
+    .promise()
+    .then(result => {
+        console.log(result.Item)
+    });
+	
 // AWSMock.mock('Lambda', 'invoke', function(params, callback) {
 //   callback(null, {Payload: [1, 2, 3]});
 // });
