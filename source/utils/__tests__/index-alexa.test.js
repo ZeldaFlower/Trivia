@@ -40,7 +40,13 @@ aws.config.update({
 // aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((_, cb) => {
 //   cb(null, user);
 // });
-aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((_, cb) => {
+	var params = {
+    TableName: "trivia",
+    Key: {
+      triviaID: "3"//"2021-05-30"//Date.now()// "2019-11-11"
+    }
+  };
+aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((params, cb) => {
   cb(null, { "Item": {"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses."}});
 });
 const checkIfUserExistsParams = {
