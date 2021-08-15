@@ -43,6 +43,15 @@ aws.config.update({
 aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((_, cb) => {
   cb(null, { "Item": {"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses."}});
 });
+const checkIfUserExistsParams = {
+	TableName: "triviaUsers",
+	Key: {
+		userID: "amzn1.ask.account.VOID"
+	}nm 
+};
+aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((checkIfUserExistsParams, cb) => {
+  cb(null, { "Item": {"correctAnswers": "6", "numberOfQuestionsAsked": "49"}});
+});
 aws.DynamoDB.DocumentClient.prototype.put.mockImplementation((_, cb) => {
   cb(null, null);
 });
@@ -79,6 +88,16 @@ aws.DynamoDB.DocumentClient.prototype.put.mockImplementation((_, cb) => {
 			says: "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses.", 
 			reprompts: "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses. Please say one, two, three or four", 
 			shouldEndSession: false
+		}
+	]);
+	
+	var triviaQuestionIntent= alexaTest.getIntentRequest("GetStats");
+	triviaQuestionIntent.request.dialogState = "COMPLETED";
+	alexaTest.test([
+		{
+			request: triviaQuestionIntent,
+			says: "You have answered 6 out of 49 questions correctly!",
+			shouldEndSession: true
 		}
 	]);
 });
