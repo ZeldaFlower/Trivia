@@ -47,7 +47,7 @@ const checkIfUserExistsParams = {
 	TableName: "triviaUsers",
 	Key: {
 		userID: "amzn1.ask.account.VOID"
-	}nm 
+	} 
 };
 aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((checkIfUserExistsParams, cb) => {
   cb(null, { "Item": {"correctAnswers": "6", "numberOfQuestionsAsked": "49"}});
