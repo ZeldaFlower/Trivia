@@ -46,9 +46,9 @@ aws.config.update({
       triviaID: "3"//"2021-05-30"//Date.now()// "2019-11-11"
     }
   };
-aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((params, cb) => {
-  cb(null, { "Item": {"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses."}});
-});
+// aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((params, cb) => {
+//   cb(null, { "Item": {"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses."}});
+// });
 const checkIfUserExistsParams = {
 	TableName: "triviaUsers",
 	Key: {
@@ -56,7 +56,12 @@ const checkIfUserExistsParams = {
 	} 
 };
 aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((checkIfUserExistsParams, cb) => {
+	
+	if (params.TableName == "trivia") {
+  cb(null, { "Item": {"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses."}});
+	} else {
   cb(null, { "Item": {"correctAnswers": "6", "numberOfQuestionsAsked": "49"}});
+	}
 });
 aws.DynamoDB.DocumentClient.prototype.put.mockImplementation((_, cb) => {
   cb(null, null);
