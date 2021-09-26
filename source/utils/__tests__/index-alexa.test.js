@@ -78,7 +78,8 @@ describe("Trivia Skill", function () {
 			}
 		]);
 		
-		var triviaNumberIntent= alexaTest.getIntentRequest("NumberIntent", {"number": "three"});
+		var triviaNumberIntent= alexaTest.getIntentRequest("NumberIntent", {"number": "3"});
+		triviaNumberIntent.request.dialogState = "COMPLETED";
 		alexaTest.test([
 			{
 				request: triviaNumberIntent,
