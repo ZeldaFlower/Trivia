@@ -8,13 +8,6 @@ Run with 'mocha examples/skill-sample-nodejs-hello-world/helloworld-tests.js'.
 const alexaTest = require('alexa-skill-test-framework');
 const aws = require('aws-sdk');
 const AWSMock = require('aws-sdk-mock');
-//const alexaTest = require('../../index');
-// const flushPromises = require('flush-promises');
-
-// jest.mock("../../../node_modules/dynamodb/src/libs/ddbClient.js");
-
-// jest.mock("../../../node_modules/aws-sdk/clients/dynamodb.js");
-// jest.mock("../../../node_modules/aws-sdk/lib/request.js");
 jest.mock("../../../node_modules/aws-sdk");
 
 // initialize the testing framework
@@ -30,56 +23,22 @@ describe("Trivia Skill", function () {
 	});
 	
 describe("LaunchIntent", function () {
-aws.config.update({
-    region: "us-east-1"
-	,
-//     endpoint: "http://us-east-1.amazonaws.com",
-    accessKeyId: "bogusaccesskey",
-    secretAccessKey: "bogussecretkey"
-});
-// aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((_, cb) => {
-//   cb(null, user);
-// });
-// 	var params = {
-//     TableName: "trivia",
-//     Key: {
-//       triviaID: "3"//"2021-05-30"//Date.now()// "2019-11-11"
-//     }
-//   };
-// aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((params, cb) => {
-//   cb(null, { "Item": {"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses."}});
-// });
-// const checkIfUserExistsParams = {
-// 	TableName: "triviaUsers",
-// 	Key: {
-// 		userID: "amzn1.ask.account.VOID"
-// 	} 
-// };
-aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((params, cb) => {// Oops, had _ here nd params variable uncommented
-	
-	if (params.TableName == "trivia") {
-  cb(null, { "Item": {"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses."}});
-	} else {
-  cb(null, { "Item": {"correctAnswers": "6", "numberOfQuestionsAsked": "49"}});
-	}
-});
-aws.DynamoDB.DocumentClient.prototype.put.mockImplementation((_, cb) => {
-  cb(null, null);
-});
-// AWSMock.mock('DynamoDB', 'getItem', function(params, callback) {
-// 	console.log("dynamodb get");
-// 	console.log(params);
-// 	console.log(callback);
-// 	if (params.TableName == "trivia") {
-//   		callback(null, { response: {"Item": {"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses."}}});
-// 	} else {
-//   		callback(null, { response: {"Item": {"userId": "amzn1.ask.account.VOID", "numberOfQuestionsAsked": 0}}});
-// 	}
-// });
-	
-// AWSMock.mock('Lambda', 'invoke', function(params, callback) {
-//   callback(null, {Payload: [1, 2, 3]});
-// });
+	aws.config.update({
+	    region: "us-east-1",
+	    accessKeyId: "bogusaccesskey",
+	    secretAccessKey: "bogussecretkey"
+	});
+	aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((params, cb) => {// Oops, had _ here nd params variable uncommented
+
+		if (params.TableName == "trivia") {
+	  cb(null, { "Item": {"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses."}});
+		} else {
+	  cb(null, { "Item": {"correctAnswers": "6", "numberOfQuestionsAsked": "49"}});
+		}
+	});
+	aws.DynamoDB.DocumentClient.prototype.put.mockImplementation((_, cb) => {
+	  cb(null, null);
+	});
 	alexaTest.test([
 		{
 			request: alexaTest.getIntentRequest("LaunchRequest"),
@@ -88,16 +47,11 @@ aws.DynamoDB.DocumentClient.prototype.put.mockImplementation((_, cb) => {
 			shouldEndSession: false
 		}
 	]);
-	// TODO: seems the slots do not get propogated to the method get trivia for user method
-	// https://github.com/ZeldaFlower/Trivia/runs/3157251358
-	
 });
 
 describe("GetTriviaQuestion", function () {
 	aws.config.update({
-	    region: "us-east-1"
-		,
-	//     endpoint: "http://us-east-1.amazonaws.com",
+	    region: "us-east-1",
 	    accessKeyId: "bogusaccesskey",
 	    secretAccessKey: "bogussecretkey"
 	});
@@ -128,9 +82,7 @@ describe("GetTriviaQuestion", function () {
 	
 describe("GetStats", function () {
 	aws.config.update({
-	    region: "us-east-1"
-		,
-	//     endpoint: "http://us-east-1.amazonaws.com",
+	    region: "us-east-1",
 	    accessKeyId: "bogusaccesskey",
 	    secretAccessKey: "bogussecretkey"
 	});
