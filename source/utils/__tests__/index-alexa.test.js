@@ -18,131 +18,101 @@ alexaTest.initialize(require("../../../index.js"),
 describe("Trivia Skill", function () {
 	
 	test("Code Compiles", function () {
-		var result = "true"
+		var result = "false"
 		expect(result).toBe("true")
 	});
 	
-describe("LaunchIntent", function () {
-	aws.config.update({
-	    region: "us-east-1",
-	    accessKeyId: "bogusaccesskey",
-	    secretAccessKey: "bogussecretkey"
-	});
-	aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((params, cb) => {// Oops, had _ here nd params variable uncommented
-
-		if (params.TableName == "trivia") {
-	  cb(null, { "Item": {"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses."}});
-		} else {
-	  cb(null, { "Item": {"correctAnswers": "6", "numberOfQuestionsAsked": "49"}});
-		}
-	});
-	aws.DynamoDB.DocumentClient.prototype.put.mockImplementation((_, cb) => {
-	  cb(null, null);
-	});
-	alexaTest.test([
-		{
-			request: alexaTest.getIntentRequest("LaunchRequest"),
-			says: "Welcome to Christine Trivia. You can say play.  What can I help you with?", 
-			reprompts: "What can I help you with?", 
-			shouldEndSession: false
-		}
-	]);
-});
-
-describe("GetTriviaQuestion", function () {
-	aws.config.update({
-	    region: "us-east-1",
-	    accessKeyId: "bogusaccesskey",
-	    secretAccessKey: "bogussecretkey"
-	});
-
-	aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((params, cb) => {// Oops, had _ here nd params variable uncommented
-
-		if (params.TableName == "trivia") {
-	  cb(null, { "Item": {"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses."}});
-		} else {
-	  cb(null, { "Item": {"correctAnswers": "6", "numberOfQuestionsAsked": "49"}});
-		}
-	});
-	aws.DynamoDB.DocumentClient.prototype.put.mockImplementation((_, cb) => {
-	  cb(null, null);
-	});
-	
-	var triviaQuestionIntent= alexaTest.getIntentRequest("GetTriviaQuestion", {"categoryTitle": "Animal"});
-	triviaQuestionIntent.request.dialogState = "COMPLETED";
-	alexaTest.test([
-		{
-			request: triviaQuestionIntent,
-			says: "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses.", 
-			reprompts: "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses. Please say one, two, three or four", 
-			shouldEndSession: false
-		}
-	]);
-});
-	
-describe("GetStats", function () {
-	aws.config.update({
-	    region: "us-east-1",
-	    accessKeyId: "bogusaccesskey",
-	    secretAccessKey: "bogussecretkey"
-	});
-
-	aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((params, cb) => {// Oops, had _ here nd params variable uncommented
-
-		if (params.TableName == "trivia") {
-	  cb(null, { "Item": {"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses."}});
-		} else {
-	  cb(null, { "Item": {"correctAnswers": "6", "numberOfQuestionsAsked": "49"}});
-		}
-	});
-	aws.DynamoDB.DocumentClient.prototype.put.mockImplementation((_, cb) => {
-	  cb(null, null);
-	});
-	
-	var triviaQuestionIntent= alexaTest.getIntentRequest("GetStats");
-	triviaQuestionIntent.request.dialogState = "COMPLETED";
-	alexaTest.test([
-		{
-			request: triviaQuestionIntent,
-			says: "You have answered 6 out of 49 questions correctly!",
-			shouldEndSession: true
-		}
-	]);
-});
-// 	describe("GetTriviaQuestion", function () {
-// 		alexaTest.test([
-// 			{
-// 				request: alexaTest.getIntentRequest("GetTriviaQuestion", {
-// 				"categoryTitle": {
-// 					"name": "categoryTitle",
-// 					"value": "Animals"}}),
-// 				says: "What is Christine's Favorite animal? 1) blah 2) Bunnies 3) cats 4) dogs", repromptsNothing: true, shouldEndSession: false,
-// 				hasAttributes: {
-// 					category: 'animals'
-// 				}
+	describe("LaunchIntent", function () {
+		aws.config.update({
+		    region: "us-east-1",
+		    accessKeyId: "bogusaccesskey",
+		    secretAccessKey: "bogussecretkey"
+		});
+// 		aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((params, cb) => {
+// 			if (params.TableName == "trivia") {
+// 		  		cb(null, { "Item": {"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses."}});
+// 			} else {
+// 		  		cb(null, { "Item": {"correctAnswers": "6", "numberOfQuestionsAsked": "49"}});
 // 			}
-// 		]);
-// 	});
+// 		});
+		aws.DynamoDB.DocumentClient.prototype.put.mockImplementation((_, cb) => {
+			cb(null, null);
+		});
+		alexaTest.test([
+			{
+				request: alexaTest.getIntentRequest("LaunchRequest"),
+				says: "Welcome to Christine Trivia. You can say play.  What can I help you with?", 
+				reprompts: "What can I help you with?", 
+				shouldEndSession: false
+			}
+		]);
+	});
 
-// 	// tests the behavior of the skill's LaunchRequest
-// 	describe("LaunchRequest", function () {
-// 		alexaTest.test([
-// 			{
-// 				request: alexaTest.getLaunchRequest(),
-// 				says: "Welcome to Christine Trivia! You can say play. What can I help you with?", repromptsNothing: true, shouldEndSession: true
-// 			}
-// 		]);
-// 	});
-	
-// 	// tests the behavior of the skill's HelloWorldIntent with like operator
-// 	describe("HelloWorldIntent like", function () {
-// 		alexaTest.test([
-// 			{
-// 				request: alexaTest.getIntentRequest("HelloWorldIntent"),
-// 				saysLike: "World", repromptsNothing: true, shouldEndSession: true
-// 			}
-// 		]);
-// 	});
+	describe("give trivia question and correct answer", function () {
+		aws.config.update({
+		    region: "us-east-1",
+		    accessKeyId: "bogusaccesskey",
+		    secretAccessKey: "bogussecretkey"
+		});
+
+		aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((params, cb) => {// Oops, had _ here nd params variable uncommented
+		  cb(null, { "Item": {"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses."}});
+		});
+		aws.DynamoDB.DocumentClient.prototype.put.mockImplementation((_, cb) => {
+		  cb(null, null);
+		});
+
+		var triviaQuestionIntent= alexaTest.getIntentRequest("GetTriviaQuestion", {"categoryTitle": "Animal"});
+		triviaQuestionIntent.request.dialogState = "COMPLETED";
+		alexaTest.test([
+			{
+				request: triviaQuestionIntent,
+				says: "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses.", 
+				reprompts: "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses. Please say one, two, three or four", 
+				shouldEndSession: false
+			}
+		]);
+		
+		var triviaNumberIntent= alexaTest.getIntentRequest("NumberIntent", {"number": "3"});
+		alexaTest.test([
+			{
+				request: triviaNumberIntent,
+				says: "Correct!", 
+				reprompts: "Please say one, two, three or four", 
+				shouldEndSession: true
+			}
+		]);
+	});
+
+	describe("GetStats", function () {
+		aws.config.update({
+		    region: "us-east-1",
+		    accessKeyId: "bogusaccesskey",
+		    secretAccessKey: "bogussecretkey"
+		});
+
+		aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((params, cb) => {// Oops, had _ here nd params variable uncommented
+
+			if (params.TableName == "trivia") {
+		  cb(null, { "Item": {"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses."}});
+			} else {
+		  cb(null, { "Item": {"correctAnswers": "6", "numberOfQuestionsAsked": "49"}});
+			}
+		});
+		aws.DynamoDB.DocumentClient.prototype.put.mockImplementation((_, cb) => {
+		  cb(null, null);
+		});
+
+		var triviaQuestionIntent= alexaTest.getIntentRequest("GetStats");
+		triviaQuestionIntent.request.dialogState = "COMPLETED";
+		alexaTest.test([
+			{
+				request: triviaQuestionIntent,
+				says: "You have answered 6 out of 49 questions correctly!",
+				shouldEndSession: true
+			}
+		]);
+	});
 });
   
 // const index = require("../../../index"); 
