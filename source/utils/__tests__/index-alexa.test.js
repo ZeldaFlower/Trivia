@@ -91,6 +91,29 @@ aws.DynamoDB.DocumentClient.prototype.put.mockImplementation((_, cb) => {
 	// TODO: seems the slots do not get propogated to the method get trivia for user method
 	// https://github.com/ZeldaFlower/Trivia/runs/3157251358
 	
+});
+
+describe("GetTriviaQuestion", function () {
+	aws.config.update({
+	    region: "us-east-1"
+		,
+	//     endpoint: "http://us-east-1.amazonaws.com",
+	    accessKeyId: "bogusaccesskey",
+	    secretAccessKey: "bogussecretkey"
+	});
+
+	aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((params, cb) => {// Oops, had _ here nd params variable uncommented
+
+		if (params.TableName == "trivia") {
+	  cb(null, { "Item": {"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses."}});
+		} else {
+	  cb(null, { "Item": {"correctAnswers": "6", "numberOfQuestionsAsked": "49"}});
+		}
+	});
+	aws.DynamoDB.DocumentClient.prototype.put.mockImplementation((_, cb) => {
+	  cb(null, null);
+	});
+	
 	var triviaQuestionIntent= alexaTest.getIntentRequest("GetTriviaQuestion", {"categoryTitle": "Animal"});
 	triviaQuestionIntent.request.dialogState = "COMPLETED";
 	alexaTest.test([
@@ -101,6 +124,28 @@ aws.DynamoDB.DocumentClient.prototype.put.mockImplementation((_, cb) => {
 			shouldEndSession: false
 		}
 	]);
+});
+	
+describe("GetStats", function () {
+	aws.config.update({
+	    region: "us-east-1"
+		,
+	//     endpoint: "http://us-east-1.amazonaws.com",
+	    accessKeyId: "bogusaccesskey",
+	    secretAccessKey: "bogussecretkey"
+	});
+
+	aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((params, cb) => {// Oops, had _ here nd params variable uncommented
+
+		if (params.TableName == "trivia") {
+	  cb(null, { "Item": {"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses."}});
+		} else {
+	  cb(null, { "Item": {"correctAnswers": "6", "numberOfQuestionsAsked": "49"}});
+		}
+	});
+	aws.DynamoDB.DocumentClient.prototype.put.mockImplementation((_, cb) => {
+	  cb(null, null);
+	});
 	
 	var triviaQuestionIntent= alexaTest.getIntentRequest("GetStats");
 	triviaQuestionIntent.request.dialogState = "COMPLETED";
@@ -112,7 +157,6 @@ aws.DynamoDB.DocumentClient.prototype.put.mockImplementation((_, cb) => {
 		}
 	]);
 });
-
 // 	describe("GetTriviaQuestion", function () {
 // 		alexaTest.test([
 // 			{
