@@ -28,13 +28,6 @@ describe("Trivia Skill", function () {
 		    accessKeyId: "bogusaccesskey",
 		    secretAccessKey: "bogussecretkey"
 		});
-// 		aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((params, cb) => {
-// 			if (params.TableName == "trivia") {
-// 		  		cb(null, { "Item": {"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses."}});
-// 			} else {
-// 		  		cb(null, { "Item": {"correctAnswers": "6", "numberOfQuestionsAsked": "49"}});
-// 			}
-// 		});
 		aws.DynamoDB.DocumentClient.prototype.put.mockImplementation((_, cb) => {
 			cb(null, null);
 		});
@@ -93,6 +86,49 @@ describe("Trivia Skill", function () {
 	});
 	// TODO: test incorrect answer responses
 
+	describe("give trivia question and incorrect answer", function () {
+		aws.config.update({
+		    region: "us-east-1",
+		    accessKeyId: "bogusaccesskey",
+		    secretAccessKey: "bogussecretkey"
+		});
+
+		aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((params, cb) => {
+		  cb(null, { "Item": {
+			  "question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses.", 
+			  "category": "Animal",
+			  "answerNumber": "3",
+			  "triviaID": "3"
+		  }});
+		});
+		aws.DynamoDB.DocumentClient.prototype.put.mockImplementation((_, cb) => {
+		  cb(null, null);
+		});
+
+		var triviaQuestionIntent= alexaTest.getIntentRequest("GetTriviaQuestion", {"categoryTitle": "Animal"});
+		triviaQuestionIntent.request.dialogState = "COMPLETED";
+		alexaTest.test([
+			{
+				request: triviaQuestionIntent,
+				says: "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses.", 
+				reprompts: "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses. Please say one, two, three or four", 
+				shouldEndSession: false
+			}
+		]);
+		
+		var triviaNumberIntent= alexaTest.getIntentRequest("NumberIntent", {"number": "1", "triviaID": "3"});
+		triviaNumberIntent.request.dialogState = "COMPLETED";
+ 		triviaNumberIntent.session.attributes.triviaID = "3"
+		alexaTest.test([
+			{
+				request: triviaNumberIntent,
+				withSessionAttributes: {"triviaID": "3"},
+				says: "Sorry, incorrect answer. The correct answer is 'Bunnies'", 
+				//reprompts: "Please say one, two, three or four", // TODO: add another test to test reprompt when a user responds with 'ice', something that doesn't make sense
+				shouldEndSession: true
+			}
+		]);
+	});
 	describe("GetStats", function () {
 		aws.config.update({
 		    region: "us-east-1",
