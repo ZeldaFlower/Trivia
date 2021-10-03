@@ -1246,7 +1246,8 @@ console.log(this)
 				}
 			};
 			dbGet(params).then(function(item) {
-				console.log("item: "+item)
+				console.log("item: ")
+				console.log(item)
 				if (item.Item.answerNumber == number) {
 					// save to db correct answer
 					
