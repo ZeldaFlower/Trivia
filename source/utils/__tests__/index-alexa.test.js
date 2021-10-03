@@ -86,11 +86,12 @@ describe("Trivia Skill", function () {
 				request: triviaNumberIntent,
 				withSessionAttributes: {"triviaID": "3"},
 				says: "Correct!", 
-				reprompts: "Please say one, two, three or four", 
+				//reprompts: "Please say one, two, three or four", // TODO: add another test to test reprompt when a user responds with 'ice', something that doesn't make sense
 				shouldEndSession: true
 			}
 		]);
 	});
+	// TODO: test incorrect answer responses
 
 	describe("GetStats", function () {
 		aws.config.update({
