@@ -84,6 +84,7 @@ describe("Trivia Skill", function () {
 		alexaTest.test([
 			{
 				request: triviaNumberIntent,
+				withSessionAttributes: {"triviaID": "3"},
 				says: "Correct!", 
 				reprompts: "Please say one, two, three or four", 
 				shouldEndSession: true
