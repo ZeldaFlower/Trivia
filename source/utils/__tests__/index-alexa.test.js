@@ -98,6 +98,7 @@ describe("Trivia Skill", function () {
 			  "question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses.", 
 			  "category": "Animal",
 			  "answerNumber": "3",
+			  "answer": "Bunnies",
 			  "triviaID": "3"
 		  }});
 		});
@@ -123,7 +124,7 @@ describe("Trivia Skill", function () {
 			{
 				request: triviaNumberIntent,
 				withSessionAttributes: {"triviaID": "3"},
-				says: "Sorry, incorrect answer. The correct answer is 'Bunnies'", 
+				says: "Sorry, that is incorrect. The correct answer is 'Bunnies'", 
 				//reprompts: "Please say one, two, three or four", // TODO: add another test to test reprompt when a user responds with 'ice', something that doesn't make sense
 				shouldEndSession: true
 			}
@@ -142,6 +143,7 @@ describe("Trivia Skill", function () {
 		  cb(null, { "Item": { "question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses.", 
 			  "category": "Animal",
 			  "answerNumber": "3",
+			  "answer": "Bunnies",
 			  "triviaID": "3"}});
 			} else {
 		  cb(null, { "Item": {"correctAnswers": "6", "numberOfQuestionsAsked": "49"}});
