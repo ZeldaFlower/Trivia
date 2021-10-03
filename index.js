@@ -1238,6 +1238,7 @@ console.log(this)
 		if (this.event.session.attributes.triviaID) {
 			var filledSlots = delegateSlotCollection.call(this);
 			const number = filledSlots.slots.number.value;
+			console.log("number:"+number);
 			var params = {
 				TableName: "trivia",
 				Key: {
