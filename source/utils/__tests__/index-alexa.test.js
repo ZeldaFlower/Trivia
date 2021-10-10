@@ -34,7 +34,7 @@ describe("Trivia Skill", function () {
 		alexaTest.test([
 			{
 				request: alexaTest.getIntentRequest("LaunchRequest"),
-				says: "Welcome to Christine Trivia. You can say play.  What can I help you with?", 
+				says: "Welcome to Fun Trivia. You can say play.  What can I help you with?", 
 				reprompts: "What can I help you with?", 
 				shouldEndSession: false
 			}
