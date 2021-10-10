@@ -1549,8 +1549,8 @@ const languageStrings = {
     'en': {
         translation: {
             SKILL_NAME: 'Daily Bread',
-      			WELCOME: 'Welcome to Christine Trivia. You can say play. ',// or comment.',//list, modify
-      			TRIVIA_INFO_TITLE: 'Christine Trivia',
+      			WELCOME: 'Welcome to Fun Trivia. You can say play. ',// or comment.',//list, modify
+      			TRIVIA_INFO_TITLE: 'Fun Trivia',
       			REMOVED_CARD_TITLE: "Removed Comment",
       			NOT_REMOVED: "I have not removed your comment.",
       			NO_FOOD: "You do not have any comments.",
