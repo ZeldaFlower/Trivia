@@ -1281,7 +1281,7 @@ console.log(this)
 								Authorization: "Bearer " + this.event.context.System.apiAccessToken
 							}
 						};
-						request(options, (error, response, body) => {//TODO: request error
+						request(options, (error, response, body) => {//TODO: request error 
 							if (!error && response.statusCode === 200){
 								let data = JSON.parse(body); // Store the data we got from the API request
 								console.log(data)
