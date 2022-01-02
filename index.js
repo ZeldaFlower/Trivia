@@ -813,7 +813,7 @@ console.log(this)
 		
 		if (!accessToken) {
 			console.log("no token")
-			console.log("user id: "userId)
+			console.log("user id: "+userId)
 // 			this.emit(':ask', 'Please link your Account so I can email you the web link.');
 			getStats.call(this, userId);
 		} else {
