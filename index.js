@@ -2,26 +2,7 @@
 /* eslint quote-props: ["error", "consistent"]*/
 /**
  * Description:
-Do you ever wonder what you have in your fridge, freezer, or cabinets, but don't want to dig around?
-Do you ever wonder how long those leftovers have been in the fridge?
-
-Track your food with this skill, and I will let you know from the comfort of your couch!
-
-Here are some examples of what you can say:
-- Add {milk} to {fridge} {top shelf/bottom drawer/top drawer/second drawer/side door/other}
-- Do I have {milk}?
-- Move {milk} to {fridge} {top shelf}
-- Undo addition (will remove the most recent food addition)
-- Suggest food
-- Suggest recipe/supper/breakfast/a meal
-- list food
-- list food from the fridge
-- Remove/I ate/I drank {milk} (can also say from fridge top shelf)
-- Add {milk} to {fridge} {top shelf} to use by {use by date}
-- Mark {mustard} as condiment
-
-If you say "Alexa, open food tracker", I will also remind you of what I can do.
-If you say, "Alexa, ask food tracker for help"
+ 
 **/
 
 'use strict';
