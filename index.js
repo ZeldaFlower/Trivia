@@ -813,6 +813,7 @@ console.log(this)
 		
 		if (!accessToken) {
 			console.log("no token")
+			console.log("user id: "userId)
 // 			this.emit(':ask', 'Please link your Account so I can email you the web link.');
 			getStats.call(this, userId);
 		} else {
@@ -2671,7 +2672,12 @@ function getStats(userId) {
 	checkIfUserExists.call(this, userId).then(data => {
 		console.log("data: " +data)
 		const existingItem = data.Item;
-		this.emit(':tell', "You have answered "+(existingItem.correctAnswers?existingItem.correctAnswers:0)+" out of "+existingItem.numberOfQuestionsAsked+" questions correctly!");
+		//existing item is empty, no user in db
+		if (existingItem) {
+			this.emit(':tell', "You have answered "+(existingItem.correctAnswers?existingItem.correctAnswers:0)+" out of "+existingItem.numberOfQuestionsAsked+" questions correctly!");
+		} else {
+			this.emit(':tell', "You have answered 0 out of 0 questions correctly!");
+		}
 	})
 }
 
