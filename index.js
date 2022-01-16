@@ -1895,7 +1895,7 @@ console.log(filledSlots)
 
 // 		}
 		// tell which you already have, and what added, number added
-		putParamsAndMessage.call(this, dynamoParams, "Added your question '"+question+"' with category "+category+", answers "+answers+" and correct answer "+correctAnswer+".", ":tellWithCard", this.t('TRIVIA_INFO_TITLE'));
+		putParamsAndMessage.call(this, dynamoParams, "Added your question '"+question+"' with category "+category+", answers: "+answers+" and correct answer "+correctAnswer+".", ":tellWithCard", this.t('TRIVIA_INFO_TITLE'));
 
 	}.bind(this)).catch(err => {
 		console.error(err);
