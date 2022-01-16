@@ -496,13 +496,13 @@ console.log(this)
         this.emit(':ask', this.t('SORRY'));
     }
     },
-    'AddFood': function () {
+    'AddQuestion': function () {
   		var filledSlots = delegateSlotCollection.call(this);
 		var { userId, accessToken } = this.event.session.user;
 		if (!accessToken) {
 			console.log("no token")
 			//this.emit(':ask', 'Please link your Account so I can email you the web link.');
-			addFoodForUser.call(this, filledSlots, userId);
+			addQuestionForUser.call(this, filledSlots, userId);
 		} else {
 			console.log("token")
 			const options = {
@@ -1807,6 +1807,101 @@ function emailVerses(email, date) {
       this.emit(':tell', "There was a problem sending you an email. Please check your account or try again later.");
       }.bind(this));
     }.bind(this))
+}
+// Add Question Out of the following, what is a tomato? 
+// Alexa: What are the answers to your question?
+// Fruit, vegetable, meat, dairy
+// Alexa: what is the correct answer?
+// 2
+function addQuestionForUser(filledSlots, userId) {
+		if (filledSlots != undefined){
+console.log("adding question")
+console.log(filledSlots)
+	const question = filledSlots.slots.question.value; //  Out of the following, what is a tomato? 
+	const category = filledSlots.slots.category.value;// food
+	const answers = filledSlots.slots.answers.value;// Fruit, vegetable, meat, dairy
+	const correctAnswer = filledSlots.slots.correctAnswer.value; // 2
+	const answersList = answers.split(",");	
+	// const condiment = filledSlots.slots.condiment ? true : ""; // true if is a condiment
+// 	const useByDate = filledSlots.slots.date.value;// July 30
+	var finalQuestion= ""
+	for (var i=1; i<answersList.length; i++) {
+		finalQuestion = finalQuestion + i + ") "+ answers[i-1];
+	}
+	var dynamoParams = {
+	  TableName: table,
+	  Item: {
+		triviaID: userId+"1",
+		category: category,
+		question: finalQuestion,
+		answerNumber: correctAnswer,
+		answer: answersList[correctAnswer-1],
+		updated: Date.now()
+	  }
+	};
+			
+	checkIfUserExists.call(this, userId)
+	  .then(function (existingData) {
+		var existingItem = existingData.Item;
+		if (existingItem) {
+			existingItem.userID = userId;
+			dynamoParams.Item = existingItem;
+		}
+// 		var nameList = name.split(" and ");
+// 		var matchingFood = getTriviaQuestion.call(this, existingItem, nameList, location, granularLocation);
+// // 		var alreadyExists = "You already have ";
+// 		var alreadyExisting = {}
+// 		for (let food of matchingFood) {
+// 			alreadyExisting[food.name] = true;
+// 			alreadyExists = alreadyExists +food.name+" in your "+food.location+" "+(food.granularLocation||"")+", ";
+// 		}
+// 		var names = [];
+// 		for (let name of nameList) {
+
+// 			let ignore = alreadyExisting[name];
+// 			if (!ignore) {
+// 				names.push(name);
+// 				var newFood = {
+// 					name: name,
+// 					location: location,
+// 					granularLocation: granularLocation,
+// 					// condiment: condiment,
+// 					dateAdded: Date.now(),
+// 					useByDate: useByDate
+// 				};
+// 				dynamoParams.Item.food.push(newFood);
+// 				dynamoParams.Item.food.sort((a,b) => {
+//   					if (('' + a.location).localeCompare(b.location)>0){
+// 						return 1;
+// 					}
+//                     if (('' + a.location).localeCompare(b.location)==0){
+//                     	if(('' + a.granularLocation).localeCompare(b.granularLocation)>0){
+//                         	return 1;
+//                         }
+//                         if (('' + a.granularLocation).localeCompare(b.granularLocation) == 0) {
+//                         	if(('' + a.food).localeCompare(b.food)>0){
+//                             	return 1;
+//                             } else {
+//                             	return 0;
+//                             }
+//                         }
+//                         return -1
+// 					}
+//                     return -1
+// 				});
+
+// 				dynamoParams.Item.updated = Date.now();
+// 			}
+
+// 		}
+		// tell which you already have, and what added, number added
+		putParamsAndMessage.call(this, dynamoParams, "Added your question '"+question+"' with category "+category+", answers "+answers+" and correct answer "+correctAnswer+".", ":tellWithCard", this.t('TRIVIA_INFO_TITLE'));
+
+	}.bind(this)).catch(err => {
+		console.error(err);
+		this.emit(':ask', this.t('SORRY'));
+	});
+		}
 }
 
 function addFoodForUser(filledSlots, userId) {
