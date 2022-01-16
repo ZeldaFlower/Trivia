@@ -518,7 +518,7 @@ console.log(this)
 					let data = JSON.parse(body); // Store the data we got from the API request
 					console.log(data)
 					userId = data.user_id
-					addFoodForUser.call(this, filledSlots, userId);
+					addQuestionForUser.call(this, filledSlots, userId);
 
 				}
 			})
