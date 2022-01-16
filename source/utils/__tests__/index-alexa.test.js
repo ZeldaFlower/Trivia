@@ -162,6 +162,71 @@ describe("Trivia Skill", function () {
 			}
 		]);
 	});
+	
+	
+	describe("AddQuestion", function () {
+		aws.config.update({
+		    region: "us-east-1",
+		    accessKeyId: "bogusaccesskey",
+		    secretAccessKey: "bogussecretkey"
+		});
+
+		aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((params, cb) => {// Oops, had _ here nd params variable uncommented
+
+			if (params.TableName == "trivia") {
+		  cb(null, { "Item": {
+			  "question": "Out of the following, what is a tomato? ",
+			  "correctAnswer": "3",
+			  "answers": " Fruit, vegetable, meat, dairy"}});
+			} else {
+// 		  cb(null, { "Item": {"correctAnswers": "6", "numberOfQuestionsAsked": "49"}});
+			}
+		});
+		aws.DynamoDB.DocumentClient.prototype.put.mockImplementation((_, cb) => {
+		  cb(null, null);
+		});
+
+		var triviaQuestionIntent= alexaTest.getIntentRequest("GetStats");
+		triviaQuestionIntent.request.dialogState = "COMPLETED";
+		alexaTest.test([
+			{
+				request: triviaQuestionIntent,
+				says: "You have answered 6 out of 49 questions correctly!",
+				shouldEndSession: true
+			}
+		]);
+	});
+	
+	describe("add a question", function () {
+		aws.config.update({
+		    region: "us-east-1",
+		    accessKeyId: "bogusaccesskey",
+		    secretAccessKey: "bogussecretkey"
+		});
+
+		aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((params, cb) => {
+		  cb(null, null);
+		});
+		
+		aws.DynamoDB.DocumentClient.prototype.put.mockImplementation((_, cb) => {
+		  cb(null, null);
+		});
+
+		var triviaQuestionIntent= alexaTest.getIntentRequest("AddQuestion", {
+			  "question": "Out of the following, what is a tomato?",
+			  "correctAnswer": "2",
+			  "answers": " Fruit, vegetable, meat, dairy"});
+		triviaQuestionIntent.request.dialogState = "COMPLETED";
+		alexaTest.test([
+			{
+				request: triviaQuestionIntent,
+				says: "Added your question 'Out of the following, what is a tomato?' with answers Fruit, vegetable, meat, dairy and correct answer 2.", 
+				shouldEndSession: true
+			}
+		]);
+		
+	});
+	
 });
   
 // const index = require("../../../index"); 
