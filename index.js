@@ -1727,6 +1727,9 @@ function getTriviaQuestion(existingItem, category) {
 	if (category == "ANIMAL" || category == "Animal") {
 		triviaIDs = ["3"]
 	}
+	if (category == "nature" || category == "Nature") {
+		triviaIDs = ["4", "5", "6", "7", "8"]
+	}
 	console.log(triviaIDs)
 
 	var randomIndex = Math.round(Math.random() * (triviaIDs.length - 1))
