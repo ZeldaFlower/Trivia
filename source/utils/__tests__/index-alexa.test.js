@@ -49,6 +49,7 @@ describe("Trivia Skill", function () {
 		});
 
 		aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((params, cb) => {
+			console.log(params)
 			if (params.Key.triviaID == "animal") {
 				cb(null, { "Item": {
 					"questionKeys": "3"
