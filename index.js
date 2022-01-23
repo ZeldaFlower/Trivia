@@ -1727,24 +1727,33 @@ function getTriviaQuestion(existingItem, category) {
 	if (category == "ANIMAL" || category == "Animal") {
 		triviaIDs = ["3"]
 	}
-	if (category == "nature" || category == "Nature") {
-		triviaIDs = ["4", "5", "6", "7", "8"]
-	}
+	//if (category == "nature" || category == "Nature") {
+		//triviaIDs = ["4", "5", "6", "7", "8"]
+	//}
 	console.log(triviaIDs)
 
+  return dbGet({
+    TableName: "trivia",
+    Key: {
+      triviaID: category.toLowerCase()//"2021-05-30"//Date.now()// "2019-11-11"
+    }
+  }).then(function(categoryItem) {
+	  var keys = categoryItem.Item.questionKeys
+	  triviaIDs = keys.split(", ")
 	var randomIndex = Math.round(Math.random() * (triviaIDs.length - 1))
 	console.log(randomIndex)
 	console.log(triviaIDs[randomIndex])
 	var params = {
-    TableName: "trivia",
-    Key: {
-      triviaID: triviaIDs[randomIndex]//"2021-05-30"//Date.now()// "2019-11-11"
-    }
-  };
-  return dbGet(params).then(function(item) {
-	  console.log("item: ")
-	  console.log(item)
-	return item.Item
+	    TableName: "trivia",
+	    Key: {
+	      triviaID: triviaIDs[randomIndex]//"2021-05-30"//Date.now()// "2019-11-11"
+	    }
+	  };
+	  return dbGet(params).then(function(item) {
+		  console.log("item: ")
+		  console.log(item)
+		return item.Item
+	  });
   });
 }
 
