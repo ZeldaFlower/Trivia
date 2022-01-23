@@ -1763,7 +1763,7 @@ var keyParams = {
 	  } else {
 		  this.emit(':tell', "Category "+category+" does not exist. Please try a different category.")
 	  }
-  });
+  }.bind(this));
 }
 
 function emailVerses(email, date) {
