@@ -1738,6 +1738,8 @@ function getTriviaQuestion(existingItem, category) {
       triviaID: category.toLowerCase()//"2021-05-30"//Date.now()// "2019-11-11"
     }
   }).then(function(categoryItem) {
+	  console.log("!!!!!")
+	  console.log(categoryItem)
 	  var keys = categoryItem.Item.questionKeys
 	  triviaIDs = keys.split(", ")
 	var randomIndex = Math.round(Math.random() * (triviaIDs.length - 1))
