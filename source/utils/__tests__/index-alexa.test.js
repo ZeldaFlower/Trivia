@@ -195,7 +195,7 @@ describe("Trivia Skill", function () {
 		alexaTest.test([
 			{
 				request: triviaQuestionIntent,
-				says: "Added your question 'Out of the following, what is a tomato' with category food, answers: Fruit, vegetable, meat, dairy and correct answer 2.", 
+				says: "Added your question 'Out of the following, what is a tomato' with category food, answers: Fruit vegetable meat dairy and correct answer 2.", 
 				shouldEndSession: true
 			}
 		]);
