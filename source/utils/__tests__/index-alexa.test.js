@@ -51,18 +51,18 @@ describe("Trivia Skill", function () {
 		aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((params, cb) => {
 			console.log("!!!!")
 			console.log(params)
-			if (params.Key.triviaID == "animal") {
+			// if (params.Key.triviaID == "animal") {
 				cb(null, { "Item": {
 					"questionKeys": "3"
 				}});
-			} else {
-				cb(null, { "Item": {
-					"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses.", 
-					"category": "Animal",
-					"answerNumber": "3",
-					"triviaID": "3"
-				}});
-			}
+			// } else {
+			// 	cb(null, { "Item": {
+			// 		"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses.", 
+			// 		"category": "Animal",
+			// 		"answerNumber": "3",
+			// 		"triviaID": "3"
+			// 	}});
+			// }
 		});
 		aws.DynamoDB.DocumentClient.prototype.put.mockImplementation((_, cb) => {
 		  cb(null, null);
