@@ -190,7 +190,7 @@ describe("Trivia Skill", function () {
 			  "question": "Out of the following, what is a tomato",
 			  "category": "food",
 			  "correctAnswer": "2",
-			  "answers": "Fruit, vegetable, meat, dairy"});
+			  "answers": "Fruit vegetable meat dairy"});
 		triviaQuestionIntent.request.dialogState = "COMPLETED";
 		alexaTest.test([
 			{
