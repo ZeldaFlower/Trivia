@@ -53,6 +53,7 @@ describe("Trivia Skill", function () {
 			console.log(params)
 			if (params.Key.triviaID == "animal") {
 				cb(null, { "Item": {
+					"triviaID": "animal",
 					"questionKeys": "3"
 				}});
 			} else {
@@ -106,6 +107,7 @@ describe("Trivia Skill", function () {
 			console.log(params)
 			if (params.Key.triviaID == "animal") {
 				cb(null, { "Item": {
+					"triviaID": "animal",
 					"questionKeys": "3"
 				}});
 			} else {
@@ -155,11 +157,19 @@ describe("Trivia Skill", function () {
 		aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((params, cb) => {// Oops, had _ here nd params variable uncommented
 
 			if (params.TableName == "trivia") {
-		  cb(null, { "Item": { "question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses.", 
-			  "category": "Animal",
-			  "answerNumber": "3",
-			  "answer": "Bunnies",
-			  "triviaID": "3"}});
+				if (params.Key.triviaID == "animal") {
+					cb(null, { "Item": {
+						"triviaID": "animal",
+						"questionKeys": "3"
+					}});
+				} else {
+					cb(null, { "Item": {
+						"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses.", 
+						"category": "Animal",
+						"answerNumber": "3",
+						"triviaID": "3"
+					}});
+				}
 			} else {
 		  cb(null, { "Item": {"correctAnswers": "6", "numberOfQuestionsAsked": "49"}});
 			}
@@ -189,11 +199,19 @@ describe("Trivia Skill", function () {
 		aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((params, cb) => {// Oops, had _ here nd params variable uncommented
 
 			if (params.TableName == "trivia") {
-		  cb(null, { "Item": { "question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses.", 
-			  "category": "Animal",
-			  "answerNumber": "3",
-			  "answer": "Bunnies",
-			  "triviaID": "3"}});
+				if (params.Key.triviaID == "animal") {
+					cb(null, { "Item": {
+						"triviaID": "animal",
+						"questionKeys": "3"
+					}});
+				} else {
+					cb(null, { "Item": {
+						"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses.", 
+						"category": "Animal",
+						"answerNumber": "3",
+						"triviaID": "3"
+					}});
+				}
 			} else {
 		  cb(null, { "Item": {"correctAnswers": "6", "numberOfQuestionsAsked": "49"}});
 			}
