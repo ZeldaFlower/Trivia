@@ -1847,10 +1847,10 @@ console.log(filledSlots)
 	checkIfUserExists.call(this, userId)
 	  .then(function (existingData) {
 		var existingItem = existingData.Item;
-		if (existingItem) {
-			existingItem.userID = userId;
-			dynamoParams.Item = existingItem;
-		}
+// 		if (existingItem) {
+// 			existingItem.userID = userId;
+// 			dynamoParams.Item = existingItem;
+// 		}
 // 		var nameList = name.split(" and ");
 // 		var matchingFood = getTriviaQuestion.call(this, existingItem, nameList, location, granularLocation);
 // // 		var alreadyExists = "You already have ";
