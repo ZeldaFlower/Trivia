@@ -1731,13 +1731,16 @@ function getTriviaQuestion(existingItem, category) {
 		//triviaIDs = ["4", "5", "6", "7", "8"]
 	//}
 	console.log(triviaIDs)
-
-  return dbGet({
+var keyParams = {
     TableName: "trivia",
     Key: {
       triviaID: category.toLowerCase()//"2021-05-30"//Date.now()// "2019-11-11"
     }
-  }).then(function(categoryItem) {
+  };
+	console.log("keyparams")
+	console.log(keyParams)
+	console.log(keyParams.Key.triviaID)
+  return dbGet(keyParams).then(function(categoryItem) {
 	  console.log("!!!!!")
 	  console.log(categoryItem)
 	  var keys = categoryItem.Item.questionKeys
