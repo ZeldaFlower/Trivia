@@ -1828,8 +1828,8 @@ console.log(filledSlots)
 	// const condiment = filledSlots.slots.condiment ? true : ""; // true if is a condiment
 // 	const useByDate = filledSlots.slots.date.value;// July 30
 	var finalQuestion= question
-	for (var i=1; i<answersList.length; i++) {
-		finalQuestion = finalQuestion + i + ") "+ answersList[i-1];
+	for (var i=1; i<=answersList.length; i++) {
+		finalQuestion = finalQuestion +" "+ i + ") "+ answersList[i-1];
 	}
 	var answer=1
 	if (correctAnswer == "Two") {
