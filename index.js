@@ -1824,10 +1824,10 @@ console.log(filledSlots)
 	const category = filledSlots.slots.category.value;// food
 	const answers = filledSlots.slots.answers.value;// Fruit, vegetable, meat, dairy
 	const correctAnswer = filledSlots.slots.correctAnswer.value; // 2
-	const answersList = answers.split(",");	
+	const answersList = answers.split(" ");	
 	// const condiment = filledSlots.slots.condiment ? true : ""; // true if is a condiment
 // 	const useByDate = filledSlots.slots.date.value;// July 30
-	var finalQuestion= ""
+	var finalQuestion= question
 	for (var i=1; i<answersList.length; i++) {
 		finalQuestion = finalQuestion + i + ") "+ answers[i-1];
 	}
