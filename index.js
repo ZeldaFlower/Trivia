@@ -1743,6 +1743,7 @@ var keyParams = {
   return dbGet(keyParams).then(function(categoryItem) {
 	  console.log("!!!!!")
 	  console.log(categoryItem)
+	  if (categoryItem.Item) {
 	  var keys = categoryItem.Item.questionKeys
 	  triviaIDs = keys.split(", ")
 	var randomIndex = Math.round(Math.random() * (triviaIDs.length - 1))
@@ -1759,6 +1760,9 @@ var keyParams = {
 		  console.log(item)
 		return item.Item
 	  });
+	  } else {
+		  this.emit(':tell', "Category "+category+" does not exist. Please try a different category.")
+	  }
   });
 }
 
