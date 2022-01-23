@@ -1829,7 +1829,17 @@ console.log(filledSlots)
 // 	const useByDate = filledSlots.slots.date.value;// July 30
 	var finalQuestion= question
 	for (var i=1; i<answersList.length; i++) {
-		finalQuestion = finalQuestion + i + ") "+ answers[i-1];
+		finalQuestion = finalQuestion + i + ") "+ answersList[i-1];
+	}
+	var answer=1
+	if (correctAnswer == "Two") {
+	 answer=2
+	} else 
+	if (correctAnswer == "Three") {
+	 answer=3
+	} else 
+	if (correctAnswer == "Four") {
+	 answer=4
 	}
 	var dynamoParams = {
 	  TableName: "trivia",
@@ -1837,8 +1847,8 @@ console.log(filledSlots)
 		triviaID: userId+"1",
 		category: category,
 		question: finalQuestion,
-		answerNumber: correctAnswer,
-		answer: answersList[correctAnswer-1],
+		answerNumber: answer,
+		answer: answersList[answer-1],
 		updated: Date.now()
 	  }
 	};
