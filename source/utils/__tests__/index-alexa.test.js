@@ -60,6 +60,7 @@ describe("Trivia Skill", function () {
 				cb(null, { "Item": {
 					"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses.", 
 					"category": "Animal",
+					"answer": "Bunnies",
 					"answerNumber": "3",
 					"triviaID": "3"
 				}});
@@ -103,8 +104,6 @@ describe("Trivia Skill", function () {
 
 
 		aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((params, cb) => {
-			console.log("!!!!")
-			console.log(params)
 			if (params.Key.triviaID == "animal") {
 				cb(null, { "Item": {
 					"triviaID": "animal",
@@ -114,6 +113,7 @@ describe("Trivia Skill", function () {
 				cb(null, { "Item": {
 					"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses.", 
 					"category": "Animal",
+					"answer": "Bunnies",
 					"answerNumber": "3",
 					"triviaID": "3"
 				}});
@@ -166,6 +166,7 @@ describe("Trivia Skill", function () {
 					cb(null, { "Item": {
 						"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses.", 
 						"category": "Animal",
+						"answer": "Bunnies",
 						"answerNumber": "3",
 						"triviaID": "3"
 					}});
@@ -208,6 +209,7 @@ describe("Trivia Skill", function () {
 					cb(null, { "Item": {
 						"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses.", 
 						"category": "Animal",
+						"answer": "Bunnies",
 						"answerNumber": "3",
 						"triviaID": "3"
 					}});
