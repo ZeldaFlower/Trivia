@@ -1761,6 +1761,7 @@ var keyParams = {
 		return item.Item
 	  });
 	  } else {
+		  // TODO: retrieve user's category. The user id needs to be passed to this method.
 		  this.emit(':tell', "Category "+category+" does not exist. Please try a different category.")
 	  }
   }.bind(this));
