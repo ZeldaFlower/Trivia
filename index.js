@@ -1842,7 +1842,8 @@ console.log(filledSlots)
 		updated: Date.now()
 	  }
 	};
-			
+	console.log("!!!");
+	console.log(dynamoParams);		
 	checkIfUserExists.call(this, userId)
 	  .then(function (existingData) {
 		var existingItem = existingData.Item;
