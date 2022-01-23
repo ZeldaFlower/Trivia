@@ -1832,7 +1832,7 @@ console.log(filledSlots)
 		finalQuestion = finalQuestion + i + ") "+ answers[i-1];
 	}
 	var dynamoParams = {
-	  TableName: table,
+	  TableName: "trivia",
 	  Item: {
 		triviaID: userId+"1",
 		category: category,
