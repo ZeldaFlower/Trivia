@@ -1769,7 +1769,7 @@ var keyParams = {
 	  } else {
 		  // TODO: retrieve user's category. The user id needs to be passed to this method.
 			if (!triedUserData) {
-				getTriviaQuestion.call(this, existingItem, category, true)
+				return getTriviaQuestion.call(this, existingItem, category, true)
 		//   return dbGet({
 		// 	TableName: "trivia",
 		// 	Key: {
