@@ -1758,7 +1758,7 @@ var keyParams = {
 	var params = {
 	    TableName: "trivia",
 	    Key: {
-	      triviaID: triedUserData+triviaIDs[randomIndex]//"2021-05-30"//Date.now()// "2019-11-11"
+	      triviaID: triviaIDs[randomIndex]//"2021-05-30"//Date.now()// "2019-11-11"
 	    }
 	  };
 	  return dbGet(params).then(function(item) {
