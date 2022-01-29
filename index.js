@@ -1721,7 +1721,12 @@ function putParamsAndMessage(dynamoParams, toTell, emitName, cardName) {
   	});
 }
 //getTriviaQuestion.call(this, existingItem, null, location ? location.value : null, null, null, null, null, true)
-function getTriviaQuestion(existingItem, category) {
+function getTriviaQuestion(existingItem, category, triedUserData) {
+	if (!triedUserData) {
+		triedUserData = ""
+	} else {
+		triedUserData = existingItem.userID
+	}
 	console.log("getTriviaQuestion")
 	var triviaIDs = ["1", "2"]
 	if (category == "ANIMAL" || category == "Animal") {
@@ -1734,7 +1739,7 @@ function getTriviaQuestion(existingItem, category) {
 var keyParams = {
     TableName: "trivia",
     Key: {
-      triviaID: category.toLowerCase()//"2021-05-30"//Date.now()// "2019-11-11"
+      triviaID: triedUserData+category.toLowerCase()//"2021-05-30"//Date.now()// "2019-11-11"
     }
   };
 	console.log("keyparams")
@@ -1752,7 +1757,7 @@ var keyParams = {
 	var params = {
 	    TableName: "trivia",
 	    Key: {
-	      triviaID: triviaIDs[randomIndex]//"2021-05-30"//Date.now()// "2019-11-11"
+	      triviaID: triedUserData+triviaIDs[randomIndex]//"2021-05-30"//Date.now()// "2019-11-11"
 	    }
 	  };
 	  return dbGet(params).then(function(item) {
@@ -1762,20 +1767,24 @@ var keyParams = {
 	  });
 	  } else {
 		  // TODO: retrieve user's category. The user id needs to be passed to this method.
-
-		  return dbGet({
-			TableName: "trivia",
-			Key: {
-			  triviaID: existingItem.userID+"1"//category.toLowerCase()//"2021-05-30"//Date.now()// "2019-11-11"
+			if (!triedUserData) {
+				getTriviaQuestion.call(this, existingItem, category, true)
+		//   return dbGet({
+		// 	TableName: "trivia",
+		// 	Key: {
+		// 	  triviaID: existingItem.userID+"1"//category.toLowerCase()//"2021-05-30"//Date.now()// "2019-11-11"
+		// 	}
+		//   }).then(function(item) {
+		// 		console.log("user's category item: ")
+		// 		console.log(item)
+		// 		if (!item) {
+		  			
+			// 	}
+			// return item.Item
+			// });
+			} else {
+				this.emit(':tell', "Category "+category+" does not exist. Please try a different category.")
 			}
-		  }).then(function(item) {
-				console.log("user's category item: ")
-				console.log(item)
-				if (!item) {
-		  			this.emit(':tell', "Category "+category+" does not exist. Please try a different category.")
-				}
-			return item.Item
-			});
 	  }
   }.bind(this));
 }
