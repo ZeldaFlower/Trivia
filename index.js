@@ -1721,7 +1721,7 @@ function putParamsAndMessage(dynamoParams, toTell, emitName, cardName) {
   	});
 }
 //getTriviaQuestion.call(this, existingItem, null, location ? location.value : null, null, null, null, null, true)
-function getTriviaQuestion(existingItem, category) {
+function getTriviaQuestion(userId, category) {
 	console.log("getTriviaQuestion")
 	var triviaIDs = ["1", "2"]
 	if (category == "ANIMAL" || category == "Animal") {
@@ -1762,6 +1762,17 @@ var keyParams = {
 	  });
 	  } else {
 		  // TODO: retrieve user's category. The user id needs to be passed to this method.
+
+		  return dbGet({
+			TableName: "trivia",
+			Key: {
+			  triviaID: userId+"1"//category.toLowerCase()//"2021-05-30"//Date.now()// "2019-11-11"
+			}
+		  }).then(function(item) {
+				console.log("item: ")
+				console.log(item)
+			return item.Item
+			});
 		  this.emit(':tell', "Category "+category+" does not exist. Please try a different category.")
 	  }
   }.bind(this));
