@@ -1727,25 +1727,18 @@ function getTriviaQuestion(existingItem, category, triedUserData) {
 	} else {
 		triedUserData = existingItem.userID
 	}
-	console.log(triedUserData)
 	console.log("getTriviaQuestion")
 	var triviaIDs = ["1", "2"]
 	if (category == "ANIMAL" || category == "Animal") {
 		triviaIDs = ["3"]
 	}
-	//if (category == "nature" || category == "Nature") {
-		//triviaIDs = ["4", "5", "6", "7", "8"]
-	//}
 	console.log(triviaIDs)
-var keyParams = {
-    TableName: "trivia",
-    Key: {
-      triviaID: triedUserData+category.toLowerCase()//"2021-05-30"//Date.now()// "2019-11-11"
-    }
-  };
-	console.log("keyparams")
-	console.log(keyParams)
-	console.log(keyParams.Key.triviaID)
+	var keyParams = {
+		TableName: "trivia",
+		Key: {
+			triviaID: triedUserData+category.toLowerCase()
+		}
+  	};
   return dbGet(keyParams).then(function(categoryItem) {
 	  console.log("!!!!!")
 	  console.log(categoryItem)
@@ -1756,37 +1749,23 @@ var keyParams = {
 	console.log(randomIndex)
 	console.log(triviaIDs[randomIndex])
 	var params = {
-	    TableName: "trivia",
-	    Key: {
-	      triviaID: triviaIDs[randomIndex]//"2021-05-30"//Date.now()// "2019-11-11"
-	    }
-	  };
-	  return dbGet(params).then(function(item) {
-		  console.log("item: ")
-		  console.log(item)
-		return item.Item
-	  });
-	  } else {
-		  // TODO: retrieve user's category. The user id needs to be passed to this method.
-			if (!triedUserData) {
-				return getTriviaQuestion.call(this, existingItem, category, true)
-		//   return dbGet({
-		// 	TableName: "trivia",
-		// 	Key: {
-		// 	  triviaID: existingItem.userID+"1"//category.toLowerCase()//"2021-05-30"//Date.now()// "2019-11-11"
-		// 	}
-		//   }).then(function(item) {
-		// 		console.log("user's category item: ")
-		// 		console.log(item)
-		// 		if (!item) {
-		  			
-			// 	}
-			// return item.Item
-			// });
-			} else {
-				this.emit(':tell', "Category "+category+" does not exist. Please try a different category.")
-			}
-	  }
+		TableName: "trivia",
+		Key: {
+			triviaID: triviaIDs[randomIndex]                                      
+		}
+	};
+	return dbGet(params).then(function(item) {
+		console.log("item: ")
+		console.log(item)
+	return item.Item
+	});
+	} else {
+		if (!triedUserData) {
+			return getTriviaQuestion.call(this, existingItem, category, true)
+		} else {
+			this.emit(':tell', "Category "+category+" does not exist. Please try a different category.")
+		}
+	}
   }.bind(this));
 }
 
