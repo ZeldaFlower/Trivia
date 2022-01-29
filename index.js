@@ -1727,6 +1727,7 @@ function getTriviaQuestion(existingItem, category, triedUserData) {
 	} else {
 		triedUserData = existingItem.userID
 	}
+	console.log(triedUserData)
 	console.log("getTriviaQuestion")
 	var triviaIDs = ["1", "2"]
 	if (category == "ANIMAL" || category == "Animal") {
@@ -2846,7 +2847,7 @@ console.log("category: " +name)
 					this.event.session.attributes.triviaID = triviaInfo.triviaID
 					//this.emit(':tellWithCard', toShow, this.t('TRIVIA_INFO_TITLE'), toShow);// TODO: maybe just tell
 				} else {
-					this.emit(':ask', "I cannot find the category "+name+". Please ask for a different category."+this.t('HELP_REPROMPT'));
+					this.emit(':ask', "I cannot find the category "+name+". Please ask for a different category. "+this.t('HELP_REPROMPT'));
 				}
 				console.log("to show: " +toShow)
 				// save dynamo params to our dynamo db table
