@@ -1852,13 +1852,13 @@ console.log(filledSlots)
 		finalQuestion = finalQuestion +" "+ i + ") "+ answersList[i-1];
 	}
 	var answer=1
-	if (correctAnswer.toLowerCase() == "two") {
+	if (correctAnswer == 2 || correctAnswer instanceof String && correctAnswer.toLowerCase() == "two") {
 	 answer=2
 	} else 
-	if (correctAnswer.toLowerCase() == "three") {
+	if (correctAnswer == 3 || correctAnswer instanceof String && correctAnswer.toLowerCase() == "three") {
 	 answer=3
 	} else 
-	if (correctAnswer.toLowerCase() == "four") {
+	if (correctAnswer == 4 || correctAnswer instanceof String &&correctAnswer.toLowerCase() == "four") {
 	 answer=4
 	}
 	// TODO: retrieve from db category info userID+category
@@ -1957,10 +1957,12 @@ console.log(filledSlots)
   
 	  }.bind(this)).catch(err => {
 		  console.error(err);
+		  console.error("failed here - 1")
 		  this.emit(':ask', this.t('SORRY'));
 	  });
 			}.bind(this)).catch(err => {
 				console.error(err);
+				console.error("failed here - 2")
 				this.emit(':ask', this.t('SORRY'));
 			});
 	})
