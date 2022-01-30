@@ -847,6 +847,36 @@ console.log(this)
 		}
     },
 
+	'DeleteTriviaQuestion': function () {
+		var filledSlots = delegateSlotCollection.call(this);
+
+		var { userId, accessToken } = this.event.session.user;
+		if (!accessToken) {
+			console.log("no token")
+			//this.emit(':ask', 'Please link your Account so I can email you the web link.');
+			deleteTriviaForUser.call(this, filledSlots, userId);
+		} else {
+			console.log("token")
+			const options = {
+				url: 'https://api.amazon.com/user/profile?access_token=' + accessToken,
+				method: 'GET',
+				headers: {
+					'Accept': 'application/json',
+					Authorization: "Bearer " + this.event.context.System.apiAccessToken
+				}
+			};
+			request(options, (error, response, body) => {//TODO: request error
+				if (!error && response.statusCode === 200) {
+					let data = JSON.parse(body); // Store the data we got from the API request
+					console.log(data)
+					console.log(filledSlots)
+					userId = data.user_id
+					deleteTriviaForUser.call(this, filledSlots, userId);
+				}
+			})
+		}
+    },
+
 	'GetRecipe': function () {
 		var filledSlots = delegateSlotCollection.call(this);
 
@@ -2819,6 +2849,62 @@ console.log("category: " +name)
 		});
 	}
 }
+
+	/**
+	 * When we delete trivia, we need to loop through all trivia to get the question to see if it matches with what the user wants to delete.
+So, I think we need a key in the db that says what categories are available, and that will also open up a way for the user to ask Alexa what categories are available. So that way we can retrieve each category, then retrieve each question based on questionKeys.
+	 */
+function deleteTriviaForUser(filledSlots, userId) {
+
+	// console.log("get trivia for user method");
+	// console.log(filledSlots);
+	// console.log(userId);
+	// 	if (filledSlots != undefined) {
+	// 		var name = filledSlots.slots.categoryTitle.value;
+	// console.log("category: " +name)
+	// 		//const { userId } = this.event.session.user;
+	// 		checkIfUserExists.call(this, userId)
+	// 		  .then(data => {
+	// 			  console.log("data: " +data)
+	// 			const existingItem = data.Item;
+	// 			var dynamoParams = {
+	// 				TableName: table,
+	// 				Item: {
+	// 					userID: userId,
+	// 					numberOfQuestionsAsked: 0,
+	// 					updated: Date.now()
+	// 				}
+	// 			}
+	// 			if (existingItem) {
+	// 				existingItem.updated = Date.now()
+	// 				dynamoParams.Item = existingItem
+	// 			}
+	// 			getTriviaQuestion.call(this, existingItem, name).then(function(triviaInfo) {
+	// 				console.log("triviaInfo: "+triviaInfo)
+	// 				console.log(triviaInfo)
+	// 				var toShow = ""
+	// 				if (triviaInfo) {
+	// 					toShow = triviaInfo.question
+	// 					this.event.session.attributes.triviaID = triviaInfo.triviaID
+	// 					//this.emit(':tellWithCard', toShow, this.t('TRIVIA_INFO_TITLE'), toShow);// TODO: maybe just tell
+	// 				} else {
+	// 					this.emit(':ask', "I cannot find the category "+name+". Please ask for a different category. "+this.t('HELP_REPROMPT'));
+	// 				}
+	// 				console.log("to show: " +toShow)
+	// 				// save dynamo params to our dynamo db table
+	// 				var numberOfQuestionsAsked = dynamoParams.Item.numberOfQuestionsAsked
+	// 				numberOfQuestionsAsked = numberOfQuestionsAsked + 1;
+	// 				dynamoParams.Item.numberOfQuestionsAsked = numberOfQuestionsAsked
+	// 				console.log("numberOfQuestionsAsked: " +numberOfQuestionsAsked)
+	// 				putParamsAndMessage.call(this, dynamoParams, toShow, ":ask", toShow+" Please say one, two, three or four");
+	// 			}.bind(this));
+	
+	// 		}).catch(err => {
+	// 			console.error(err);
+	// 			this.emit(':ask', this.t('SORRY'));
+	// 		});
+	// 	}
+	}
 
 function addRecipeForUser(filledSlots, userId, mealsMax) {
 	if (filledSlots != undefined) {
