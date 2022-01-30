@@ -1883,7 +1883,7 @@ console.log(filledSlots)
 			// increment and add to list, and save
 			dbPut({TableName: "trivia", Item: item.Item}).then(function(){
 					// successful
-			}).bind(this).catch(err => {
+			}.bind(this)).catch(err => {
 				console.error(err);
 				this.emit(':ask', this.t('SORRY'));
 			});
