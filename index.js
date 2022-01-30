@@ -519,7 +519,6 @@ console.log(this)
 					console.log(data)
 					userId = data.user_id
 					addQuestionForUser.call(this, filledSlots, userId);
-
 				}
 			})
 		}
@@ -1863,28 +1862,37 @@ console.log(filledSlots)
 	 answer=4
 	}
 	// TODO: retrieve from db category info userID+category
-	// dbGet({
-	// 	TableName: "trivia", 
-	// 	Key: {
-	// 		triviaID: userId+category.toLowerCase()
-	// 	}}).then(function(item) {
-	// 		if (!item){
-	// 			item = {
-	// 				TableName: "trivia",
-	// 				Item: {
-	// 				  triviaID: userId+"1",
-	// 				  questionKeys: "1"
-	// 				}
-	// 			}
-	// 		}
-	// 		item.Item.questionKeys
-	// })
-	// TODO: increment and add to list, and save,
+	var questionNumber = "1"
+	dbGet({
+		TableName: "trivia", 
+		Key: {
+			triviaID: userId+category.toLowerCase()
+		}}).then(function(item) {
+			if (!item){
+				item = {
+					TableName: "trivia",
+					Item: {
+					  triviaID: userId+"1",
+					  questionKeys: userId+category.toLowerCase()+"1"
+					}
+				}
+			} else {
+				questionNumber = item.Item.questionKeys.length+1
+				item.Item.questionKeys += ", "+userId+category.toLowerCase()+questionNumber
+			}
+			// increment and add to list, and save
+			dbPut({TableName: "trivia", Item: item.Item}).then(function(){
+					// successful
+			}).bind(this).catch(err => {
+				console.error(err);
+				this.emit(':ask', this.t('SORRY'));
+			});
+	})
 	// TODO: then save trivia too
 	var dynamoParams = {
 	  TableName: "trivia",
 	  Item: {
-		triviaID: userId+"1",
+		triviaID: userId+category.toLowerCase()+questionNumber,
 		category: category,
 		question: finalQuestion,
 		answerNumber: answer,
