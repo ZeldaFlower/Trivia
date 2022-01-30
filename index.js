@@ -1738,34 +1738,34 @@ function getTriviaQuestion(existingItem, category, triedUserData) {
 			triviaID: triedUserData+category.toLowerCase()
 		}
   	};
-  return dbGet(keyParams).then(function(categoryItem) {
-	  console.log("!!!!!")
-	  console.log(categoryItem)
-	  if (categoryItem.Item) {
-	  var keys = categoryItem.Item.questionKeys
-	  triviaIDs = keys.split(", ")
-	var randomIndex = Math.round(Math.random() * (triviaIDs.length - 1))
-	console.log(randomIndex)
-	console.log(triviaIDs[randomIndex])
-	var params = {
-		TableName: "trivia",
-		Key: {
-			triviaID: triviaIDs[randomIndex]                                      
-		}
-	};
-	return dbGet(params).then(function(item) {
-		console.log("item: ")
-		console.log(item)
-	return item.Item
-	});
-	} else {
-		if (!triedUserData) {
-			return getTriviaQuestion.call(this, existingItem, category, true)
+  	return dbGet(keyParams).then(function(categoryItem) {
+		console.log("!!!!!")
+		console.log(categoryItem)
+		if (categoryItem.Item) {
+			var keys = categoryItem.Item.questionKeys
+			triviaIDs = keys.split(", ")
+			var randomIndex = Math.round(Math.random() * (triviaIDs.length - 1))
+			console.log(randomIndex)
+			console.log(triviaIDs[randomIndex])
+			var params = {
+				TableName: "trivia",
+				Key: {
+					triviaID: triviaIDs[randomIndex]                                      
+				}
+			};
+			return dbGet(params).then(function(item) {
+				console.log("item: ")
+				console.log(item)
+			return item.Item
+			});
 		} else {
-			this.emit(':tell', "Category "+category+" does not exist. Please try a different category.")
+			if (!triedUserData) {
+				return getTriviaQuestion.call(this, existingItem, category, true)
+			} else {
+				this.emit(':tell', "Category "+category+" does not exist. Please try a different category.")
+			}
 		}
-	}
-  }.bind(this));
+  	}.bind(this));
 }
 
 function emailVerses(email, date) {
