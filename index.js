@@ -1858,7 +1858,7 @@ console.log(filledSlots)
 	if (correctAnswer == 3 || correctAnswer instanceof String && correctAnswer.toLowerCase() == "three") {
 	 answer=3
 	} else 
-	if (correctAnswer == 4 || correctAnswer instanceof String &&correctAnswer.toLowerCase() == "four") {
+	if (correctAnswer == 4 || correctAnswer instanceof String && correctAnswer.toLowerCase() == "four") {
 	 answer=4
 	}
 	// TODO: retrieve from db category info userID+category
