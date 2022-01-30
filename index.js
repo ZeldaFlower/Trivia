@@ -1853,15 +1853,34 @@ console.log(filledSlots)
 		finalQuestion = finalQuestion +" "+ i + ") "+ answersList[i-1];
 	}
 	var answer=1
-	if (correctAnswer == "Two") {
+	if (correctAnswer.toLowerCase() == "two") {
 	 answer=2
 	} else 
-	if (correctAnswer == "Three") {
+	if (correctAnswer.toLowerCase() == "three") {
 	 answer=3
 	} else 
-	if (correctAnswer == "Four") {
+	if (correctAnswer.toLowerCase() == "four") {
 	 answer=4
 	}
+	// TODO: retrieve from db category info userID+category
+	// dbGet({
+	// 	TableName: "trivia", 
+	// 	Key: {
+	// 		triviaID: userId+category.toLowerCase()
+	// 	}}).then(function(item) {
+	// 		if (!item){
+	// 			item = {
+	// 				TableName: "trivia",
+	// 				Item: {
+	// 				  triviaID: userId+"1",
+	// 				  questionKeys: "1"
+	// 				}
+	// 			}
+	// 		}
+	// 		item.Item.questionKeys
+	// })
+	// TODO: increment and add to list, and save,
+	// TODO: then save trivia too
 	var dynamoParams = {
 	  TableName: "trivia",
 	  Item: {
