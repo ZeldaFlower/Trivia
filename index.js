@@ -1901,57 +1901,6 @@ console.log(filledSlots)
 	  checkIfUserExists.call(this, userId)
 		.then(function (existingData) {
 		  var existingItem = existingData.Item;
-  // 		if (existingItem) {
-  // 			existingItem.userID = userId;
-  // 			dynamoParams.Item = existingItem;
-  // 		}
-  // 		var nameList = name.split(" and ");
-  // 		var matchingFood = getTriviaQuestion.call(this, existingItem, nameList, location, granularLocation);
-  // // 		var alreadyExists = "You already have ";
-  // 		var alreadyExisting = {}
-  // 		for (let food of matchingFood) {
-  // 			alreadyExisting[food.name] = true;
-  // 			alreadyExists = alreadyExists +food.name+" in your "+food.location+" "+(food.granularLocation||"")+", ";
-  // 		}
-  // 		var names = [];
-  // 		for (let name of nameList) {
-  
-  // 			let ignore = alreadyExisting[name];
-  // 			if (!ignore) {
-  // 				names.push(name);
-  // 				var newFood = {
-  // 					name: name,
-  // 					location: location,
-  // 					granularLocation: granularLocation,
-  // 					// condiment: condiment,
-  // 					dateAdded: Date.now(),
-  // 					useByDate: useByDate
-  // 				};
-  // 				dynamoParams.Item.food.push(newFood);
-  // 				dynamoParams.Item.food.sort((a,b) => {
-  //   					if (('' + a.location).localeCompare(b.location)>0){
-  // 						return 1;
-  // 					}
-  //                     if (('' + a.location).localeCompare(b.location)==0){
-  //                     	if(('' + a.granularLocation).localeCompare(b.granularLocation)>0){
-  //                         	return 1;
-  //                         }
-  //                         if (('' + a.granularLocation).localeCompare(b.granularLocation) == 0) {
-  //                         	if(('' + a.food).localeCompare(b.food)>0){
-  //                             	return 1;
-  //                             } else {
-  //                             	return 0;
-  //                             }
-  //                         }
-  //                         return -1
-  // 					}
-  //                     return -1
-  // 				});
-  
-  // 				dynamoParams.Item.updated = Date.now();
-  // 			}
-  
-  // 		}
 		  // tell which you already have, and what added, number added
 		  putParamsAndMessage.call(this, dynamoParams, "Added your question '"+question+"' with category "+category+", answers: "+answers+" and correct answer "+correctAnswer+".", ":tellWithCard", this.t('TRIVIA_INFO_TITLE'));
   
@@ -1965,7 +1914,7 @@ console.log(filledSlots)
 				console.error("failed here - 2")
 				this.emit(':ask', this.t('SORRY'));
 			});
-	})
+	}.bind(this))
 		}
 }
 
