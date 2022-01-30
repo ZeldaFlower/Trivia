@@ -1882,40 +1882,37 @@ console.log(filledSlots)
 			}
 			// increment and add to list, and save
 			dbPut({TableName: "trivia", Item: item.Item}).then(function(){
-					// successful
-					
-	// TODO: then save trivia too
-	var dynamoParams = {
-		TableName: "trivia",
-		Item: {
-		  triviaID: userId+category.toLowerCase()+questionNumber,
-		  category: category,
-		  question: finalQuestion,
-		  answerNumber: answer,
-		  answer: answersList[answer-1],
-		  updated: Date.now()
-		}
-	  };
-	  console.log("!!!");
-	  console.log(dynamoParams);		
-	  checkIfUserExists.call(this, userId)
-		.then(function (existingData) {
-		  var existingItem = existingData.Item;
-		  // tell which you already have, and what added, number added
-		  putParamsAndMessage.call(this, dynamoParams, "Added your question '"+question+"' with category "+category+", answers: "+answers+" and correct answer "+correctAnswer+".", ":tellWithCard", this.t('TRIVIA_INFO_TITLE'));
-  
-	  }.bind(this)).catch(err => {
-		  console.error(err);
-		  console.error("failed here - 1")
-		  this.emit(':ask', this.t('SORRY'));
-	  });
+				// then save trivia too
+				var dynamoParams = {
+					TableName: "trivia",
+					Item: {
+					triviaID: userId+category.toLowerCase()+questionNumber,
+					category: category,
+					question: finalQuestion,
+					answerNumber: answer,
+					answer: answersList[answer-1],
+					updated: Date.now()
+					}
+				};
+				console.log("!!!");
+				console.log(dynamoParams);		
+				checkIfUserExists.call(this, userId).then(function (existingData) {
+					var existingItem = existingData.Item;
+					// tell which you already have, and what added, number added
+					putParamsAndMessage.call(this, dynamoParams, "Added your question '"+question+"' with category "+category+", answers: "+answers+" and correct answer "+correctAnswer+".", ":tellWithCard", this.t('TRIVIA_INFO_TITLE'));
+			
+				}.bind(this)).catch(err => {
+					console.error(err);
+					console.error("failed here - 1")
+					this.emit(':ask', this.t('SORRY'));
+				});
 			}.bind(this)).catch(err => {
 				console.error(err);
 				console.error("failed here - 2")
 				this.emit(':ask', this.t('SORRY'));
 			});
-	}.bind(this))
-		}
+		}.bind(this))
+	}
 }
 
 function addFoodForUser(filledSlots, userId) {
