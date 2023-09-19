@@ -19,7 +19,7 @@ describe("html", function () {
 		var searchString = "Automation testing with Selenium";
 		
 		//To wait for browser to build and launch properly
-		let driver = await new webdriver.Chrome().build();
+		let driver = await new webdriver.Builder().forBrowser("chrome").build();
 		
 		//To fetch http://google.com from the browser with our code.
 		await driver.get("https://s3.amazonaws.com/christine-trivia/index.html");
