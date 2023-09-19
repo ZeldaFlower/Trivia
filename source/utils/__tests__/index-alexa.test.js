@@ -200,18 +200,23 @@ describe("Trivia Skill", function () {
 		aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((params, cb) => {// Oops, had _ here nd params variable uncommented
 
 			if (params.TableName == "trivia") {
-				if (params.Key.triviaID == "amzn1.ask.account.VOIDfood") {
+				if (params.Key.triviaID == "animal") {
+					cb(null, { "Item": {
+						"triviaID": "animal",
+						"questionKeys": "3"
+					}});
+				} if (params.Key.triviaID == "amzn1.ask.account.VOIDfood") {
 					cb(null, { "Item": {
 						"triviaID": "amzn1.ask.account.VOIDfood",
 						"questionKeys": "3"
 					}});
 				} else {
 					cb(null, { "Item": {
-						"question": "Out of the following, what is a tomato", 
-						"category": "food",
-						"answer": "vegetable",
-						"answerNumber": "2",
-						"triviaID": "amzn1.ask.account.VOIDfood2"
+						"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses.", 
+						"category": "Animal",
+						"answer": "Bunnies",
+						"answerNumber": "3",
+						"triviaID": "3"
 					}});
 				}
 			} else {
