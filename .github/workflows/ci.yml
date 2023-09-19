@@ -27,9 +27,8 @@ jobs:
 #       - run: npm install mocha
 #       - run: npm install alexa-skill-test-framework --save-dev
 
-      - run: |
-          npm install --save-dev selenium-webdriver
-          npm i --save-dev jest-environment-jsdom
+      - run: npm install --save-dev selenium-webdriver
+      - run: npm install --save-dev jest-environment-jsdom
 #       - run: git branch
 #       - run: cd node_modules;ls; cd aws-sdk; ls; cd dynamodb; cd src; ls; libs; ls
 # TODO: make test run shorter by merging with brach that already has this installed:
