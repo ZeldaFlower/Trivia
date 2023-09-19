@@ -22,7 +22,7 @@ jobs:
 #       - run: cat package.json 
 #       - run: zip -r index.zip *
       - run: ls
-      # - run: npm install --save-dev jest-cli
+      - run: npm install --save-dev jest-cli@22.4.3
       # - run: npm install aws-sdk
       # - run: npm install mocha
       # - run: npm install alexa-skill-test-framework --save-dev
