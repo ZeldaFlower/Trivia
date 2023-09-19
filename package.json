@@ -26,6 +26,6 @@
     "selenium-webdriver": "^4.11.0",
     "jest-environment-jsdom": "^27.0.6",
     "alexa-skill-test-framework": "^1.2.4",
-    "chromedriver": "^90.0.0"
+    "chromedriver": "^116.0.5845.96"
   }
 }
