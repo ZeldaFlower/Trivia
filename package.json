@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "jest": {
-    "testUrl": "https://www.google.com"
+    "testURL": "https://www.google.com"
   },
   "dependencies": {
     "alexa-sdk": "^1.0.24",
