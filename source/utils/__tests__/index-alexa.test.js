@@ -62,8 +62,7 @@ describe("Trivia Skill", function () {
 					"category": "Animal",
 					"answer": "Bunnies",
 					"answerNumber": "3",
-					"triviaID": "3",
-					"questionKeys": "3"
+					"triviaID": "3"
 				}});
 			}
 		});
@@ -116,8 +115,7 @@ describe("Trivia Skill", function () {
 					"category": "Animal",
 					"answer": "Bunnies",
 					"answerNumber": "3",
-					"triviaID": "3",
-					"questionKeys": "3"
+					"triviaID": "3"
 				}});
 			}
 		});
@@ -170,8 +168,7 @@ describe("Trivia Skill", function () {
 						"category": "Animal",
 						"answer": "Bunnies",
 						"answerNumber": "3",
-						"triviaID": "3",
-					"questionKeys": "3"
+						"triviaID": "3"
 					}});
 				}
 			} else {
