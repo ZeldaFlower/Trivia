@@ -207,11 +207,11 @@ describe("Trivia Skill", function () {
 					}});
 				} else {
 					cb(null, { "Item": {
-						"question": "What is Christine's favorite animal? 1) Cats 2) Dogs 3) Bunnies 4) Horses.", 
-						"category": "Animal",
-						"answer": "Bunnies",
-						"answerNumber": "3",
-						"triviaID": "3"
+						"question": "Out of the following, what is a tomato", 
+						"category": "food",
+						"answer": "vegetable",
+						"answerNumber": "2",
+						"triviaID": "amzn1.ask.account.VOIDfood"
 					}});
 				}
 			} else {
