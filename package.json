@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "jest-cli": "^27.0.6",
-    "selenium-webdriver": "^4.11.0"
+    "selenium-webdriver": "^4.11.0",
+    "jest-environment-jsdom": "^22.4.3"
   }
 }
