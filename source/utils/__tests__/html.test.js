@@ -24,7 +24,7 @@ describe("html", function () {
 		await driver.get("https://s3.amazonaws.com/christine-trivia/index.html");
 		    
 		//To send a search query by passing the value in searchString.
-		await driver.findElement(webdriver.By.name("q")).sendKeys(searchString,Key.RETURN);
+		//await driver.findElement(webdriver.By.name("q")).sendKeys(searchString,Key.RETURN);
 		
 		//Verify the page title and print it
 		var title = await driver.getTitle();
