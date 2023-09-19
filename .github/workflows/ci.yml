@@ -38,12 +38,11 @@ jobs:
       - run: unzip nodes.zip
       - run: rm nodes.zip
       - run: rm node_modules.zip
-      - run: npm install –save selenium-webdriver
+      - run: npm install --save-dev selenium-webdriver
       - run: zip -r index.zip *
       - run: echo "🍏 This job's status is ${{ job.status }}. Uploading to lambda."
       - run: cd .. 
       - run: ls
-#       - run: mkfile ~/.aws/confige
       - name: Configure AWS Region
         run: echo "AWS_DEFAULT_REGION=us-east-1" >> $GITHUB_ENV
       - run: AWS_EC2_METADATA_DISABLED=true >> $GITHUB_ENV
@@ -58,30 +57,3 @@ jobs:
       - run: git config --global user.name "Christine Koen through workflow"
       - name: create branch that has our zip
         run: git push origin --delete branch-${{ github.ref }}-with-zip; git checkout -b branch-${{ github.ref }}-with-zip; git add .; git commit -am"With Zip"; git push  --set-upstream origin branch-${{ github.ref }}-with-zip;
-
-
-#   Checkmarx:
-#     runs-on: ubuntu-latest
-#     needs: Test-and-Upload
-#     steps:
-#     - run: echo "!"
-#   Deploy-to-Snapshot-and-run-FTA:
-#     runs-on: ubuntu-latest
-#     needs: Checkmarx
-#     steps:
-#     - run: echo "!"
-#   Deploy-to-Test-and-run-FTA:
-#     runs-on: ubuntu-latest
-#     needs: Deploy-to-Snapshot-and-run-FTA
-#     steps:
-#     - run: echo "!"
-#   Update-Support-Branch:
-#     runs-on: ubuntu-latest
-#     needs: Deploy-to-Test-and-run-FTA
-#     steps:
-#     - run: echo "!"
-#   Tag-Current-Release-Version:
-#     runs-on: ubuntu-latest
-#     needs: Update-Support-Branch
-#     steps:
-#     - run: echo "!"
