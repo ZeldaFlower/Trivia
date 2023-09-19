@@ -5,7 +5,8 @@ Run with 'mocha examples/skill-sample-nodejs-hello-world/helloworld-tests.js'.
 */
 
 // include the testing framework
-var webdriver = require('selenium-webdriver');
+var {By,Key,Builder} = require('selenium-webdriver');
+require("chromedriver");
 
 describe("html", function () {
 	
@@ -18,13 +19,13 @@ describe("html", function () {
 		var searchString = "Automation testing with Selenium";
 		
 		//To wait for browser to build and launch properly
-		let driver = await new webdriver.Builder().forBrowser("chrome").build();
+		let driver = await new Builder().forBrowser("chrome").build();
 		
 		//To fetch http://google.com from the browser with our code.
 		await driver.get("https://s3.amazonaws.com/christine-trivia/index.html");
 		    
 		//To send a search query by passing the value in searchString.
-		//await driver.findElement(webdriver.By.name("q")).sendKeys(searchString,Key.RETURN);
+		//await driver.findElement(By.name("q")).sendKeys(searchString,Key.RETURN);
 		
 		//Verify the page title and print it
 		var title = await driver.getTitle();
