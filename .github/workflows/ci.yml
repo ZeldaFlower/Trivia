@@ -38,6 +38,7 @@ jobs:
       - run: unzip nodes.zip
       - run: rm nodes.zip
       - run: rm node_modules.zip
+      - run: npm install –save selenium-webdriver
       - run: zip -r index.zip *
       - run: echo "🍏 This job's status is ${{ job.status }}. Uploading to lambda."
       - run: cd .. 
@@ -56,7 +57,7 @@ jobs:
       - run: git config --global user.email "zelda_flower@yahoo.com"
       - run: git config --global user.name "Christine Koen through workflow"
       - name: create branch that has our zip
-        run: git push origin --delete ${{ github.ref }}-with-zip; git checkout -b ${{ github.ref }}-with-zip; git add .; git commit -am"With Zip"; git push  --set-upstream origin ${{ github.ref }}-with-zip;
+        run: git push origin --delete branch-${{ github.ref }}-with-zip; git checkout -b branch-${{ github.ref }}-with-zip; git add .; git commit -am"With Zip"; git push  --set-upstream origin branch-${{ github.ref }}-with-zip;
 
 
 #   Checkmarx:
