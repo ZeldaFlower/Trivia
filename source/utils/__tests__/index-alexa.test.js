@@ -1,4 +1,4 @@
-/*
+e/*
 Mocha tests for the Alexa skill "Hello World" example (https://github.com/alexa/skill-sample-nodejs-hello-world).
 Using the Alexa Skill Test Framework (https://github.com/BrianMacIntosh/alexa-skill-test-framework).
 Run with 'mocha examples/skill-sample-nodejs-hello-world/helloworld-tests.js'.
@@ -200,9 +200,9 @@ describe("Trivia Skill", function () {
 		aws.DynamoDB.DocumentClient.prototype.get.mockImplementation((params, cb) => {// Oops, had _ here nd params variable uncommented
 
 			if (params.TableName == "trivia") {
-				if (params.Key.triviaID == "animal") {
+				if (params.Key.triviaID == "amzn1.ask.account.VOIDfood") {
 					cb(null, { "Item": {
-						"triviaID": "animal",
+						"triviaID": "amzn1.ask.account.VOIDfood",
 						"questionKeys": "3"
 					}});
 				} else {
