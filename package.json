@@ -10,7 +10,8 @@
     "test": "jest"
   },
   "jest": {
-    "testURL": "https://www.google.com"
+    "testURL": "https://www.google.com",
+    "testEnvironment": "jsdom"
   },
   "dependencies": {
     "alexa-sdk": "^1.0.24",
