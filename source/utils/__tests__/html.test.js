@@ -14,7 +14,7 @@ describe("html", function () {
 		expect(result).toBe("true")
 	});
 	
-	describe("test html", async function () {
+	test("test html", async function () {
 		var searchString = "Automation testing with Selenium";
 		
 		//To wait for browser to build and launch properly
