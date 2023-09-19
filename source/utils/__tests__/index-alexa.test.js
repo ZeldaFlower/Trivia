@@ -211,7 +211,7 @@ describe("Trivia Skill", function () {
 						"category": "food",
 						"answer": "vegetable",
 						"answerNumber": "2",
-						"triviaID": "amzn1.ask.account.VOIDfood"
+						"triviaID": "amzn1.ask.account.VOIDfood2"
 					}});
 				}
 			} else {
