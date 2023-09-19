@@ -32,7 +32,7 @@ jobs:
 #       - name: merge current branch with jest aws mocha and alexa skill test framework to test
 #         run: |
 #           git pull origin test-node-modules --allow-unrelated-histories; git push origin --delete ${{ github.ref }}-testing-branch; git checkout test-node-modules; git checkout -b ${{ github.ref }}-testing-branch; git merge ${{ github.ref }}; git push origin;
-   #   - run: npm test --
+      - run: npm test --
       - run: cp node_modules.zip nodes.zip
       - run: rm -rf node_modules
       - run: unzip nodes.zip
