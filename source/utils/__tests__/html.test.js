@@ -19,11 +19,18 @@ describe("html", function () {
 	test("test html", async function () {
 		var searchString = "Automation testing with Selenium";
 		
-		var chrome_options = webdriver.chrome.Options()
-		chrome_options.add_argument('--headless')
-		chrome_options.add_argument('--no-sandbox')
-		chrome_options.add_argument('--disable-dev-shm-usage')
-		var driver = webdriver.Chrome('/usr/bin/chromedriver', chrome_options=chrome_options)
+		var chromeCapabilities = webdriver.Capabilities.chrome();
+		//setting chrome options to start the browser fully maximized
+		var chromeOptions = {
+		    'args': ['--test-type', '--start-maximized', "--headless", "--no-sandbox", "--disable-dev-shm-usage"]
+		};
+		chromeCapabilities.set('chromeOptions', chromeOptions);
+		var driver = new webdriver.Builder().withCapabilities(chromeCapabilities).build();
+		// var chrome_options = webdriver.chrome.Options()
+		// chrome_options.add_argument('--headless')
+		// chrome_options.add_argument('--no-sandbox')
+		// chrome_options.add_argument('--disable-dev-shm-usage')
+		// var driver = webdriver.Chrome('/usr/bin/chromedriver', chrome_options=chrome_options)
 		driver.get('https://s3.amazonaws.com/christine-trivia/index.html')
 		
 		//To wait for browser to build and launch properly
