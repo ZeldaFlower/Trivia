@@ -5,8 +5,8 @@ Run with 'mocha examples/skill-sample-nodejs-hello-world/helloworld-tests.js'.
 */
 
 // include the testing framework
-var selenium = require('selenium-webdriver');
-var webdriver = require('chromedriver');
+var webdriver = require('selenium-webdriver');
+require('chromedriver');
 // from selenium import webdriver
 // from selenium.webdriver.chrome.options import Options
 
@@ -22,21 +22,21 @@ describe("html", function () {
 	test("test html", async function () {
 		var searchString = "Automation testing with Selenium";
 		
-		// var chromeCapabilities = webdriver.Capabilities.chrome();
-		// //setting chrome options to start the browser fully maximized
-		// var chromeOptions = {
-		//     'args': [ '--start-maximized', "--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-extensions", "disable-infobars", "--remote-debugging-port=9222" ]
-		// };
-		// chromeCapabilities.set('chromeOptions', chromeOptions);
-		// var driver = new webdriver.Builder().withCapabilities(chromeCapabilities).build();
+		var chromeCapabilities = webdriver.Capabilities.chrome();
+		//setting chrome options to start the browser fully maximized
+		var chromeOptions = {
+		    'args': [ '--start-maximized', "--headless", "--no-sandbox", "--window-size=1420,1080", "disable-gpu", "--disable-dev-shm-usage", "--disable-extensions", "disable-infobars", "--remote-debugging-port=9222" ]
+		};
+		chromeCapabilities.set('chromeOptions', chromeOptions);
+		var driver = new webdriver.Builder().withCapabilities(chromeCapabilities).build();
 
 
-		chrome_options = webdriver.ChromeOptions()
-		chrome_options.add_argument('--no-sandbox')
-		chrome_options.add_argument('--window-size=1420,1080')
-		chrome_options.add_argument('--headless')
-		chrome_options.add_argument('--disable-gpu')
-		driver = webdriver.Chrome(chrome_options=chrome_options)
+		// chrome_options = webdriver.ChromeOptions()
+		// chrome_options.add_argument('--no-sandbox')
+		// chrome_options.add_argument('--window-size=1420,1080')
+		// chrome_options.add_argument('--headless')
+		// chrome_options.add_argument('--disable-gpu')
+		// driver = webdriver.Chrome(chrome_options=chrome_options)
 		
 		// var chrome_options = webdriver.chrome.Options()
 		// chrome_options.add_argument('--headless')
