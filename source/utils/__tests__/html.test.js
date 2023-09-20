@@ -9,6 +9,8 @@ var webdriver = require('selenium-webdriver');
 // from selenium import webdriver
 // from selenium.webdriver.chrome.options import Options
 
+jest.setTimeout(50000)
+
 describe("html", function () {
 	
 	test("Code Compiles", function () {
@@ -17,13 +19,12 @@ describe("html", function () {
 	});
 	
 	test("test html", async function () {
-		jest.setTimeout(50000)
 		var searchString = "Automation testing with Selenium";
 		
 		var chromeCapabilities = webdriver.Capabilities.chrome();
 		//setting chrome options to start the browser fully maximized
 		var chromeOptions = {
-		    'args': ['--test-type', '--start-maximized', "--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-extensions", "disable-infobars", "--remote-debugging-port=9222" ]
+		    'args': [ '--start-maximized', "--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-extensions", "disable-infobars", "--remote-debugging-port=9222" ]
 		};
 		chromeCapabilities.set('chromeOptions', chromeOptions);
 		var driver = new webdriver.Builder().withCapabilities(chromeCapabilities).build();
