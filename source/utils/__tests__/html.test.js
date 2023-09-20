@@ -22,7 +22,7 @@ describe("html", function () {
 		var chromeCapabilities = webdriver.Capabilities.chrome();
 		//setting chrome options to start the browser fully maximized
 		var chromeOptions = {
-		    'args': ['--test-type', '--start-maximized', "--headless", "--no-sandbox", "--disable-dev-shm-usage"]
+		    'args': ['--test-type', '--start-maximized', "--headless", "--no-sandbox", "--disable-dev-shm-usage", "--disable-extensions", "disable-infobars" ]
 		};
 		chromeCapabilities.set('chromeOptions', chromeOptions);
 		var driver = new webdriver.Builder().withCapabilities(chromeCapabilities).build();
