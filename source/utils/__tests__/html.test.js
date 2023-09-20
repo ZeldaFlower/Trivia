@@ -17,6 +17,7 @@ describe("html", function () {
 	});
 	
 	test("test html", async function () {
+		jest.setTimeout(50000)
 		var searchString = "Automation testing with Selenium";
 		
 		var chromeCapabilities = webdriver.Capabilities.chrome();
