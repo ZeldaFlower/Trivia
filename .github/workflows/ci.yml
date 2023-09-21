@@ -36,14 +36,15 @@ jobs:
 #         run: |
 #           git pull origin test-node-modules --allow-unrelated-histories; git push origin --delete ${{ github.ref }}-testing-branch; git checkout test-node-modules; git checkout -b ${{ github.ref }}-testing-branch; git merge ${{ github.ref }}; git push origin;
       - run: npm ls
-      - run: | 
-          echo "chrome driver"
-          cd /usr/bin/chromedriver
-          ls
-      - run: |
-          echo "google-chrome"
-          cd /opt/google/chrome/google-chrome
-          ls
+      - run: echo $PATH
+      # - run: | 
+      #     echo "chrome driver"
+      #     cd /usr/bin/chromedriver
+      #     ls
+      # - run: |
+      #     echo "google-chrome"
+      #     cd /opt/google/chrome/google-chrome
+      #     ls
       - run: npm test --
       - run: cp node_modules.zip nodes.zip
       - run: rm -rf node_modules
