@@ -22,22 +22,22 @@ describe("html", function () {
 	
 	test("test html", async function () {
 		// example from selenium website:
-		// let driver = await new Builder().forBrowser('chrome').build();
-		// try {
-		// 	await driver.get('http://www.google.com/ncr');
-		// 	await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN);
-		// 	await driver.wait(until.titleIs('webdriver - Google Search'), 1000);
-		// } finally {
-		// 	await driver.quit();
-		// }
+		let driver = await new Builder().forBrowser('chrome').withDriverPath('/usr/bin/chromedriver.exe').build();
+		try {
+			await driver.get('http://www.google.com/ncr');
+			await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN);
+			await driver.wait(until.titleIs('webdriver - Google Search'), 1000);
+		} finally {
+			await driver.quit();
+		}
 		
-		var chromeCapabilities = webdriver.Capabilities.chrome();
-		//setting chrome options to start the browser fully maximized
-		var chromeOptions = {
-		    'args': [ '--start-maximized', "--headless", "--no-sandbox", "--window-size=1420,1080", "--disable-gpu", "--disable-dev-shm-usage", "disable-extensions", "--disable-infobars", "--remote-debugging-port=9222" ]
-		};
-		chromeCapabilities.set('chromeOptions', chromeOptions);
-		var driver = new webdriver.Builder().withDriverPath('/usr/bin/chromedriver.exe').withCapabilities(chromeCapabilities).build();
+		// var chromeCapabilities = webdriver.Capabilities.chrome();
+		// //setting chrome options to start the browser fully maximized
+		// var chromeOptions = {
+		//     'args': [ '--start-maximized', "--headless", "--no-sandbox", "--window-size=1420,1080", "--disable-gpu", "--disable-dev-shm-usage", "disable-extensions", "--disable-infobars", "--remote-debugging-port=9222" ]
+		// };
+		// chromeCapabilities.set('chromeOptions', chromeOptions);
+		// var driver = new webdriver.Builder().withCapabilities(chromeCapabilities).build();
 
 
 		
