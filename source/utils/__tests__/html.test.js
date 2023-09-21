@@ -5,9 +5,9 @@ Run with 'mocha examples/skill-sample-nodejs-hello-world/helloworld-tests.js'.
 */
 
 // // include the testing framework
-// var webdriver = require('selenium-webdriver');
+var webdriver = require('selenium-webdriver');
 // require('jest-environment-jsdom');
-const {Builder, By, Key, until} = require('selenium-webdriver');
+// const {Builder, By, Key, until} = require('selenium-webdriver');
 // from selenium import webdriver
 // from selenium.webdriver.chrome.options import Options
 
@@ -21,26 +21,28 @@ describe("html", function () {
 	});
 	
 	test("test html", async function () {
-		let driver = await new Builder().forBrowser('chrome').build();
-		try {
-			await driver.get('http://www.google.com/ncr');
-			await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN);
-			await driver.wait(until.titleIs('webdriver - Google Search'), 1000);
-		} finally {
-			await driver.quit();
-		}
+		// example from selenium website:
+		// let driver = await new Builder().forBrowser('chrome').build();
+		// try {
+		// 	await driver.get('http://www.google.com/ncr');
+		// 	await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN);
+		// 	await driver.wait(until.titleIs('webdriver - Google Search'), 1000);
+		// } finally {
+		// 	await driver.quit();
+		// }
+		
+		var chromeCapabilities = webdriver.Capabilities.chrome();
+		//setting chrome options to start the browser fully maximized
+		var chromeOptions = {
+		    'args': [ '--start-maximized', "--headless", "--no-sandbox", "--window-size=1420,1080", "--disable-gpu", "--disable-dev-shm-usage", "disable-extensions", "--disable-infobars", "--remote-debugging-port=9222" ]
+		};
+		chromeCapabilities.set('chromeOptions', chromeOptions);
+		var driver = new webdriver.Builder().withCapabilities(chromeCapabilities).build();
+
+
 		
 		// var searchString = "Automation testing with Selenium";
 		
-		// var chromeCapabilities = webdriver.Capabilities.chrome();
-		// //setting chrome options to start the browser fully maximized
-		// var chromeOptions = {
-		//     'args': [ '--start-maximized', "--headless", "--no-sandbox", "--window-size=1420,1080", "--disable-gpu", "--disable-dev-shm-usage", "--disable-extensions", "--disable-infobars", "--remote-debugging-port=9222" ]
-		// };
-		// chromeCapabilities.set('chromeOptions', chromeOptions);
-		// var driver = new webdriver.Builder().withCapabilities(chromeCapabilities).build();
-
-
 		// chrome_options = webdriver.ChromeOptions()
 		// chrome_options.add_argument('--no-sandbox')
 		// chrome_options.add_argument('--window-size=1420,1080')
