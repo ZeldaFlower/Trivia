@@ -21,7 +21,6 @@ describe("html", function () {
 	});
 	
 	test("test html", async function () {
-		System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver.exe")
 		let driver = await new Builder().forBrowser('chrome').build();
 		try {
 			await driver.get('http://www.google.com/ncr');
