@@ -37,7 +37,7 @@ describe("html", function () {
 		    'args': [ '--start-maximized', "--headless", "--no-sandbox", "--window-size=1420,1080", "--disable-gpu", "--disable-dev-shm-usage", "disable-extensions", "--disable-infobars", "--remote-debugging-port=9222" ]
 		};
 		chromeCapabilities.set('chromeOptions', chromeOptions);
-		var driver = new webdriver.Builder().withCapabilities(chromeCapabilities).build();
+		var driver = new webdriver.Builder().withDriverPath('/usr/bin/chromedriver.exe').withCapabilities(chromeCapabilities).build();
 
 
 		
