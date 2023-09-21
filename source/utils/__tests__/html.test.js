@@ -5,9 +5,9 @@ Run with 'mocha examples/skill-sample-nodejs-hello-world/helloworld-tests.js'.
 */
 
 // // include the testing framework
-var webdriver = require('selenium-webdriver');
+// var webdriver = require('selenium-webdriver');
 // require('jest-environment-jsdom');
-// const {Builder, By, Key, until} = require('selenium-webdriver');
+const {Builder, By, Key, until} = require('selenium-webdriver');
 // from selenium import webdriver
 // from selenium.webdriver.chrome.options import Options
 
