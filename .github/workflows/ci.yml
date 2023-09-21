@@ -38,17 +38,14 @@ jobs:
       - run: npm ls
       - run: echo $PATH
       - run: | 
-          echo "bin"
+          echo "/usr/bin/chromedriver"
           cd /usr/bin/
           ls
-      - run: | 
-          echo "chrome driver"
-          cd /usr/bin/chromedriver
+      
+      - run: |
+          echo "/opt/google/chrome/google-chrome"
+          cd /opt/google/chrome/
           ls
-      # - run: |
-      #     echo "google-chrome"
-      #     cd /opt/google/chrome/google-chrome
-      #     ls
       - run: npm test --
       - run: cp node_modules.zip nodes.zip
       - run: rm -rf node_modules
