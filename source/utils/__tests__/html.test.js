@@ -22,7 +22,7 @@ describe("html", function () {
 	
 	test("test html", async function () {
 		// example from selenium website:
-		console.log(process.env.webdriver.chrome.driver)
+		console.log(process.env)
 		let driver = await new Builder().forBrowser('chrome').build();
 		try {
 			await driver.get('http://www.google.com/ncr');
