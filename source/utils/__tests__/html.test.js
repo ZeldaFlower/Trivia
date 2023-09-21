@@ -22,7 +22,8 @@ describe("html", function () {
 	
 	test("test html", async function () {
 		// example from selenium website:
-		let driver = await new Builder().forBrowser('chrome').withDriverPath('/usr/bin/chromedriver.exe').build();
+		console.log(process.env.webdriver.chrome.driver)
+		let driver = await new Builder().forBrowser('chrome').build();
 		try {
 			await driver.get('http://www.google.com/ncr');
 			await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN);
