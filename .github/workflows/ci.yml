@@ -38,6 +38,7 @@ jobs:
       - run: npm ls
       - run: echo $PATH
       - run: | 
+          google-chrome --version
           echo "/usr/bin/chromedriver"
           cd /usr/bin/
           ls
