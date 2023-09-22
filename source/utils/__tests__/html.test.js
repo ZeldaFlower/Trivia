@@ -40,7 +40,7 @@ describe("html", function () {
 			await driver.wait(until.titleIs('webdriver - Google Search'), 1000);
 		} catch (e) {
 			for (let entry in driver.get_log('browser')) {
-    				print entry
+    				console.log(entry)
 			}
 			throw e;
 		] finally {
