@@ -23,7 +23,7 @@ describe("html", function () {
 	test("test html", async function () {
 		// example from selenium website:
 		console.log(process.env)
-		Builder builder = new Builder().forBrowser('firefox');
+		var builder = new Builder().forBrowser('firefox');
 		var capabilities = webdriver.Capabilities.firefox();
 		//setting chrome options to start the browser fully maximized
 		var options = {
