@@ -47,9 +47,7 @@ jobs:
           echo "/opt/google/chrome/google-chrome"
           cd /opt/google/chrome/
           ls
-      - env:
-          webdriver.chrome.driver: "/usr/bin/chromedriver"
-        run: npm test --
+      - run: npm test --
       - run: cp node_modules.zip nodes.zip
       - run: rm -rf node_modules
       - run: unzip nodes.zip
