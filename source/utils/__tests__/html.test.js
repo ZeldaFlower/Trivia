@@ -26,7 +26,7 @@ describe("html", function () {
 		var builder = new Builder().forBrowser('firefox');
 		var capabilities = Capabilities.firefox();
 		var options = {
-		    'args':  [ '--start-maximized', "--headless", "--no-sandbox", "--window-size=1420,1080", "--disable-gpu", "--disable-dev-shm-usage", "disable-extensions", "--disable-infobars", "--remote-debugging-port=9222" ]
+		    'args':  [ "--headless", "--no-sandbox", "--window-size=1420,1080", "--disable-gpu", "--disable-dev-shm-usage" ]
 		};
 
 		capabilities.set('firefoxOptions', options)
