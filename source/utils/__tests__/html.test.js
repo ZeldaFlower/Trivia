@@ -24,20 +24,25 @@ describe("html", function () {
 		// example from selenium website:
 		console.log(process.env)
 		var builder = new Builder().forBrowser('firefox');
-		// var capabilities = Capabilities.firefox();
-		// //setting chrome options to start the browser fully maximized
+		var capabilities = Capabilities.firefox();
 		var options = {
 		    'args':  [ '--start-maximized', "--headless", "--no-sandbox", "--window-size=1420,1080", "--disable-gpu", "--disable-dev-shm-usage", "disable-extensions", "--disable-infobars", "--remote-debugging-port=9222" ]
 		};
-		
-		builder.setFirefoxOptions(options);
+
+		capabilities.set('firefoxOptions', options)
+		capabilities['loggingPrefs'] = {'browser': 'ALL'}
+		builder.setCapabilities(capabilities);
 		
 		let driver = await builder.build();
 		try {
 			await driver.get('http://www.google.com/ncr');
 			await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN);
 			await driver.wait(until.titleIs('webdriver - Google Search'), 1000);
-		} finally {
+		} catch (e) {
+			for entry in driver.get_log('browser'):
+    				print entry	
+			throw e;
+		] finally {
 			await driver.quit();
 		}
 		
