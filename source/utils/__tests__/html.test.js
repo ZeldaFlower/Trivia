@@ -43,7 +43,7 @@ describe("html", function () {
     				console.log(entry)
 			}
 			throw e;
-		] finally {
+		} finally {
 			await driver.quit();
 		}
 		
