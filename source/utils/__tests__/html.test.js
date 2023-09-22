@@ -24,12 +24,13 @@ describe("html", function () {
 		// example from selenium website:
 		console.log(process.env)
 		var builder = new Builder().forBrowser('firefox');
-		var capabilities = Capabilities.firefox();
-		//setting chrome options to start the browser fully maximized
+		// var capabilities = Capabilities.firefox();
+		// //setting chrome options to start the browser fully maximized
 		var options = {
 		    'args': [ "--headless" ]
 		};
-		builder.withCapabilities(capabilities);
+		
+		builder.setFirefoxOptions(options);
 		
 		let driver = await builder.build();
 		try {
