@@ -38,17 +38,11 @@ jobs:
       - run: npm ls
       - run: echo $PATH
       - run: | 
-          echo "/usr/bin/chromedriver"
+          firefox -v
+          echo "/usr/bin/geckodriver"
           cd /usr/bin/
           ls
-      
-      - run: |
-          echo "/opt/google/chrome/google-chrome"
-          cd /opt/google/chrome/
-          ls
-      - env:
-          webdriver.chrome.driver: "/usr/bin/chromedriver"
-        run: npm test --
+      - run: npm test --
       - run: cp node_modules.zip nodes.zip
       - run: rm -rf node_modules
       - run: unzip nodes.zip
@@ -72,8 +66,8 @@ jobs:
       - run: git config --global user.name "Christine Koen through workflow"
       - name: create branch that has our zip
         run: git push origin --delete branch-${{ github.ref }}-with-zip; git checkout -b branch-${{ github.ref }}-with-zip; git add .; git commit -am"With Zip"; git push  --set-upstream origin branch-${{ github.ref }}-with-zip;
-      - if: always()
-        run: |
-          ls
-          cat geckodriver.log
+      # - if: always()
+      #   run: |
+      #     ls
+      #     cat geckodriver.log
 
