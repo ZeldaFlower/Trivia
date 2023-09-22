@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "jest-cli": "^27.0.6",
-    "selenium-webdriver": "^4.12.0",
+    "selenium-webdriver": "^4.11.0",
     "jest-environment-jsdom": "^27.0.6",
     "alexa-skill-test-framework": "^1.2.4"
   }

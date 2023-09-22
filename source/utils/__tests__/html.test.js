@@ -21,16 +21,15 @@ describe("html", function () {
 	});
 	
 	test("test html", async function () {
-		// example from selenium website:
 		console.log(process.env)
-		var builder = new Builder().forBrowser('firefox');
-		var capabilities = Capabilities.firefox();
-		//setting chrome options to start the browser fully maximized
+		var builder = new Builder().forBrowser('chrome');
+		var capabilities = Capabilities.chrome();
 		var options = {
 		    'args': [ "--headless" ]
 		};
 		builder.withCapabilities(capabilities);
 		
+		// example from selenium website:
 		let driver = await builder.build();
 		try {
 			await driver.get('http://www.google.com/ncr');
