@@ -27,7 +27,7 @@ describe("html", function () {
 		var capabilities = Capabilities.firefox();
 		//setting chrome options to start the browser fully maximized
 		var options = {
-		    'args': [ '--start-maximized', "--headless", "--no-sandbox", "--window-size=1420,1080", "--disable-gpu", "--disable-dev-shm-usage", "disable-extensions", "--disable-infobars", "--remote-debugging-port=9222" ]
+		    'args': [ "--headless" ]
 		};
 		builder.withCapabilities(capabilities);
 		
