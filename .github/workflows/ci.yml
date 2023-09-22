@@ -27,7 +27,7 @@ jobs:
       - run: npm install mocha@3.5.3
       # - run: npm install alexa-skill-test-framework --save-dev
 
-      - run: npm install --save-dev selenium-webdriver@4.11.0
+      - run: npm install --save-dev selenium-webdriver@4.12.0
       - run: npm install --save-dev jest-environment-jsdom
 #       - run: git branch
 #       - run: cd node_modules;ls; cd aws-sdk; ls; cd dynamodb; cd src; ls; libs; ls
