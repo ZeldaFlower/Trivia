@@ -7,7 +7,7 @@ Run with 'mocha examples/skill-sample-nodejs-hello-world/helloworld-tests.js'.
 // // include the testing framework
 // var webdriver = require('selenium-webdriver');
 // require('jest-environment-jsdom');
-const {Builder, By, Key, until} = require('selenium-webdriver');
+const {Builder, By, Key, until, Capabilities} = require('selenium-webdriver');
 // from selenium import webdriver
 // from selenium.webdriver.chrome.options import Options
 
@@ -24,7 +24,7 @@ describe("html", function () {
 		// example from selenium website:
 		console.log(process.env)
 		var builder = new Builder().forBrowser('firefox');
-		var capabilities = webdriver.Capabilities.firefox();
+		var capabilities = Capabilities.firefox();
 		//setting chrome options to start the browser fully maximized
 		var options = {
 		    'args': [ '--start-maximized', "--headless", "--no-sandbox", "--window-size=1420,1080", "--disable-gpu", "--disable-dev-shm-usage", "disable-extensions", "--disable-infobars", "--remote-debugging-port=9222" ]
