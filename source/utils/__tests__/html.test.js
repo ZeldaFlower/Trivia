@@ -39,6 +39,7 @@ describe("html", function () {
 			await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN);
 			await driver.wait(until.titleIs('webdriver - Google Search'), 1000);
 		} catch (e) {
+			console.log("Hi!!!")
 			for (let entry in driver.get_log('browser')) {
     				console.log(entry)
 			}
