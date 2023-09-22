@@ -32,9 +32,9 @@ describe("html", function () {
 		capabilities.set('firefoxOptions', options)
 		capabilities['loggingPrefs'] = {'browser': 'ALL'}
 		builder.withCapabilities(capabilities);
-		
+		let driver
 		try {
-			let driver = await builder.build();
+			driver = await builder.build();
 			await driver.get('http://www.google.com/ncr');
 			await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN);
 			await driver.wait(until.titleIs('webdriver - Google Search'), 1000);
