@@ -31,7 +31,7 @@ describe("html", function () {
 
 		capabilities.set('firefoxOptions', options)
 		capabilities['loggingPrefs'] = {'browser': 'ALL'}
-		builder.setCapabilities(capabilities);
+		builder.withCapabilities(capabilities);
 		
 		let driver = await builder.build();
 		try {
