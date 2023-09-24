@@ -9,6 +9,7 @@ Run with 'mocha examples/skill-sample-nodejs-hello-world/helloworld-tests.js'.
 // require('jest-environment-jsdom');
 const {Builder, By, Key, until, Capabilities} = require('selenium-webdriver');
 const firefox = require('selenium-webdriver/firefox');
+import { strict as assert } from 'node:assert';
 // from selenium import webdriver
 // from selenium.webdriver.chrome.options import Options
 
@@ -38,9 +39,12 @@ describe("html", function () {
 		let driver
 		try {
 			driver = await builder.build();
-			await driver.get('http://www.google.com/ncr');
-			await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN);
-			await driver.wait(until.titleIs('webdriver - Google Search'), 1000);
+			await driver.get('https://s3.amazonaws.com/christine-trivia/index.html');
+			var title = driver.findElement(By.xpath('body > div:nth-child(1) > h2')).getAttribute('innerHTML');
+			assert.strictEqual(title, "Christine Trivia");
+			assert.strictEqual(title, "sdfsfddsf");
+			// await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN);
+			// await driver.wait(until.titleIs('webdriver - Google Search'), 1000);
 			// driver.get('https://s3.amazonaws.com/christine-trivia/index.html');
 		} catch (e) {
 			console.log("Hi!!!")
