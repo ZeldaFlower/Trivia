@@ -41,8 +41,11 @@ describe("html", function () {
 			// driver.get('https://s3.amazonaws.com/christine-trivia/index.html');
 		} catch (e) {
 			console.log("Hi!!!")
-			for (let entry in driver.get_log('browser')) {
-    				console.log(entry)
+			if (driver) {
+			console.log(" driver logs:")
+				for (let entry in driver.get_log('browser')) {
+	    				console.log(entry)
+				}
 			}
 			throw e;
 		} finally {
