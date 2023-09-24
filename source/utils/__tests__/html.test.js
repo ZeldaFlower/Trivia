@@ -40,7 +40,7 @@ describe("html", function () {
 		try {
 			driver = await builder.build();
 			await driver.get('https://s3.amazonaws.com/christine-trivia/index.html');
-			var title = driver.findElement(By.xpath('body > div:nth-child(1) > h2')).getAttribute('innerHTML').text;
+			var title = await driver.findElement(By.xpath('body > div:nth-child(1) > h2')).getAttribute('innerHTML').text;
 			console.log(title)
 			assert.strictEqual(title, "Christine Trivia");
 			assert.strictEqual(title, "sdfsfddsf");
