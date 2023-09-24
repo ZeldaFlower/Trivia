@@ -27,7 +27,7 @@ describe("html", function () {
 			console.log(title)
 			assert.equal(title, "Christine Trivia");
 
-			await driver.findElement(By.xpath(*[@id="LoginWithAmazon"])).click();
+			await driver.findElement(By.xpath('*[@id="LoginWithAmazon"'])).click();
 
 
 	
