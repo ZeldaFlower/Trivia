@@ -9,7 +9,7 @@ Run with 'mocha examples/skill-sample-nodejs-hello-world/helloworld-tests.js'.
 // require('jest-environment-jsdom');
 const {Builder, By, Key, until, Capabilities} = require('selenium-webdriver');
 const firefox = require('selenium-webdriver/firefox');
-import { strict as assert } from 'node:assert';
+const assert = require('node:assert');
 // from selenium import webdriver
 // from selenium.webdriver.chrome.options import Options
 
