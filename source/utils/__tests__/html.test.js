@@ -26,7 +26,8 @@ describe("html", function () {
 			// var title = driver.findElement(By.xpath('/html/body/div[1]/h2'));//.getAttribute('innerHTML').text;
 			console.log(title)
 			assert.equal(title, "Christine Trivia");
-
+			
+			await driver.wait(until.elementIsVisible(driver.findElement(By.id('LoginWithAmazon'))), 1000).getAttribute('innerHTML');
 			await driver.findElement(By.id('LoginWithAmazon')).click();
 
 
