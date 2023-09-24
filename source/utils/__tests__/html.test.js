@@ -42,8 +42,7 @@ describe("html", function () {
 			await driver.get('https://s3.amazonaws.com/christine-trivia/index.html');
 			var title = await driver.findElement(By.xpath('body > div:nth-child(1) > h2')).getAttribute('innerHTML').text;
 			console.log(title)
-			assert.strictEqual(title, "Christine Trivia");
-			assert.strictEqual(title, "sdfsfddsf");
+			assert.equal(title, "Christine Trivia");
 			// await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN);
 			// await driver.wait(until.titleIs('webdriver - Google Search'), 1000);
 			// driver.get('https://s3.amazonaws.com/christine-trivia/index.html');
