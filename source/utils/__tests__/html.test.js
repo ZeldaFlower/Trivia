@@ -19,19 +19,19 @@ describe("html", function () {
 		let driver
 		try {
 			driver = await builder.build();
-			await driver.get('http://www.google.com/ncr');
-			await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN);
-			await driver.wait(until.titleIs('webdriver - Google Search'), 1000);
-			
 			await driver.get('https://s3.amazonaws.com/christine-trivia/index.html');
 			
-			// await driver.wait(until.titleIs('s3.amazonaws.com/christine-trivia/index.html'), 1000);
-			// var title = await driver.findElement(By.xpath('body > div:nth-child(1) > h2')).getAttribute('innerHTML').text;
-			// console.log(title)
-			// assert.equal(title, "Christine Trivia");
+			var title = await driver.findElement(By.xpath('/html/body/div[1]/h2')).getAttribute('innerHTML').text;
+			console.log(title)
+			assert.equal(title, "Christine Trivia");
 			// await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN);
 			// await driver.wait(until.titleIs('webdriver - Google Search'), 1000);
 			// driver.get('https://s3.amazonaws.com/christine-trivia/index.html');
+			
+			// await driver.get('http://www.google.com/ncr');
+			// await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN);
+			// await driver.wait(until.titleIs('webdriver - Google Search'), 1000);
+			
 		} catch (e) {
 			console.log("Hi!!!")
 			// if (driver) {
