@@ -8,6 +8,7 @@ Run with 'mocha examples/skill-sample-nodejs-hello-world/helloworld-tests.js'.
 // var webdriver = require('selenium-webdriver');
 // require('jest-environment-jsdom');
 const {Builder, By, Key, until, Capabilities} = require('selenium-webdriver');
+const firefox = require('selenium-webdriver/firefox');
 // from selenium import webdriver
 // from selenium.webdriver.chrome.options import Options
 
@@ -24,14 +25,16 @@ describe("html", function () {
 		// example from selenium website:
 		console.log(process.env)
 		var builder = new Builder().forBrowser('firefox');
-		var capabilities = Capabilities.firefox();
-		var options = {
-		    'args':  [ "--headless", "--no-sandbox", "--window-size=1420,1080", "--disable-gpu", "--disable-dev-shm-usage" ]
-		};
+		// var capabilities = Capabilities.firefox();
+		// var options = {
+		//     'args':  [ "--headless", "--no-sandbox", "--window-size=1420,1080", "--disable-gpu", "--disable-dev-shm-usage" ]
+		// };
 
-		capabilities.set('firefoxOptions', options)
-		capabilities['loggingPrefs'] = {'browser': 'ALL'}
-		builder.withCapabilities(capabilities);
+		// capabilities.set('firefoxOptions', options)
+		// capabilities['loggingPrefs'] = {'browser': 'ALL'}
+		// builder.withCapabilities(capabilities);
+		var options = firefox.Options();
+		builder.setFirefoxOptions(options.addArguments('--headless'));
 		let driver
 		try {
 			driver = await builder.build();
