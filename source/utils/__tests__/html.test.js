@@ -46,7 +46,9 @@ describe("html", function () {
 			}
 			throw e;
 		} finally {
-			await driver.quit();
+			if (driver) {
+				await driver.quit();
+			}
 		}
 		
 		// var chromeCapabilities = webdriver.Capabilities.chrome();
