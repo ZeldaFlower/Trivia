@@ -21,8 +21,8 @@ describe("html", function () {
 			driver = await builder.build();
 			await driver.get('https://s3.amazonaws.com/christine-trivia/index.html');
 			
-			let title = driver.wait(until.elementIsVisible(By.xpath('/html/body/div[1]/h2')), 1000);
-			// var title = driver.findElement(By.xpath('/html/body/div[1]/h2'));//.getAttribute('innerHTML').text;
+			await driver.wait(until.elementIsVisible(By.xpath('/html/body/div[1]/h2')), 1000);
+			var title = driver.findElement(By.xpath('/html/body/div[1]/h2'));//.getAttribute('innerHTML').text;
 			console.log(title)
 			assert.equal(title, "Christine Trivia");
 			// await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN);
