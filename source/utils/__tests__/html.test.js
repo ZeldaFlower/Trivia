@@ -33,7 +33,7 @@ describe("html", function () {
 		// capabilities.set('firefoxOptions', options)
 		// capabilities['loggingPrefs'] = {'browser': 'ALL'}
 		// builder.withCapabilities(capabilities);
-		var options = firefox.Options();
+		let options = new firefox.Options();
 		builder.setFirefoxOptions(options.addArguments('--headless'));
 		let driver
 		try {
