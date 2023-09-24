@@ -21,7 +21,7 @@ jobs:
 #           ls ${{ github.workspace }}
 #       - run: cat package.json 
 #       - run: zip -r index.zip *
-      - run: ls
+      # - run: ls
       # - run: npm install --save-dev jest-cli@22.4.3
       # - run: npm install aws-sdk
       - run: npm install mocha@3.5.3
@@ -35,13 +35,7 @@ jobs:
 #       - name: merge current branch with jest aws mocha and alexa skill test framework to test
 #         run: |
 #           git pull origin test-node-modules --allow-unrelated-histories; git push origin --delete ${{ github.ref }}-testing-branch; git checkout test-node-modules; git checkout -b ${{ github.ref }}-testing-branch; git merge ${{ github.ref }}; git push origin;
-      - run: npm ls
-      - run: echo $PATH
-      - run: | 
-          firefox -v
-          echo "/usr/bin/geckodriver"
-          cd /usr/bin/
-          ls
+      # - run: npm ls
       - run: npm test --
       - run: cp node_modules.zip nodes.zip
       - run: rm -rf node_modules
