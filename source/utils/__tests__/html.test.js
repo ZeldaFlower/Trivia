@@ -1,3 +1,4 @@
+
 const {Builder, By, Key, until, Capabilities} = require('selenium-webdriver');
 const firefox = require('selenium-webdriver/firefox');
 const assert = require('node:assert');
@@ -25,6 +26,11 @@ describe("html", function () {
 			// var title = driver.findElement(By.xpath('/html/body/div[1]/h2'));//.getAttribute('innerHTML').text;
 			console.log(title)
 			assert.equal(title, "Christine Trivia");
+
+			await driver.findElement(By.xpath(*[@id="LoginWithAmazon"])).click();
+
+
+	
 			// await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN);
 			// await driver.wait(until.titleIs('webdriver - Google Search'), 1000);
 			// driver.get('https://s3.amazonaws.com/christine-trivia/index.html');
