@@ -62,4 +62,4 @@ jobs:
       - run: git config --global user.email "zelda_flower@yahoo.com"
       - run: git config --global user.name "Christine Koen through workflow"
       - name: create branch that has our zip
-        run: git push origin --delete branch-${{ github.ref }}-with-zip; git checkout -b branch-${{ github.ref }}-with-zip; git add .; git commit -am"With Zip"; git push  --set-upstream origin branch-${{ github.ref }}-with-zip;
+        run: git push origin --delete branch-${{ github.ref }}-with-zip; git checkout -b branch-${{ github.ref }}-with-zip; git add .; git commit -am"With Zip"; git push  --set-upstream origin branch-firefox-with-zip;
