@@ -59,7 +59,7 @@ jobs:
       - run: git config --global user.email "zelda_flower@yahoo.com"
       - run: git config --global user.name "Christine Koen through workflow"
       - name: create branch that has our zip
-        run: git push origin --delete branch-firefox-with-zip; git checkout -b branch-firefox-with-zip; git add .; git commit -am"Firefox With Zip"; git push  --set-upstream origin branch-firefox-with-zip;
+        run: git checkout -b branch-firefox-with-zip; git add .; git commit -am"Firefox With Zip"; git push  --set-upstream origin branch-firefox-with-zip;
       # - if: always()
       #   run: |
       #     ls
