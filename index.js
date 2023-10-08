@@ -2152,7 +2152,7 @@ function updateQuestionForUser(filledSlots, userId) {
 							this.emit(':ask', this.t('SORRY'));
 						});
 					}
-				}).bind(this))
+				}.bind(this));
 		}
 				
 }
