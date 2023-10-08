@@ -524,6 +524,35 @@ console.log(this)
 		}
 		console.log(this.event)
     },
+	
+    'UpdateQuestion': function () {
+  		var filledSlots = delegateSlotCollection.call(this);
+		var { userId, accessToken } = this.event.session.user;
+		if (!accessToken) {
+			console.log("no token")
+			//this.emit(':ask', 'Please link your Account so I can email you the web link.');
+			updateQuestionForUser.call(this, filledSlots, userId);
+		} else {
+			console.log("token")
+			const options = {
+				url: 'https://api.amazon.com/user/profile?access_token=' + accessToken,
+				method: 'GET',
+				headers: {
+					'Accept': 'application/json',
+					Authorization: "Bearer " + this.event.context.System.apiAccessToken
+				}
+			};
+			request(options, (error, response, body) => {//TODO: request error
+				if (!error && response.statusCode === 200) {
+					let data = JSON.parse(body); // Store the data we got from the API request
+					console.log(data)
+					userId = data.user_id
+					updateQuestionForUser.call(this, filledSlots, userId);
+				}
+			})
+		}
+		console.log(this.event)
+    },
 
     'UpdateFood': function () {
 		var filledSlots = delegateSlotCollection.call(this);
@@ -2023,6 +2052,90 @@ console.log(filledSlots)
 		console.error(err);
 		this.emit(':ask', this.t('SORRY'));
 	});
+		}
+}
+
+function updateQuestionForUser(filledSlots, userId) {
+	//
+	if (filledSlots != undefined) {
+		
+		console.log("updating question")
+		console.log(filledSlots)
+		const question = filledSlots.slots.question.value; //  Out of the following, what is a tomato? 
+		const newQuestion = filledSlots.slots.newQuestion.value; //  out of the following what is lettuce?
+		const category = filledSlots.slots.category.value;// food
+		const answers = filledSlots.slots.answers.value;// Fruit, vegetable, meat, dairy
+		const correctAnswer = filledSlots.slots.correctAnswer.value; // 2
+		const answersList = answers.split(" ");	
+
+		
+
+		/// same as above for adding a question, make method
+		var finalQuestion= newQuestion
+		for (var i=1; i<=answersList.length; i++) {
+			finalQuestion = finalQuestion +" "+ i + ") "+ answersList[i-1];
+		}
+		var answer=1
+		if (correctAnswer == 2 || correctAnswer instanceof String && correctAnswer.toLowerCase() == "two") {
+		 answer=2
+		} else 
+		if (correctAnswer == 3 || correctAnswer instanceof String && correctAnswer.toLowerCase() == "three") {
+		 answer=3
+		} else 
+		if (correctAnswer == 4 || correctAnswer instanceof String && correctAnswer.toLowerCase() == "four") {
+		 answer=4
+		}
+		// TODO: retrieve from db category info userID+category
+		var questionNumber = "1"
+		dbGet({
+			TableName: "trivia", 
+			Key: {
+				triviaID: userId+category.toLowerCase()
+			}}).then(function(item) {
+				if (!item){
+					item = {
+						TableName: "trivia",
+						Item: {
+						  triviaID: userId+"1",
+						  questionKeys: userId+category.toLowerCase()+"1"
+						}
+					}
+				} else {
+					questionNumber = item.Item.questionKeys.length+1
+					item.Item.questionKeys += ", "+userId+category.toLowerCase()+questionNumber
+				}
+				// increment and add to list, and save
+				dbPut({TableName: "trivia", Item: item.Item}).then(function(){
+					// then save trivia too
+					var dynamoParams = {
+						TableName: "trivia",
+						Item: {
+						triviaID: userId+category.toLowerCase()+questionNumber,
+						category: category,
+						question: finalQuestion,
+						answerNumber: answer,
+						answer: answersList[answer-1],
+						updated: Date.now()
+						}
+					};
+					console.log("!!!");
+					console.log(dynamoParams);		
+					checkIfUserExists.call(this, userId).then(function (existingData) {
+						var existingItem = existingData.Item;
+						// tell which you already have, and what added, number added
+						putParamsAndMessage.call(this, dynamoParams, "Added your question '"+question+"' with category "+category+", answers: "+answers+" and correct answer "+correctAnswer+".")//, ":tellWithCard", this.t('TRIVIA_INFO_TITLE'));
+				
+					}.bind(this)).catch(err => {
+						console.error(err);
+						console.error("failed here - 1")
+						this.emit(':ask', this.t('SORRY'));
+					});
+				}.bind(this)).catch(err => {
+					console.error(err);
+					console.error("failed here - 2")
+					this.emit(':ask', this.t('SORRY'));
+				});
+			}.bind(this))
 		}
 }
 
