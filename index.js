@@ -2104,40 +2104,60 @@ function updateQuestionForUser(filledSlots, userId) {
 					questionNumber = item.Item.questionKeys.length+1
 					item.Item.questionKeys += ", "+userId+category.toLowerCase()+questionNumber
 				}
-				// increment and add to list, and save
-				dbPut({TableName: "trivia", Item: item.Item}).then(function(){
-					// then save trivia too
-					var dynamoParams = {
-						TableName: "trivia",
-						Item: {
-						triviaID: userId+category.toLowerCase()+questionNumber,
-						category: category,
-						question: finalQuestion,
-						answerNumber: answer,
-						answer: answersList[answer-1],
-						updated: Date.now()
-						}
-					};
-					console.log("!!!");
-					console.log(dynamoParams);		
-					checkIfUserExists.call(this, userId).then(function (existingData) {
-						var existingItem = existingData.Item;
-						// tell which you already have, and what added, number added
-						putParamsAndMessage.call(this, dynamoParams, "Added your question '"+question+"' with category "+category+", answers: "+answers+" and correct answer "+correctAnswer+".")//, ":tellWithCard", this.t('TRIVIA_INFO_TITLE'));
-				
-					}.bind(this)).catch(err => {
-						console.error(err);
-						console.error("failed here - 1")
-						this.emit(':ask', this.t('SORRY'));
-					});
-				}.bind(this)).catch(err => {
-					console.error(err);
-					console.error("failed here - 2")
-					this.emit(':ask', this.t('SORRY'));
-				});
-			}.bind(this))
+				var keyList = item.Item.questionKeys.split(', ')
+				for(let key in keyList) {
+					dbGet({
+						TableName: "trivia", 
+						Key: {
+							triviaID: userId+category.toLowerCase()
+						}}).then(function(item) {
+							if (!item){
+								this.emit(':ask', this.t('Question does not exist!'));
+							} else {
+								dbPut({TableName: "trivia", Item: item.Item}).then(function(){
+								// then save trivia too
+								var dynamoParams = {
+									TableName: "trivia",
+									Item: {
+									triviaID: userId+category.toLowerCase()+questionNumber,
+									category: category,
+									question: finalQuestion,
+									answerNumber: answer,
+									answer: answersList[answer-1],
+									updated: Date.now()
+									}
+								};
+								console.log("!!!");
+								console.log(dynamoParams);		
+								checkIfUserExists.call(this, userId).then(function (existingData) {
+									var existingItem = existingData.Item;
+									// tell which you already have, and what added, number added
+									putParamsAndMessage.call(this, dynamoParams, "Added your question '"+newQuestion+"' with category "+category+", answers: "+answers+" and correct answer "+correctAnswer+".")//, ":tellWithCard", this.t('TRIVIA_INFO_TITLE'));
+							
+								}.bind(this)).catch(err => {
+									console.error(err);
+									console.error("failed here - 1")
+									this.emit(':ask', this.t('SORRY'));
+								});
+							}.bind(this)).catch(err => {
+								console.error(err);
+								console.error("failed here - 2")
+								this.emit(':ask', this.t('SORRY'));
+							});
+
+							}
+						}.bind(this)).catch(err => {
+							console.error(err);
+							console.error("failed here - 2")
+							this.emit(':ask', this.t('SORRY'));
+						});
+					}
+				}).bind(this))
 		}
+				
 }
+		
+
 
 function updateFoodForUser(filledSlots, userId) {
 	if (filledSlots != undefined){
