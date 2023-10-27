@@ -24,9 +24,9 @@ describe("html", function () {
 			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="Search"]'))), 1000).sendKeys('webdriver', 'carrots');
 			await driver.findElement(By.xpath('//*[@id="Search"]')).sendKeys('webdriver', Key.RETURN);
 
+			await driver.wait(until.titleIs("Search for carrots - Sam's Club"), 1000);
 			
-			console.log(document.body)
-			await driver.wait(until.elementIsVisible(driver.findElement(By.className("sc-pc-medium-desktop-card-canary-product-link"))), 1000).click();
+			await driver.wait(until.elementIsVisible(driver.findElement(By.css(".sc-pc-medium-desktop-card-canary-product-link"))), 5000).click();
 			
 			// var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[1]'))), 1000);
 			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="page-title"]'))), 1000);
