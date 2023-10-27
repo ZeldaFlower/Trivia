@@ -21,10 +21,9 @@ describe("html", function () {
 		try {
 			driver = await builder.build();
 			await driver.get('https://www.samsclub.com/');
-			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="Search"]'))), 1000).sendKeys('webdriver', 'carrots');
-			await driver.findElement(By.xpath('//*[@id="Search"]')).sendKeys('webdriver', Key.RETURN);
-
-			await driver.wait(until.titleIs("Search for carrots - Sam's Club"), 1000);
+			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="Search"]'))), 1000).sendKeys('carrots', Key.RETURN);
+			// await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="Search"]'))), 1000)
+			await driver.wait(until.titleIs("Search for carrots - Sam's Club"), 5000);
 			
 			await driver.wait(until.elementIsVisible(driver.findElement(By.css(".sc-pc-medium-desktop-card-canary-product-link"))), 5000).click();
 			
