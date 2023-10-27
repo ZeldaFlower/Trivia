@@ -20,16 +20,26 @@ describe("html", function () {
 		let driver
 		try {
 			driver = await builder.build();
-			await driver.get('https://s3.amazonaws.com/christine-trivia/index.html');
+			await driver.get('https://www.samsclub.com/');
+			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="Search"]'))), 1000).sendKeys('webdriver', 'carrots');
+			await driver.findElement(By.name('//*[@id="Search"]')).sendKeys('webdriver', Key.RETURN);
 			
-			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('/html/body/div[1]/h2'))), 1000).getAttribute('innerHTML');
-			// var title = driver.findElement(By.xpath('/html/body/div[1]/h2'));//.getAttribute('innerHTML').text;
-			console.log(title)
-			assert.equal(title, "Christine Trivia");
-			
-			await driver.wait(until.elementIsVisible(driver.findElement(By.id('LoginWithAmazon'))), 1000).getAttribute('innerHTML');
-			await driver.findElement(By.id('LoginWithAmazon')).click();
+			await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="main"]/div/div[4]/div/div[1]/div/ul/li[1]/div/a'))), 1000).click();
 
+			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[1]'))), 1000);
+			assert.contains(title.toLowerCase(), "carrots");
+			
+			//Tested
+			// await driver.get('https://s3.amazonaws.com/christine-trivia/index.html');
+			
+			// var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('/html/body/div[1]/h2'))), 1000).getAttribute('innerHTML');
+			// // var title = driver.findElement(By.xpath('/html/body/div[1]/h2'));//.getAttribute('innerHTML').text;
+			// console.log(title)
+			// assert.equal(title, "Christine Trivia");
+			
+			// await driver.wait(until.elementIsVisible(driver.findElement(By.id('LoginWithAmazon'))), 1000).getAttribute('innerHTML');
+			// await driver.findElement(By.id('LoginWithAmazon')).click();
+//end tested
 
 	
 			// await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN);
