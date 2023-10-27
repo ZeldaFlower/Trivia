@@ -25,9 +25,10 @@ describe("html", function () {
 			await driver.findElement(By.xpath('//*[@id="Search"]')).sendKeys('webdriver', Key.RETURN);
 
 			console.log(document)
-			await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="main"]/div/div[4]/div/div[1]/div/ul/li[1]/div/a'))), 1000).click();
-
-			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[1]'))), 1000);
+			await driver.wait(until.elementIsVisible(document.querySelector('#main > div > div.sc-plp-layout > div > div.sc-plp-cards.sc-plp-cards-grid > div > ul > li:nth-child(1) > div > a > div.sc-pc-title-medium.title-medium-desktop-canary')), 1000).click();
+			
+			// var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[1]'))), 1000);
+			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="page-title"]'))), 1000);
 			assert.contains(title.toLowerCase(), "carrots");
 			
 			//Tested
