@@ -24,7 +24,7 @@ describe("html", function () {
 			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="Search"]'))), 1000).sendKeys('webdriver', 'carrots');
 			await driver.findElement(By.xpath('//*[@id="Search"]')).sendKeys('webdriver', Key.RETURN);
 
-			await driver.wait(until.elementIsVisible(driver.findElement(By.PARTIAL_LINK_TEXT, "carrots")), 1000).click();
+			await driver.wait(until.elementIsVisible(driver.findElement(By.partialLinkText("carrots")), 1000).click();
 			
 			// var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[1]'))), 1000);
 			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="page-title"]'))), 1000);
