@@ -23,7 +23,8 @@ describe("html", function () {
 			await driver.get('https://www.samsclub.com/');
 			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="Search"]'))), 1000).sendKeys('webdriver', 'carrots');
 			await driver.findElement(By.xpath('//*[@id="Search"]')).sendKeys('webdriver', Key.RETURN);
-			
+
+			console.log(document)
 			await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="main"]/div/div[4]/div/div[1]/div/ul/li[1]/div/a'))), 1000).click();
 
 			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[1]'))), 1000);
