@@ -29,6 +29,8 @@ describe("html", function () {
 			//*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[1]/h1
 			// var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[1]'))), 1000);
 			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[1]/h1'))), 5000);
+			
+			await driver.wait(until.elementIsVisible(driver.findElement(By.css('bst-btn'))), 5000);
 			console.log(title)
 			// assert.contains(title, "carrots");
 			await driver.findElement(By.css('bst-btn')).click();
@@ -39,7 +41,8 @@ describe("html", function () {
 			await driver.wait(until.elementIsVisible(driver.findElement(By.css(".sc-pc-title-medium"))), 5000).click();
 
 			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[1]/h1'))), 5000);
-
+			await driver.wait(until.elementIsVisible(driver.findElement(By.css('bst-btn'))), 5000);
+			
 			await driver.findElement(By.css('bst-btn')).click();
 			await driver.findElement(By.css('bst-btn-secondary')).click(); // continue shopping
 			
