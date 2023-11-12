@@ -32,6 +32,10 @@ describe("html", function () {
 			console.log(title)
 			// assert.contains(title, "carrots");
 			driver.findElement(By.css('bst-btn')).click();
+			driver.findElement(By.css('bst-btn-secondary')).click();
+
+
+			
 			assert.equals(true,false);
 			
 			//Tested
