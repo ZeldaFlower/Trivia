@@ -29,7 +29,8 @@ describe("html", function () {
 			
 			// var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[1]'))), 1000);
 			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[1]/h1'))), 1000);
-			assert.contains(title.toLowerCase(), "carrots");
+			console.log(title)
+			assert.contains(title.innerHTML().toLowerCase(), "carrots");
 			
 			//Tested
 			// await driver.get('https://s3.amazonaws.com/christine-trivia/index.html');
