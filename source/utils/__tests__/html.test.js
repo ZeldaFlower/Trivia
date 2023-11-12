@@ -31,8 +31,8 @@ describe("html", function () {
 			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[1]/h1'))), 5000);
 			console.log(title)
 			// assert.contains(title, "carrots");
-			driver.findElement(By.css('bst-btn')).click();
-			driver.findElement(By.css('bst-btn-secondary')).click();
+			await driver.findElement(By.css('bst-btn')).click();
+			await driver.findElement(By.css('bst-btn-secondary')).click();
 
 			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="Search"]'))), 1000).sendKeys('broccoli florets', Key.RETURN);
 			await driver.wait(until.titleIs("Sam's Club"), 5000);
@@ -40,8 +40,8 @@ describe("html", function () {
 
 			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[1]/h1'))), 5000);
 
-			driver.findElement(By.css('bst-btn')).click();
-			driver.findElement(By.css('bst-btn-secondary')).click(); // continue shopping
+			await driver.findElement(By.css('bst-btn')).click();
+			await driver.findElement(By.css('bst-btn-secondary')).click(); // continue shopping
 			
 			assert.equals(true,false);
 			
