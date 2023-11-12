@@ -28,7 +28,7 @@ describe("html", function () {
 			await driver.wait(until.elementIsVisible(driver.findElement(By.css(".sc-plp-cards-card-first-row-item"))), 5000).click();
 			
 			// var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[1]'))), 1000);
-			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="page-title"]'))), 1000);
+			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[1]/h1'))), 1000);
 			assert.contains(title.toLowerCase(), "carrots");
 			
 			//Tested
