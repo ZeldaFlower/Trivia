@@ -38,7 +38,7 @@ describe("html", function () {
 
 			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="Search"]'))), 1000).sendKeys('broccoli florets', Key.RETURN);
 			await driver.wait(until.titleIs("Sam's Club"), 5000);
-			await driver.wait(until.elementIsVisible(driver.findElement(By.css(".sc-plp-cards-card-first-row-item"))), 5000).click();
+			await driver.wait(until.elementIsVisible(driver.findElement(By.css(".sc-pc-title-medium"))), 5000).click();
 
 			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[1]/h1'))), 5000);
 			await driver.wait(until.elementIsVisible(driver.findElement(By.css('bst-btn'))), 5000);
