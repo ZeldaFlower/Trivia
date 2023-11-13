@@ -21,20 +21,20 @@ describe("html", function () {
 		try {
 			driver = await builder.build();
 			await driver.get('https://www.samsclub.com/');
-			// var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="Search"]'))), 1000).sendKeys('carrots', Key.RETURN);
-			// // await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="Search"]'))), 1000)
-			// await driver.wait(until.titleIs("Search for carrots - Sam's Club"), 5000);
+			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="Search"]'))), 1000).sendKeys('carrots', Key.RETURN);
+			// await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="Search"]'))), 1000)
+			await driver.wait(until.titleIs("Search for carrots - Sam's Club"), 5000);
 			
-			// await driver.wait(until.elementIsVisible(driver.findElement(By.css(".sc-plp-cards-card-first-row-item"))), 5000).click();
-			// //*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[1]/h1
-			// // var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[1]'))), 1000);
-			// var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[1]/h1'))), 5000);
+			await driver.wait(until.elementIsVisible(driver.findElement(By.css(".sc-plp-cards-card-first-row-item"))), 5000).click();
+			//*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[1]/h1
+			// var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[1]'))), 1000);
+			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[1]/h1'))), 5000);
 			
-			// await driver.wait(until.elementIsVisible(driver.findElement(By.css('bst-btn'))), 5000);
-			// console.log(title)
-			// // assert.contains(title, "carrots");
-			// await driver.findElement(By.css('bst-btn')).click();
-			// await driver.findElement(By.css('bst-btn-secondary')).click();
+			await driver.wait(until.elementIsVisible(driver.findElement(By.css('bst-btn'))), 5000);
+			console.log(title)
+			// assert.contains(title, "carrots");
+			await driver.findElement(By.css('bst-btn')).click();
+			await driver.findElement(By.css('bst-btn-secondary')).click();
 
 			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="Search"]'))), 5000).sendKeys('broccoli florets', Key.RETURN);
 			await driver.wait(until.titleIs("Search for broccoli florets - Sam's Club"), 5000);
@@ -42,7 +42,7 @@ describe("html", function () {
 			console.log("I'm here");
 			console.log(element) 
 			element.click();
-			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[2]/h1'))), 5000);
+			var title = await driver.wait(until.elementIsVisible(driver.findElement(By.xpath('//*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[1]/h1'))), 5000);
 			console.log(title)
 			await driver.wait(until.elementIsVisible(driver.findElement(By.css('bst-btn'))), 5000);////*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[2]/h1e
 			//*[@id="main"]/div/div/div[1]/div/div[3]/div[2]/div[2]/h1
